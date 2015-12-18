@@ -106,6 +106,7 @@ function template_html_above()
 	echo '
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/script.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/theme.js?fin20"></script>
+	<script type="text/javascript" src="', $settings['theme_url'], '/external/jquery/dist/jquery.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/bootstrap/dist/js/bootstrap.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/bootstrap-material-design/dist/js/material.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/bootstrap-material-design/dist/js/ripples.min.js?fin20"></script>
