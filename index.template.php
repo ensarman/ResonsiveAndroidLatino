@@ -71,7 +71,7 @@ function template_init()
 	$settings['message_index_preview'] = false;
 
 	/* Set the following variable to true if this theme requires the optional theme strings file to be loaded. */
-	$settings['require_theme_strings'] = false;
+	$settings['require_theme_strings'] = true;
 }
 
 // The main sub template above the content.
@@ -187,50 +187,46 @@ echo '<div class="navbar navbar-inverse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="javascript:void(0)">Brand</a>
+      <a class="navbar-brand" href="', $scripturl, '">',$context['forum_name'],'</a>
     </div>
-    <div class="navbar-collapse collapse navbar-inverse-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="javascript:void(0)">Active</a></li>
-        <li><a href="javascript:void(0)">Link</a></li>
-        <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-            <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="javascript:void(0)">Action</a></li>
-            <li><a href="javascript:void(0)">Another action</a></li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Dropdown header</li>
-            <li><a href="javascript:void(0)">Separated link</a></li>
-            <li><a href="javascript:void(0)">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
+    <div class="navbar-collapse collapse navbar-inverse-collapse">';
+    if ($context['user']['is_logged'])
+	{
+        echo'<p class="navbar-text material-secondary">',$txt['hello_member_ndt'], ', ', $context['user']['name'];'</p>';
+    }
+      echo'
+      <ul class="nav navbar-nav navbar-right">
+      <form class="navbar-form navbar-left" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
         <div class="form-group">
-          <input type="text" class="form-control col-md-8" placeholder="Search">
+          <input type="text" class="form-control col-md-8" name="search" placeholder="', $txt['search'], '" type="search" required type="text" value class="input_text">
         </div>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="javascript:void(0)">Link</a></li>
         <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">',$txt['main_menu'],'
             <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="javascript:void(0)">Action</a></li>
-            <li><a href="javascript:void(0)">Another action</a></li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
+          <ul class="dropdown-menu">';
+          if ($context['user']['is_logged'])
+	{
+        echo'
+            <li><a href="' , $scripturl , '?action=profile;area=forumprofile;">' , $txt['edit_profile'] , '</a></li>
+			<li><a href="' , $scripturl , '?action=profile;area=account;" >' , $txt['profile_account'] , '</span></a></li>
+			<li><a href="' , $scripturl , '?action=unread;" >' , $txt['new_post'] , '</span></a></li>
+			<li><a href="' , $scripturl , '?action=unreadreplies;" >' , $txt['new_replies'] , '</span></a></li>
+
             <li class="divider"></li>
-            <li><a href="javascript:void(0)">Separated link</a></li>
-          </ul>
+            <li><a href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '" >' , $txt['logout'] , '</a></li>';}
+          else {
+        echo'
+          	<li><a href="' , $scripturl , '?action=login">' , $txt['login'] , '</a></li>
+			<li><a href="' , $scripturl , '?action=register">' , $txt['register'] , '</a></li>';}
+       	echo'   </ul>
         </li>
       </ul>
     </div>
   </div>
 </div>';
 
-
+// Agregando la seccion principal en donde va a aparecer el menu del foro, y algunas opciones de SMF. 
 
 	// the upshrink image, right-floated
 	echo '

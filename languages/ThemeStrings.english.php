@@ -1,0 +1,1 @@
+<?php// Version: 2.0; ThemeStrings$txt['main_menu'] = 'Main Menu';$txt['edit_profile'] = 'Edit profile';$txt['profile_account'] = 'Account settings';$txt['new_post'] = 'New posts';$txt['new_replies'] = 'New replies';$txt['pm'] = 'Private messages';?>
