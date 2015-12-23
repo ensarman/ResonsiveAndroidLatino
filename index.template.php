@@ -176,31 +176,43 @@ function template_body_above()
 /*Empezando a escribir lo del body, thx smf*/
 
 /*Navbar responsive, estilizada al foro*/
-echo'<header class="header header-transparent header-waterfall affix-top">
+echo '<header class="header header-transparent header-waterfall">
 		<ul class="nav nav-list pull-left">
 			<li>
-				<a data-toggle="menu" href="#doc_menu">
+				<a data-toggle="menu" href="#al_menu">
 					<span class="icon icon-lg">menu</span>
 				</a>
 			</li>
 		</ul>
-		<a class="header-affix-hide header-logo margin-left-no margin-right-no affix-top" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
-		<span class="header-affix header-logo margin-left-no margin-right-no affix-top" data-offset-top="213" data-spy="affix">Toolbars</span>
+		<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
+		<span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix">', $context['page_title_html_safe'], '</span>
 		<ul class="nav nav-list pull-right">
-			<li class="dropdown margin-right open">
-				<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown" aria-expanded="true">
+			<li class="dropdown margin-right">
+				<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
 					<span class="access-hide">John Smith</span>
-					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="', $settings['theme_url'], '/images/noavatar.png"></span>
+					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="';
+        if(!empty($context['user']['is_logged']))
+				{
+					//Ahora se viene la pregunta del avatar
+				if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image'])) 
+					{echo $context['user']['avatar']['href']; }
+				else
+					{echo $settings['theme_url'], '/images/noavatar.png';}
+				}
+		//Sino se pone sin avatar por defecto
+		else
+			{echo $settings['theme_url'], '/images/noavatar.png';}
+					echo'"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a class="padding-right-lg waves-attach waves-effect" href="javascript:void(0)"><span class="icon icon-lg margin-right">account_box</span>Profile Settings</a>
+						<a class="padding-right-lg waves-attach" href="javascript:void(0)"><span class="icon icon-lg margin-right">account_box</span>Profile Settings</a>
 					</li>
 					<li>
-						<a class="padding-right-lg waves-attach waves-effect" href="javascript:void(0)"><span class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>
+						<a class="padding-right-lg waves-attach" href="javascript:void(0)"><span class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>
 					</li>
 					<li>
-						<a class="padding-right-lg waves-attach waves-effect" href="page-login.html"><span class="icon icon-lg margin-right">exit_to_app</span>Logout</a>
+						<a class="padding-right-lg waves-attach" href="page-login.html"><span class="icon icon-lg margin-right">exit_to_app</span>Logout</a>
 					</li>
 				</ul>
 			</li>
