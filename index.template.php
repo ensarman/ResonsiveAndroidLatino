@@ -86,9 +86,8 @@ function template_html_above()
 
 	// The ?fin20 part of this link is just here to make sure browsers don't cache it wrongly.
 	echo '
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/bootstrap/dist/css/bootstrap.min.css?fin20" />
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/bootstrap-material-design/dist/css/bootstrap-material-design.min.css?fin20" />
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/bootstrap-material-design/dist/css/ripples.min.css?fin20" />
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/base.min.css?fin20" />
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/mdcp/material-design-color-palette.min.css?fin20" />
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/theme.css" />';
 
 	// Some browsers need an extra stylesheet due to bugs/compatibility issues.
@@ -107,9 +106,7 @@ function template_html_above()
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/script.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/theme.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/jquery/dist/jquery.min.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/bootstrap/dist/js/bootstrap.min.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/bootstrap-material-design/dist/js/material.min.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/bootstrap-material-design/dist/js/ripples.min.js?fin20"></script>
+	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd//js/base.min.js?fin20"></script>
 	<script type="text/javascript"><!-- // --><![CDATA[
 		var smf_theme_url = "', $settings['theme_url'], '";
 		var smf_default_theme_url = "', $settings['default_theme_url'], '";
@@ -170,7 +167,7 @@ function template_html_above()
 
 	echo '
 </head>
-<body>';
+<body class="page-brand">';
 }
 
 function template_body_above()
@@ -179,6 +176,55 @@ function template_body_above()
 /*Empezando a escribir lo del body, thx smf*/
 
 /*Navbar responsive, estilizada al foro*/
+echo'<header class="header header-transparent header-waterfall affix-top">
+		<ul class="nav nav-list pull-left">
+			<li>
+				<a data-toggle="menu" href="#doc_menu">
+					<span class="icon icon-lg">menu</span>
+				</a>
+			</li>
+		</ul>
+		<a class="header-affix-hide header-logo margin-left-no margin-right-no affix-top" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
+		<span class="header-affix header-logo margin-left-no margin-right-no affix-top" data-offset-top="213" data-spy="affix">Toolbars</span>
+		<ul class="nav nav-list pull-right">
+			<li class="dropdown margin-right open">
+				<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown" aria-expanded="true">
+					<span class="access-hide">John Smith</span>
+					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="', $settings['theme_url'], '/images/noavatar.png"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="padding-right-lg waves-attach waves-effect" href="javascript:void(0)"><span class="icon icon-lg margin-right">account_box</span>Profile Settings</a>
+					</li>
+					<li>
+						<a class="padding-right-lg waves-attach waves-effect" href="javascript:void(0)"><span class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>
+					</li>
+					<li>
+						<a class="padding-right-lg waves-attach waves-effect" href="page-login.html"><span class="icon icon-lg margin-right">exit_to_app</span>Logout</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</header>';
+//Añadiendo un content, en el cual despues vemos si agregar algo mas
+	echo'<main class="content">
+		<div class="content-heading">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+						<h2 class="heading">';
+						if ($context['user']['is_logged'])
+	{
+        echo'<p class="navbar-text material-secondary">',$txt['hello_member_ndt'], ', ', $context['user']['name'];'</p>';
+    }
+    echo'</h2>
+						<h4>Es un foro de un foro, de un foro basado en un foro</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		</main>';
+
 echo '<div class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -225,8 +271,6 @@ echo '<div class="navbar navbar-inverse">
     </div>
   </div>
 </div>';
-
-// Agregando la seccion principal en donde va a aparecer el menu del foro, y algunas opciones de SMF. 
 
 	// the upshrink image, right-floated
 	echo '

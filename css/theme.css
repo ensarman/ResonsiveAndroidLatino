@@ -1,14 +1,18 @@
-/*Añadiendo valores de los items segun las propiedades de las guidelines de Material Design. En este caso es cuando la UI tiene un color oscuro y requiere una opacidad de un 70%*/
-.material-secondary{
-	opacity:0.70;
+/*Agregando valores de project.css*/
+.content-heading {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: -69px;
+  padding-top: 68px;
+  padding-bottom: 93px;
+  z-index: 0;
 }
 
-/*Agregando colores de Android Latino, es un blue 700 */
-.navbar.navbar-inverse {
-	background-color:#0288D1;
+.content-heading {
+  background-image: url(../images/material/bg.png);
 }
-
-/*cambiando el color que define MDB, y agregando un blue 500.*/
-a, a:focus, a:hover,.navbar.navbar-inverse .dropdown-menu li>a:focus, .navbar.navbar-inverse .dropdown-menu li>a:hover {
-	color:#2196F3;
+/*Agregando el color blue 700 caracteristico de AL*/
+.page-brand .header-transparent.affix{
+	background-color: #1976D2;
 }
