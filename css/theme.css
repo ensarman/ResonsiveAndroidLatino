@@ -17,3 +17,24 @@
 .page-brand .header-transparent.affix{
 	background-color: #1976D2;
 }
+
+.menu-top-img img {
+	-webkit-filter: blur(10px);
+-moz-filter: blur(10px);
+-o-filter: blur(10px);
+-ms-filter: blur(10px);
+filter: blur(10px);
+}
+
+.menu-content .nav .a, .menu-content .nav a {
+	color:rgba(255,255,255,0.87);
+}
+.menu-content .nav a:hover{
+	background-color:transparent;
+	color:rgba(255,255,255,1);
+}
+#al_menu > div > div.menu-content > ul > li > span > i {
+	color:rgba(255,255,255,1);
+} 
+
+/*Intentando hacer que los cortes de la imagen sean cuadrados y sin necesidad de apretarlos.*/

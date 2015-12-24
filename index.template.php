@@ -190,34 +190,76 @@ echo '<header class="header header-transparent header-waterfall">
 			<li class="dropdown margin-right">
 				<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
 					<span class="access-hide">John Smith</span>
-					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="';
-        if(!empty($context['user']['is_logged']))
-				{
-					//Ahora se viene la pregunta del avatar
-				if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image'])) 
-					{echo $context['user']['avatar']['href']; }
-				else
-					{echo $settings['theme_url'], '/images/noavatar.png';}
-				}
-		//Sino se pone sin avatar por defecto
-		else
-			{echo $settings['theme_url'], '/images/noavatar.png';}
-					echo'"></span>
+					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" />
+</span>
 				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<a class="padding-right-lg waves-attach" href="javascript:void(0)"><span class="icon icon-lg margin-right">account_box</span>Profile Settings</a>
+				<ul class="dropdown-menu">';
+				if ($context['user']['is_logged'])
+					{echo '<li>
+						<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
 					</li>
 					<li>
-						<a class="padding-right-lg waves-attach" href="javascript:void(0)"><span class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>
+						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
 					</li>
 					<li>
-						<a class="padding-right-lg waves-attach" href="page-login.html"><span class="icon icon-lg margin-right">exit_to_app</span>Logout</a>
+						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
+					</li>';}
+				else
+					{echo '<li>
+						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
 					</li>
-				</ul>
+					<li>
+						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
+					</li>';}
+				echo '</ul>
 			</li>
 		</ul>
 	</header>';
+//Añadiendo el panel de usuario de Materialize adaptado a este FW. 
+		echo '<nav aria-hidden="true" class="menu" id="al_menu" tabindex="-1">
+		<div class="menu-scroll mdc-bg-blue-grey-700">
+			<div class="menu-top">
+				<div class="menu-top-img">
+					<img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/material/defaultbg.png' ,'" alt="', $context['user']['name'],'" >
+				</div>
+				<div class="menu-top-info">
+					<a class="menu-top-user" href="javascript:void(0)"><span class="avatar pull-left"><img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'"></span>';
+					if ($context['user']['is_logged'])
+	{echo $context['user']['name'];}
+	else 
+	{echo $txt['guest_title'];}
+	echo'</a>
+				</div>
+				<div class="menu-top-info-sub">
+					<small>        </small>
+				</div>
+			</div>
+			<div class="menu-content">
+				<ul class="nav">
+				<li>
+					<a class="waves-attach" href="', $scripturl, '"><span class="icon icon-lg margin-right">home</span>',$txt['home'],'</a>
+					</li>';
+				//Editando el listado para mostrar los menus mas importantes del mod
+				 if(!empty($context['user']['is_logged']))
+				{echo '
+					<li>
+					<a class="waves-attach" href="', $scripturl, '?action=profile"><span class="icon icon-lg margin-right">account_circle</span>',$txt['forumprofile_short'],'</a>
+					</li>
+					<li>
+					<a class="waves-attach" href="', $scripturl, '?action=pm"><span class="icon icon-lg margin-right">inbox</span>',$txt['pm'],'</a>
+					</li>';
+					// Muestra los Likes del Like Mod
+          if (!empty($modSettings['LikePosts::$LikePostsUtils->showLikeNotification())'])) {echo '
+					<li>
+						<a class="waves-attach" href="', $scripturl, '?action=likepostsstats"><span class="icon icon-lg margin-right">thumb_up</span>', $txt['like_show_notifications'], '</a>
+					</li>';}}
+					echo '<li>
+						<a class="waves-attach" href="', $scripturl, '?action=help"><span class="icon icon-lg margin-right">help</span>',$txt['help'],'</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>';
 //Añadiendo un content, en el cual despues vemos si agregar algo mas
 	echo'<main class="content">
 		<div class="content-heading">
@@ -608,4 +650,4 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 		</div>';
 }
 
-?>
+?>	
