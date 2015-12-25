@@ -265,66 +265,64 @@ echo '<header class="header header-transparent header-waterfall">
 		<div class="content-heading">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
-						<h2 class="heading">';
-						if ($context['user']['is_logged'])
-	{
-        echo'<p class="navbar-text material-secondary">',$txt['hello_member_ndt'], ', ', $context['user']['name'];'</p>';
-    }
-    echo'</h2>
-						<h4>Es un foro de un foro, de un foro basado en un foro</h4>
+					<div class="card col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+    <div class="card-main">
+        <div class="card-inner mdc-text-grey-900"> 
+        	<h2>Bienvenido a Android Latino </h2>
+        	    ',$txt['date'],':', $context['current_time'], '.';
+              if ($context['in_maintenance'] && $context['user']['is_admin'])
+			{echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';}
+			if (!empty($context['unapproved_members']))
+			{echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';}
+		if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
+			{echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';}
+			echo' </div>
+        <div class="card-action"> ';
+        if(!empty($context['user']['is_logged']))
+        {echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
+</a>
+        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>';}
+        else {
+        	echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=login">' , $txt['login'] , '</a>
+        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
+</a>';}
+        echo'</div>
+	</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		</main>';
 
-echo '<div class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="', $scripturl, '">',$context['forum_name'],'</a>
-    </div>
-    <div class="navbar-collapse collapse navbar-inverse-collapse">';
-    if ($context['user']['is_logged'])
-	{
-        echo'<p class="navbar-text material-secondary">',$txt['hello_member_ndt'], ', ', $context['user']['name'];'</p>';
-    }
-      echo'
-      <ul class="nav navbar-nav navbar-right">
-      <form class="navbar-form navbar-left" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
-        <div class="form-group">
-          <input type="text" class="form-control col-md-8" name="search" placeholder="', $txt['search'], '" type="search" required type="text" value class="input_text">
-        </div>
-      </form>
-        <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">',$txt['main_menu'],'
-            <b class="caret"></b></a>
-          <ul class="dropdown-menu">';
-          if ($context['user']['is_logged'])
-	{
-        echo'
-            <li><a href="' , $scripturl , '?action=profile;area=forumprofile;">' , $txt['edit_profile'] , '</a></li>
-			<li><a href="' , $scripturl , '?action=profile;area=account;" >' , $txt['profile_account'] , '</span></a></li>
-			<li><a href="' , $scripturl , '?action=unread;" >' , $txt['new_post'] , '</span></a></li>
-			<li><a href="' , $scripturl , '?action=unreadreplies;" >' , $txt['new_replies'] , '</span></a></li>
-
-            <li class="divider"></li>
-            <li><a href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '" >' , $txt['logout'] , '</a></li>';}
-          else {
-        echo'
-          	<li><a href="' , $scripturl , '?action=login">' , $txt['login'] , '</a></li>
-			<li><a href="' , $scripturl , '?action=register">' , $txt['register'] , '</a></li>';}
-       	echo'   </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>';
+// Agregar la seccion de noticias desplazables.
+	if (!empty($settings['enable_news']))
+		echo '				
+	<div class="container-fluid">
+				<div class="row">
+				<div class="col-md-offset-4 col-md-4">
+					<div class="tile-wrap">
+							<div class="tile tile-collapse">
+								<div data-target="#doc_tile_example_1" data-toggle="tile">
+									<div class="pull-left tile-side" data-ignore="tile">
+										<div class="avatar avatar-sm mdc-bg-blue-500">
+											<span class="icon" id="icofix">public</span>
+										</div>
+									</div>
+									<div class="tile-inner">
+										<div class="text-overflow"><strong>', $txt['news'], '</strong></div>
+									</div>
+								</div>
+								<div class="tile-active-show collapse" id="doc_tile_example_1">
+									<div class="tile-sub">
+										<p>', $context['random_news_line'], '</p>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>';
 
 	// the upshrink image, right-floated
 	echo '
