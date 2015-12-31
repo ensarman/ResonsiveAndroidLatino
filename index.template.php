@@ -317,7 +317,8 @@ echo '
 
 // Agregar la seccion de noticias desplazables.
 	if (!empty($settings['enable_news']))
-		echo '
+	{	echo '
+
 	<div class="container-fluid">
 				<div class="row">
 				<div class="col-md-offset-4 col-md-4">
@@ -343,7 +344,22 @@ echo '
 						</div>
 					</div>
 				</div>
-				</div>';
+				</div>';}
+
+//Agregando el menu principal para los usuarios
+
+	echo '<div class="container">
+	<div class="row">
+        <a class="btn btn-flat waves-attach waves-button">Inicio</a>
+        <a class="btn btn-flat waves-attach waves-button">Ayuda</a>
+        <a class="btn btn-flat waves-attach waves-button">Buscar</a>
+        <a class="btn btn-flat waves-attach waves-button">Administracion</a>
+        <a class="btn btn-flat waves-attach waves-button">Moderar</a>
+        <a class="btn btn-flat waves-attach waves-button">Mis mensajes</a>
+        <a class="btn btn-flat waves-attach waves-button">Uusarios</a>
+        <a class="btn btn-flat waves-attach waves-button">Estadisticas de Me Gusta</a>
+	</div>
+</div>';
 
 	// If the user is logged in, display stuff like their name, new messages, etc.
 	if ($context['user']['is_logged'])
@@ -659,5 +675,6 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 			</ul>
 		</div>';
 }
+
 
 ?>
