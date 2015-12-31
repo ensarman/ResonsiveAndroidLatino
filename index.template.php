@@ -320,46 +320,41 @@ echo '
 	{	echo '
 
 	<div class="container-fluid">
-				<div class="row">
-				<div class="col-md-offset-4 col-md-4">
-					<div class="tile-wrap">
-							<div class="tile tile-collapse">
-								<div data-target="#doc_tile_example_1" data-toggle="tile">
-									<div class="pull-left tile-side" data-ignore="tile">
-										<div class="avatar avatar-sm mdc-bg-blue-500">
-											<span class="icon" id="icofix">public</span>
-										</div>
-									</div>
-									<div class="tile-inner">
-										<div class="text-overflow"><strong>', $txt['news'], '</strong></div>
-									</div>
+		<div class="row">
+			<div class="col-md-offset-4 col-md-4">
+				<div class="tile-wrap">
+					<div class="tile tile-collapse">
+						<div data-target="#doc_tile_example_1" data-toggle="tile">
+							<div class="pull-left tile-side" data-ignore="tile">
+								<div class="avatar avatar-sm mdc-bg-blue-500">
+									<span class="icon" id="icofix">public</span>
 								</div>
-								<div class="tile-active-show collapse" id="doc_tile_example_1">
-									<div class="tile-sub">
-										<p>', $context['random_news_line'], '</p>
-									</div>
-									</div>
-								</div>
+							</div>
+							<div class="tile-inner">
+								<div class="text-overflow"><strong>', $txt['news'], '</strong></div>
+							</div>
+						</div>
+						<div class="tile-active-show collapse" id="doc_tile_example_1">
+							<div class="tile-sub">
+								<p>', $context['random_news_line'], '</p>
 							</div>
 						</div>
 					</div>
 				</div>
-				</div>';}
+			</div>
+		</div>
+	</div>';}
 
 //Agregando el menu principal para los usuarios
 
 	echo '<div class="container">
 	<div class="row">
-        <a class="btn btn-flat waves-attach waves-button">Inicio</a>
-        <a class="btn btn-flat waves-attach waves-button">Ayuda</a>
-        <a class="btn btn-flat waves-attach waves-button">Buscar</a>
-        <a class="btn btn-flat waves-attach waves-button">Administracion</a>
-        <a class="btn btn-flat waves-attach waves-button">Moderar</a>
-        <a class="btn btn-flat waves-attach waves-button">Mis mensajes</a>
-        <a class="btn btn-flat waves-attach waves-button">Uusarios</a>
-        <a class="btn btn-flat waves-attach waves-button">Estadisticas de Me Gusta</a>
+				'.template_menu().';
 	</div>
 </div>';
+
+	// Show the menu here, according to the menu sub template.
+
 
 	// If the user is logged in, display stuff like their name, new messages, etc.
 	if ($context['user']['is_logged'])
@@ -480,8 +475,7 @@ echo '
 			});
 		// ]]></script>';
 
-	// Show the menu here, according to the menu sub template.
-	template_menu();
+
 
 	echo '
 		<br class="clear" />
@@ -585,20 +579,19 @@ function template_menu()
 	global $context, $settings, $options, $scripturl, $txt;
 
 	echo '
-		<div id="main_menu">
-			<ul class="dropmenu" id="menu_nav">';
+		<nav class="tab-nav tab-nav-brand">
+			<ul class="nav nav-justified">';
 
 	foreach ($context['menu_buttons'] as $act => $button)
 	{
 		echo '
-				<li id="button_', $act, '">
-					<a class="', $button['active_button'] ? 'active ' : '', 'firstlevel" href="', $button['href'], '"', isset($button['target']) ? ' target="' . $button['target'] . '"' : '', '>
-						<span class="', isset($button['is_last']) ? 'last ' : '', 'firstlevel">', $button['title'], '</span>
+				<li class="', $button['active_button'] ? 'active ' : '',' ', empty($button['sub_buttons']) ? '' : 'dropdown"' ,'">
+					<a class="waves-attach" ', !empty($button['sub_buttons']) ? 'href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' : 'href="', $button['href'], '"', isset($button['target']) ? ' target="' . $button['target'] . '"' : '',' >', $button['title'], '
 					</a>';
 		if (!empty($button['sub_buttons']))
 		{
 			echo '
-					<ul>';
+					<ul class="dropdown-menu">';
 
 			foreach ($button['sub_buttons'] as $childbutton)
 			{
@@ -637,7 +630,7 @@ function template_menu()
 
 	echo '
 			</ul>
-		</div>';
+		</nav>';
 }
 
 // Generate a strip of buttons.
