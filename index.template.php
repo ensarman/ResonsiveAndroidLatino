@@ -347,11 +347,14 @@ echo '
 
 //Agregando el menu principal para los usuarios
 
-	echo '<div class="container">
-	<div class="row">
-				'.template_menu().';
-	</div>
-</div>';
+	echo '
+	<div class="container ">
+		<div class="row">
+			<div class="hidden-xs">
+					', template_menu(),'
+			</div>
+		</div>
+	</div>';
 
 	// Show the menu here, according to the menu sub template.
 
@@ -585,8 +588,8 @@ function template_menu()
 	foreach ($context['menu_buttons'] as $act => $button)
 	{
 		echo '
-				<li class="', $button['active_button'] ? 'active ' : '',' ', empty($button['sub_buttons']) ? '' : 'dropdown"' ,'">
-					<a class="waves-attach" ', !empty($button['sub_buttons']) ? 'href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' : 'href="', $button['href'], '"', isset($button['target']) ? ' target="' . $button['target'] . '"' : '',' >', $button['title'], '
+				<li class="', $button['active_button'] ? 'active ' : '',' ', empty($button['sub_buttons']) ? '' : 'dropdown' ,'">
+					<a class="waves-attach" ', !empty($button['sub_buttons']) ? 'href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' : 'href="'. $button['href']. '"', isset($button['target']) ? ' target="' . $button['target'] . '"' : '',' >', $button['title'], '
 					</a>';
 		if (!empty($button['sub_buttons']))
 		{
