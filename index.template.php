@@ -88,7 +88,7 @@ function template_html_above()
 	echo '
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/base.min.css?fin20" />
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/mdcp/material-design-color-palette.min.css?fin20" />
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/theme.css" />';
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/theme.css?fin20" />';
 
 	// Some browsers need an extra stylesheet due to bugs/compatibility issues.
 	foreach (array('ie7', 'ie6', 'webkit') as $cssfix)
@@ -215,7 +215,7 @@ echo '<header class="header header-transparent header-waterfall">
 			</li>
 		</ul>
 	</header>';
-//Añadiendo el panel de usuario de Materialize adaptado a este FW. 
+//Añadiendo el panel de usuario de Materialize adaptado a este FW.
 		echo '<nav aria-hidden="true" class="menu" id="al_menu" tabindex="-1">
 		<div class="menu-scroll mdc-bg-blue-grey-700">
 			<div class="menu-top">
@@ -226,7 +226,7 @@ echo '<header class="header header-transparent header-waterfall">
 					<a class="menu-top-user" href="', $scripturl, '?action=profile"><span class="avatar pull-left"><img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'"></span>';
 					if ($context['user']['is_logged'])
 	{echo $context['user']['name'];}
-	else 
+	else
 	{echo $txt['guest_title'];}
 	echo'</a>
 				</div>
@@ -267,7 +267,7 @@ echo '<header class="header header-transparent header-waterfall">
 				<div class="row">
 					<div class="card col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
     <div class="card-main">
-        <div class="card-inner mdc-text-grey-900"> 
+        <div class="card-inner mdc-text-grey-900">
         	<h2>Bienvenido a Android Latino </h2>
         	    ',$txt['date'],':', $context['current_time'], '.';
               if ($context['in_maintenance'] && $context['user']['is_admin'])
@@ -296,7 +296,7 @@ echo '<header class="header header-transparent header-waterfall">
 
 // Agregar la seccion de noticias desplazables.
 	if (!empty($settings['enable_news']))
-		echo '				
+		echo '
 	<div class="container-fluid">
 				<div class="row">
 				<div class="col-md-offset-4 col-md-4">
@@ -639,4 +639,4 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 		</div>';
 }
 
-?>	
+?>
