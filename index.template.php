@@ -192,8 +192,8 @@ echo '
 			<ul class="nav nav-list pull-right">
 				<li class="dropdown margin-right">
 					<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
-						<span class="access-hide">John Smith</span>
-						<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" />
+						<span class="access-hide">', $context['user']['name'],'</span>
+						<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" />
 	</span>
 					</a>
 					<ul class="dropdown-menu">';
