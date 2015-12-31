@@ -86,6 +86,7 @@ function template_html_above()
 
 	// The ?fin20 part of this link is just here to make sure browsers don't cache it wrongly.
 	echo '
+	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/base.min.css?fin20" />
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/mdcp/material-design-color-palette.min.css?fin20" />
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/theme.css?fin20" />';
@@ -179,51 +180,53 @@ function template_body_above()
 echo '
 <div class="container-fluid">
 	<div class="row">
-		<header class="header header-transparent header-waterfall">
-			<ul class="nav nav-list pull-left">
-				<li>
-					<a data-toggle="menu" href="#al_menu">
-						<span class="icon icon-lg">menu</span>
-					</a>
-				</li>
-			</ul>
-			<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
-			<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
-			<ul class="nav nav-list pull-right">
-				<li class="dropdown margin-right">
-					<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
-						<span class="access-hide">', $context['user']['name'],'</span>
-						<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
-					</a>
-					<ul class="dropdown-menu">';
-						if ($context['user']['is_logged'])
-						{
-							echo
-								'<li>
-									<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
-								</li>
-								<li>
-									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
-								</li>
-								<li>
-									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
-								</li>';
-						}
-						else
-						{
+		<div class="col-xs-12">
+			<header class="header header-transparent header-waterfall">
+				<ul class="nav nav-list pull-left">
+					<li>
+						<a data-toggle="menu" href="#al_menu">
+							<span class="icon icon-lg">menu</span>
+						</a>
+					</li>
+				</ul>
+				<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
+				<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+				<ul class="nav nav-list pull-right">
+					<li class="dropdown margin-right">
+						<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+							<span class="access-hide">', $context['user']['name'],'</span>
+							<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
+						</a>
+						<ul class="dropdown-menu">';
+							if ($context['user']['is_logged'])
+							{
+								echo
+									'<li>
+										<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
+									</li>
+									<li>
+										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
+									</li>
+									<li>
+										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
+									</li>';
+							}
+							else
+							{
+								echo '
+									<li>
+										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
+									</li>
+									<li>
+										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
+									</li>';
+							}
 							echo '
-								<li>
-									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
-								</li>
-								<li>
-									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
-								</li>';
-						}
-						echo '
-					</ul>
-				</li>
-			</ul>
-		</header>
+						</ul>
+					</li>
+				</ul>
+			</header>
+		</div>
 	</div>
 </div>
 	';
@@ -251,21 +254,26 @@ echo '
 				<ul class="nav">
 				<li>
 					<a class="waves-attach" href="', $scripturl, '"><span class="icon icon-lg margin-right">home</span>',$txt['home'],'</a>
-					</li>';
+				</li>';
 				//Editando el listado para mostrar los menus mas importantes del mod
 				 if(!empty($context['user']['is_logged']))
-				{echo '
+				{
+					echo '
 					<li>
-					<a class="waves-attach" href="', $scripturl, '?action=profile"><span class="icon icon-lg margin-right">account_circle</span>',$txt['forumprofile_short'],'</a>
+						<a class="waves-attach" href="', $scripturl, '?action=profile"><span class="icon icon-lg margin-right">account_circle</span>',$txt['forumprofile_short'],'</a>
 					</li>
 					<li>
-					<a class="waves-attach" href="', $scripturl, '?action=pm"><span class="icon icon-lg margin-right">inbox</span>',$txt['pm'],'</a>
+						<a class="waves-attach" href="', $scripturl, '?action=pm"><span class="icon icon-lg margin-right">inbox</span>',$txt['pm'],'</a>
 					</li>';
 					// Muestra los Likes del Like Mod
-          if (!empty($modSettings['LikePosts::$LikePostsUtils->showLikeNotification())'])) {echo '
+          if (!empty($modSettings['LikePosts::$LikePostsUtils->showLikeNotification())']))
+					{
+						echo '
 					<li>
 						<a class="waves-attach" href="', $scripturl, '?action=likepostsstats"><span class="icon icon-lg margin-right">thumb_up</span>', $txt['like_show_notifications'], '</a>
-					</li>';}}
+					</li>';
+					}
+				}
 					echo '<li>
 						<a class="waves-attach" href="', $scripturl, '?action=help"><span class="icon icon-lg margin-right">help</span>',$txt['help'],'</a>
 					</li>
