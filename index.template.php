@@ -176,45 +176,51 @@ function template_body_above()
 /*Empezando a escribir lo del body, thx smf*/
 
 /*Navbar responsive, estilizada al foro*/
-echo '<header class="header header-transparent header-waterfall">
-		<ul class="nav nav-list pull-left">
-			<li>
-				<a data-toggle="menu" href="#al_menu">
-					<span class="icon icon-lg">menu</span>
-				</a>
-			</li>
-		</ul>
-		<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
-		<span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix">', $context['page_title_html_safe'], '</span>
-		<ul class="nav nav-list pull-right">
-			<li class="dropdown margin-right">
-				<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
-					<span class="access-hide">John Smith</span>
-					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" />
-</span>
-				</a>
-				<ul class="dropdown-menu">';
-				if ($context['user']['is_logged'])
-					{echo '<li>
-						<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
-					</li>
-					<li>
-						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
-					</li>
-					<li>
-						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
-					</li>';}
-				else
-					{echo '<li>
-						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
-					</li>
-					<li>
-						<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
-					</li>';}
-				echo '</ul>
-			</li>
-		</ul>
-	</header>';
+echo '
+<div class="container-fluid">
+	<div class="row">
+		<header class="header header-transparent header-waterfall">
+			<ul class="nav nav-list pull-left">
+				<li>
+					<a data-toggle="menu" href="#al_menu">
+						<span class="icon icon-lg">menu</span>
+					</a>
+				</li>
+			</ul>
+			<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
+			<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+			<ul class="nav nav-list pull-right">
+				<li class="dropdown margin-right">
+					<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+						<span class="access-hide">John Smith</span>
+						<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" />
+	</span>
+					</a>
+					<ul class="dropdown-menu">';
+					if ($context['user']['is_logged'])
+						{echo '<li>
+							<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
+						</li>
+						<li>
+							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
+						</li>
+						<li>
+							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
+						</li>';}
+					else
+						{echo '<li>
+							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
+						</li>
+						<li>
+							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
+						</li>';}
+					echo '</ul>
+				</li>
+			</ul>
+		</header>
+	</div>
+</div>
+	';
 //Añadiendo el panel de usuario de Materialize adaptado a este FW.
 		echo '<nav aria-hidden="true" class="menu" id="al_menu" tabindex="-1">
 		<div class="menu-scroll mdc-bg-blue-grey-700">
