@@ -591,8 +591,8 @@ function template_menu()
 		if (!empty($button['sub_buttons']))
 		{
 			echo '
-					<ul class="dropdown-menu">';
-
+					<ul class="dropdown-menu">
+						<li><a href="', $button['href'], '"', isset($button['target']) ? ' target="' . $button['target'] .'"' :'',' >', $button['title'] ,'</a></li>	';
 			foreach ($button['sub_buttons'] as $childbutton)
 			{
 				echo '
