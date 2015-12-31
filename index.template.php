@@ -193,28 +193,34 @@ echo '
 				<li class="dropdown margin-right">
 					<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
 						<span class="access-hide">', $context['user']['name'],'</span>
-						<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" />
-	</span>
+						<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
 					</a>
 					<ul class="dropdown-menu">';
-					if ($context['user']['is_logged'])
-						{echo '<li>
-							<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
-						</li>
-						<li>
-							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
-						</li>
-						<li>
-							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
-						</li>';}
-					else
-						{echo '<li>
-							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
-						</li>
-						<li>
-							<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
-						</li>';}
-					echo '</ul>
+						if ($context['user']['is_logged'])
+						{
+							echo
+								'<li>
+									<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
+								</li>
+								<li>
+									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
+								</li>
+								<li>
+									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
+								</li>';
+						}
+						else
+						{
+							echo '
+								<li>
+									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
+								</li>
+								<li>
+									<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
+								</li>';
+						}
+						echo '
+					</ul>
 				</li>
 			</ul>
 		</header>
@@ -222,22 +228,23 @@ echo '
 </div>
 	';
 //Añadiendo el panel de usuario de Materialize adaptado a este FW.
-		echo '<nav aria-hidden="true" class="menu" id="al_menu" tabindex="-1">
+	echo '<nav aria-hidden="true" class="menu" id="al_menu" tabindex="-1">
 		<div class="menu-scroll mdc-bg-blue-grey-700">
 			<div class="menu-top">
 				<div class="menu-top-img">
-					<img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/material/defaultbg.png' ,'" alt="', $context['user']['name'],'" >
+					<img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/material/defaultbg.png' ,'" alt="User Background ', $context['user']['name'],'" >
 				</div>
 				<div class="menu-top-info">
 					<a class="menu-top-user" href="', $scripturl, '?action=profile"><span class="avatar pull-left"><img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'"></span>';
 					if ($context['user']['is_logged'])
-	{echo $context['user']['name'];}
-	else
-	{echo $txt['guest_title'];}
-	echo'</a>
+						{echo $context['user']['name'];}
+					else
+						{echo $txt['guest_title'];}
+				echo'
+					</a>
 				</div>
 				<div class="menu-top-info-sub">
-					<small>        </small>
+					<small>    Menú de Usuario    </small>
 				</div>
 			</div>
 			<div class="menu-content">
