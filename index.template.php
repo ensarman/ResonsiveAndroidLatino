@@ -189,8 +189,11 @@ echo '
 						</a>
 					</li>
 				</ul>
-				<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
-				<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="213" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+
+				<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
+
+				<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+
 				<ul class="nav nav-list pull-right">
 					<li class="dropdown margin-right">
 						<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
@@ -282,38 +285,40 @@ echo '
 		</div>
 	</nav>';
 //Añadiendo un content, en el cual despues vemos si agregar algo mas
-	echo'<main class="content">
+	echo'
+	<main class="content">
 		<div class="content-heading">
 			<div class="container">
 				<div class="row">
 					<div class="card col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
-    <div class="card-main">
-        <div class="card-inner mdc-text-grey-900">
-        	<h2>Bienvenido a Android Latino </h2>
-        	    ',$txt['date'],':', $context['current_time'], '.';
-              if ($context['in_maintenance'] && $context['user']['is_admin'])
-			{echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';}
-			if (!empty($context['unapproved_members']))
-			{echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';}
-		if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
-			{echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';}
-			echo' </div>
-        <div class="card-action"> ';
-        if(!empty($context['user']['is_logged']))
-        {echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
-</a>
-        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>';}
-        else {
-        	echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=login">' , $txt['login'] , '</a>
-        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
-</a>';}
-        echo'</div>
-	</div>
+				    <div class="card-main">
+				        <div class="card-inner mdc-text-grey-900">
+				        	<div class="bienvenido">Bienvenido a ', $context['forum_name'],'</div>
+			        	    ',$txt['date'],':', $context['current_time'], '.';
+          				  if ($context['in_maintenance'] && $context['user']['is_admin'])
+											{echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';}
+										if (!empty($context['unapproved_members']))
+											{echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';}
+										if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
+											{echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';}
+										echo' </div>
+							        <div class="card-action"> ';
+						        if(!empty($context['user']['is_logged']))
+							        {echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
+											</a>
+							        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>';}
+						        else {
+						        	echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=login">' , $txt['login'] , '</a>
+							        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
+											</a>';}
+						        echo'
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		</main>';
+	</main>';
 
 // Agregar la seccion de noticias desplazables.
 	if (!empty($settings['enable_news']))
@@ -589,10 +594,11 @@ function template_menu()
 	{
 		echo '
 				<li class="', $button['active_button'] ? 'active ' : '',' ', empty($button['sub_buttons']) ? '' : 'dropdown' ,'">
-					<a class="waves-attach" ', !empty($button['sub_buttons']) ? 'href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' : 'href="'. $button['href']. '"', isset($button['target']) ? ' target="' . $button['target'] . '"' : '',' >', $button['title'], '
+					<a ', !empty($button['sub_buttons']) ? 'href="#" class="dropdown-toggle waves-attach" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' : 'href="'. $button['href']. '"', isset($button['target']) ? ' target="' . $button['target'] . '"' : ' class="waves-attach" ',' >', $button['title'], '
 					</a>';
 		if (!empty($button['sub_buttons']))
 		{
+			//primero el boton de  dorpdown toggle que no apunta a nada mas que al dropdow, asi que lo colocamos como primera opcion en la lista
 			echo '
 					<ul class="dropdown-menu">
 						<li><a href="', $button['href'], '"', isset($button['target']) ? ' target="' . $button['target'] .'"' :'',' >', $button['title'] ,'</a></li>	';
