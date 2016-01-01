@@ -350,7 +350,7 @@ echo '
 	echo '
 	<div class="container ">
 		<div class="row">
-			<div class="hidden-xs">
+			<div class="visible-md-block visible-lg-block">
 					', template_menu(),'
 			</div>
 		</div>
