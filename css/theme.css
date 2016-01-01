@@ -1,12 +1,24 @@
 
 .content-heading {
   background-image: url(../images/material/bg.png);
+  padding-bottom: 100px;
+  padding-top: 40px;
+  margin-bottom: -68px;
+  z-index: -1;
 }
 /*Agregando el color blue 700 caracteristico de AL*/
 .page-brand .header-transparent.affix{
 	background-color: #388ccc;
 }
 
+.header{
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.menu-usuario {
+  margin-top: 40px;
+}
 .menu-top-img img {
 	-webkit-filter: blur(5px);
   -moz-filter: blur(5px);
@@ -41,5 +53,6 @@ h1{
 }
 
 .bienvenido{
-  font-size: 2em;
+  font-size: 1.5em;
+  margin: 10px 0 10px 0;
 }
