@@ -297,8 +297,50 @@ echo '
 										<div class="container">
 											<div class="row">
 												<div class="col-md-6">
-								        	<div class="bienvenido">Bienvenido a ', $context['forum_name'],'</div>
-							        	    ',$txt['date'],':', $context['current_time'], '.';
+												';
+															if (!$context['user']['is_logged'])
+															{
+																echo'
+																	<form class="form-inline" id="login-form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+																		<div class="container-fluid">
+																			<div class="col-md-6">
+
+																					<input type="text" name="user" size="10" class="form-control" placeholder="',$txt['username'],'"/>
+																					<input type="password" name="passwrd" size="10" class="form-control" placeholder="',$txt['password'],'"/>
+
+																			</div>
+																			<div class="col-md-6">
+																				<select name="cookielength" class="form-control">
+																					<option value="60">', $txt['one_hour'], '</option>
+																					<option value="1440">', $txt['one_day'], '</option>
+																					<option value="10080">', $txt['one_week'], '</option>
+																					<option value="43200">', $txt['one_month'], '</option>
+																					<option value="-1" selected="selected">', $txt['forever'], '</option>
+																				</select>
+
+																				<div>
+																					<a href="#" onclick="document.getElementById(\'login-form\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
+																					<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
+																					</a>
+																					<span class="oculto">
+																						<input type="submit" value="', $txt['login'], '" class="btn btn-default" />
+																					</span>
+																				</div>
+
+																			</div>
+																		</div>
+																	</form>
+																';
+															}else {
+																echo '
+																	<div class="bienvenido">
+																		',$txt['welmsg_welcome'].' '.$context['user']['name'].'
+																	</div>
+																';
+															}
+														echo'
+
+							        	    <div>',$txt['date'],':', $context['current_time'], '.</div>';
 				          				  if ($context['in_maintenance'] && $context['user']['is_admin'])
 															{echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';}
 														if (!empty($context['unapproved_members']))
@@ -325,8 +367,7 @@ echo '
 								        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>';}
 							        else {
 							        	echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=login">' , $txt['login'] , '</a>
-								        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
-												</a>';}
+								        ';}
 							        echo'
 										</div>
 									</div>
@@ -501,9 +542,10 @@ function show_news($cols="desktop"){
 	'.
 	($cols=="movil" ? '
 	<div class="visible-xs-block visible-sm-block">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
-				<div class="col-md-offset-4 col-md-4">':'	<div class="visible-md-block visible-lg-block">' ).'
+				<div class="col-md-offset-4 col-md-4">':'	<div class="visible-md-block visible-lg-block">' )
+	.'
 					<div class="tile-wrap">
 						<div class="tile tile-collapse">
 							<div data-target="'. ($cols=="movil" ? '#doc_tile_example_2':'#doc_tile_example_1').'" data-toggle="tile">
@@ -516,7 +558,7 @@ function show_news($cols="desktop"){
 									<div class="text-overflow"><strong>'. $txt['news']. '</strong></div>
 								</div>
 							</div>
-							<div class="tile-active-show collapse" id="'.($cols=="movil" ? 'doc_tile_example_2': 'doc_tile_example_1').'">
+							<div class="tile-active-show collapse" id="'.($cols=="movil" ? : 'doc_tile_example_1').'">
 								<div class="tile-sub">
 									<p>'. $context['random_news_line']. '</p>
 								</div>
