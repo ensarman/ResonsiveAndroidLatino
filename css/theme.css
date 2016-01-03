@@ -72,3 +72,7 @@ h1{
 	background:  url(../images/openid.gif) no-repeat;
 
 }
+/*para la busqueda de google*/
+.busqueda{
+	margin-top: 6.8px; /*numero aureo xD*/
+}

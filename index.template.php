@@ -178,54 +178,80 @@ function template_body_above()
 
 /*Navbar responsive, estilizada al foro*/
 echo '
-
 			<header class="header header-transparent header-waterfall">
-				<ul class="nav nav-list pull-left">
-					<li>
-						<a data-toggle="menu" href="#al_menu">
-							<span class="icon icon-lg">menu</span>
-						</a>
-					</li>
-				</ul>
+				<div class=container-fluid>
+					<div class="row">
+						<div class="col-xs-10">
+							<ul class="nav nav-list pull-left">
+								<li>
+									<a data-toggle="menu" href="#al_menu">
+										<span class="icon icon-lg">menu</span>
+									</a>
+								</li>
+							</ul>
 
-				<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
+							<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
 
-				<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
 
-				<ul class="nav nav-list pull-right">
-					<li class="dropdown margin-right">
-						<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
-							<span class="access-hide">', $context['user']['name'],'</span>
-							<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
-						</a>
-						<ul class="dropdown-menu">';
-							if ($context['user']['is_logged'])
-							{
-								echo
-									'<li>
-										<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
-									</li>
-									<li>
-										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
-									</li>
-									<li>
-										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
-									</li>';
-							}
-							else
-							{
-								echo '
-									<li>
-										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
-									</li>
-									<li>
-										<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
-									</li>';
-							}
-							echo '
-						</ul>
-					</li>
-				</ul>
+							<div class="container-fluid">
+								<div class="col-xs-4 busqueda visible-md-block visible-sm-block visible-lg-block ">
+									<form action="http://www.google.com" id="cse-search-box">
+										<div>
+											<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
+											<input type="hidden" name="ie" value="UTF-8" />
+											<input style="background-color:transparent; " type="text" name="q" class="form-control" />
+											<input class="oculto" type="submit" name="sa" value="Buscar" />
+										</div>
+									</form>
+
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-2">
+
+							<ul class="nav nav-list pull-right">
+								<li class="dropdown margin-right">
+									<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+										<span class="access-hide">', $context['user']['name'],'</span>
+										<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
+									</a>
+									<ul class="dropdown-menu">';
+										if ($context['user']['is_logged'])
+										{
+											echo
+												'<li>
+													<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
+												</li>
+												<li>
+													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=profile;area=account;"><span class="icon icon-lg margin-right">account_box</span>' , $txt['profile_account'] , '</a>
+												</li>
+												<li>
+													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
+												</li>';
+										}
+										else
+										{
+											echo '
+												<li>
+													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
+												</li>
+												<li>
+													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
+												</li>';
+										}
+										echo '
+									</ul>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+
+
 			</header>
 
 	';
@@ -339,7 +365,9 @@ echo '
 																		</div>
 																	</form>
 																';
-															}else {
+															}
+															// If the user is logged in, display stuff like their name, new messages, etc.
+															else {
 																echo '
 																	<div class="bienvenido">
 																		',$txt['welmsg_welcome'].' '.$context['user']['name'].'
@@ -412,54 +440,7 @@ echo '
 	if (!empty($settings['enable_news']))
 	{	echo show_news("movil")	;}
 
-	// If the user is logged in, display stuff like their name, new messages, etc.
-	if ($context['user']['is_logged'])
-	{
 
-		if ($context['in_maintenance'] && $context['user']['is_admin'])
-			echo '
-					<li class="notice">', $txt['maintain_mode_on'], '</li>';
-
-
-		if (!empty($context['unapproved_members']))
-			echo '
-					<li>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</li>';
-
-		if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
-			echo '
-					<li><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></li>';
-
-		echo '
-					<li>', $context['current_time'], '</li>
-				</ul>';
-	}
-	// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
-	elseif (!empty($context['show_login_bar']))
-	{
-		echo '
-				<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/sha1.js"></script>
-				<form id="guest_form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
-					<div class="info">', sprintf($txt['welcome_guest'], $txt['guest_title']), '</div>
-					<input type="text" name="user" size="10" class="input_text" />
-					<input type="password" name="passwrd" size="10" class="input_password" />
-					<select name="cookielength">
-						<option value="60">', $txt['one_hour'], '</option>
-						<option value="1440">', $txt['one_day'], '</option>
-						<option value="10080">', $txt['one_week'], '</option>
-						<option value="43200">', $txt['one_month'], '</option>
-						<option value="-1" selected="selected">', $txt['forever'], '</option>
-					</select>
-					<input type="submit" value="', $txt['login'], '" class="button_submit" /><br />
-					<div class="info">', $txt['quick_login_dec'], '</div>';
-
-		if (!empty($modSettings['enableOpenID']))
-			echo '
-					<br /><input type="text" name="openid_identifier" id="openid_url" size="25" class="input_text openid_login" />';
-
-		echo '
-					<input type="hidden" name="hash_passwrd" value="" />
-				</form>';
-	}
 
 	echo '
 			</div>
@@ -545,7 +526,7 @@ function show_news($cols="desktop"){
 	$titlewarp='
 	'.
 	($cols=="movil" ? '
-	<div class="visible-xs-block visible-sm-block">
+	<div class="hidden-lg hidden-md">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-4 col-md-4">':'	<div class="visible-md-block visible-lg-block">' )
