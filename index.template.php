@@ -293,13 +293,14 @@ echo '
 						<div class="card margin-bottom-no">
 						<!-- div class="card col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2" -->
 					    <div class="card-main">
-					        <div class="card-inner mdc-text-grey-900">
+					        <div class="card-inner mdc-text-grey-900"  style="margin-bottom: 0px;>
 										<div class="container">
 											<div class="row">
 												<div class="col-md-6">
 												';
 															if (!$context['user']['is_logged'])
 															{
+																// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
 																echo'
 																	<form class="form-inline" id="login-form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 																		<div class="container-fluid">
@@ -307,7 +308,13 @@ echo '
 
 																					<input type="text" name="user" size="10" class="form-control" placeholder="',$txt['username'],'"/>
 																					<input type="password" name="passwrd" size="10" class="form-control" placeholder="',$txt['password'],'"/>
+																					';
+																					if (!empty($modSettings['enableOpenID']))
+																						echo '
+																								<input placeholder="',$txt['openid'],' no Obligatorio" type="text" name="openid_identifier" id="openid_url" size="25" class="form-control openid_login" />';
 
+																						echo '
+																								<input type="hidden" name="hash_passwrd" value="" />
 																			</div>
 																			<div class="col-md-6">
 																				<select name="cookielength" class="form-control">
@@ -328,6 +335,7 @@ echo '
 																				</div>
 
 																			</div>
+
 																		</div>
 																	</form>
 																';
@@ -337,22 +345,40 @@ echo '
 																		',$txt['welmsg_welcome'].' '.$context['user']['name'].'
 																	</div>
 																';
-															}
-														echo'
+																echo '
+																<div>
+																<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
+																</a>
+												        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>
+																</div>';
+																// Is the forum in maintenance mode?
+																if ($context['in_maintenance'] && $context['user']['is_admin'])
+																	{
+																		echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';
+																	}
+																// Are there any members waiting for approval?
+																if (!empty($context['unapproved_members']))
+																	{
+																		echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';
+																	}
 
-							        	    <div>',$txt['date'],':', $context['current_time'], '.</div>';
-				          				  if ($context['in_maintenance'] && $context['user']['is_admin'])
-															{echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';}
-														if (!empty($context['unapproved_members']))
-															{echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';}
-														if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
-															{echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';}
+																if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
+																	{
+																		echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';
+																	}
+															}
+
+
 														echo'
 												</div>
 
 												<div class="col-md-6">
 												';
 													//aqui para noticias en dispositivos grandes
+													echo'
+													<div class="text-center">',$txt['date'],':', $context['current_time'], '.</div>
+													';
+
 													if (!empty($settings['enable_news']))
 													{echo show_news("desktop");}
 
@@ -360,24 +386,25 @@ echo '
 												</div>
 											</div>
 										</div>
-								    <div class="card-action"> ';
-							        if(!empty($context['user']['is_logged']))
-								        {echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
-												</a>
-								        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>';}
-							        else {
-							        	echo '<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=login">' , $txt['login'] , '</a>
-								        ';}
-							        echo'
+
+										<div class="container ">
+											<div class="row">
+												<div class="visible-md-block visible-lg-block">
+														', template_menu(),'
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
+
+									</div>';
+									//aqui debe de ir el div dard action
+									echo'
 							</div>
 						</div>
-
 					</div>
 				</div>
-	</div>
+
+			</div>
+
 	<div class="clearfix"></div>
 	';
 
@@ -385,38 +412,15 @@ echo '
 	if (!empty($settings['enable_news']))
 	{	echo show_news("movil")	;}
 
-//Agregando el menu principal para los usuarios
-
-	echo '
-	<div class="container ">
-		<div class="row">
-			<div class="visible-md-block visible-lg-block">
-					', template_menu(),'
-			</div>
-		</div>
-	</div>';
-
-	// Show the menu here, according to the menu sub template.
-
-
 	// If the user is logged in, display stuff like their name, new messages, etc.
 	if ($context['user']['is_logged'])
 	{
-		if (!empty($context['user']['avatar']))
-			echo '
-				<p class="avatar">', $context['user']['avatar']['image'], '</p>';
-		echo '
-				<ul class="reset">
-					<li class="greeting">', $txt['hello_member_ndt'], ' <span>', $context['user']['name'], '</span></li>
-					<li><a href="', $scripturl, '?action=unread">', $txt['unread_since_visit'], '</a></li>
-					<li><a href="', $scripturl, '?action=unreadreplies">', $txt['show_unread_replies'], '</a></li>';
 
-		// Is the forum in maintenance mode?
 		if ($context['in_maintenance'] && $context['user']['is_admin'])
 			echo '
 					<li class="notice">', $txt['maintain_mode_on'], '</li>';
 
-		// Are there any members waiting for approval?
+
 		if (!empty($context['unapproved_members']))
 			echo '
 					<li>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</li>';
@@ -663,7 +667,7 @@ function template_menu()
 	global $context, $settings, $options, $scripturl, $txt;
 
 	echo '
-		<nav class="tab-nav tab-nav-brand">
+		<nav class="tab-nav tab-nav-brand card-menu">
 			<ul class="nav nav-justified">';
 
 	foreach ($context['menu_buttons'] as $act => $button)
