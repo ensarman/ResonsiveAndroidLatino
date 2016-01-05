@@ -81,3 +81,7 @@ h1{
 {
 	word-wrap: break-word;
 }
+
+.navegacion{
+  margin: 0;
+}

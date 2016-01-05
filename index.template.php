@@ -80,7 +80,7 @@ function template_html_above()
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	// Show right to left and the character set for ease of translating.
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	echo '<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 <head>';
 
@@ -430,7 +430,7 @@ echo '
 		</div>
 
 
-	';
+	';//dejo sin cerrar el <div class="content"> para cerrar en el final del documento
 
 // Agregar la seccion de noticias desplazables para tablets y celulares.
 	if (!empty($settings['enable_news']))
@@ -442,14 +442,30 @@ echo '
 		<div class="clearfix"></div>';
 
 	// The main content should go here.
-	echo '
-	<div id="content_section"><div class="frame">
-		<div id="main_content_section">';
-
+	echo'
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-8">
+	';
 	// Custom banners and shoutboxes should be placed here, before the linktree.
 
 	// Show the navigation tree.
 	theme_linktree();
+	echo'
+				</div>
+			</div>
+		</div>
+	</main>
+	';
+
+	echo '
+	<div id="content_section">
+		<div class="frame">
+			<div id="main_content_section">';
+
+
+
 }
 
 function show_news($cols="desktop"){
@@ -503,21 +519,25 @@ function template_body_below()
 
 	// Show the "Powered by" and "Valid" logos, as well as the copyright. Remember, the copyright must be somewhere!
 	echo '
-	<div id="footer_section"><div class="frame">
-		<ul class="reset">
-			<li class="copyright">', theme_copyright(), '</li>
-			<li><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="', $txt['valid_xhtml'], '"><span>', $txt['xhtml'], '</span></a></li>
-			', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
-			<li class="last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
-		</ul>';
+	<div class="container">
+		<div id="row">
+			<div class="col-xs-12">
+				<ul class="nav-list">
+					<li class="padding-right-lg copyright">', theme_copyright(), '</li>
+					<li class="padding-right-lg"><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="', $txt['valid_xhtml'], '"><span>', $txt['xhtml'], '</span></a></li>
+					', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li class="padding-right-lg"><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
+					<li class="padding-right-lg last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
+				</ul>';
 
-	// Show the load time?
-	if ($context['show_load_time'])
+		// Show the load time?
+		if ($context['show_load_time'])
+			echo '
+				<p>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</p>';
+
 		echo '
-		<p>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</p>';
-
-	echo '
-	</div></div>', !empty($settings['forum_width']) ? '
+			</div>
+		</div>
+	</div>', !empty($settings['forum_width']) ? '
 </div>' : '';
 }
 
@@ -539,14 +559,14 @@ function theme_linktree($force_show = false)
 		return;
 
 	echo '
-	<div class="navigate_section">
-		<ul>';
+	<div class="navegacion">
+		<ul class="breadcrumb">';
 
 	// Each tree item has a URL and name. Some may have extra_before and extra_after.
 	foreach ($context['linktree'] as $link_num => $tree)
 	{
 		echo '
-			<li', ($link_num == count($context['linktree']) - 1) ? ' class="last"' : '', '>';
+			<li ', ($link_num == count($context['linktree']) - 1) ? ' class="active"' : '', '>';
 
 		// Show something before the link?
 		if (isset($tree['extra_before']))
@@ -559,10 +579,6 @@ function theme_linktree($force_show = false)
 		// Show something after the link...?
 		if (isset($tree['extra_after']))
 			echo $tree['extra_after'];
-
-		// Don't show a separator for the last one.
-		if ($link_num != count($context['linktree']) - 1)
-			echo ' &#187;';
 
 		echo '
 			</li>';
@@ -653,7 +669,7 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
 			$buttons[] = '
-				<li><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
+				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
 	}
 
 	// No buttons? No button strip either.
@@ -665,10 +681,11 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 
 	echo '
 		<div class="buttonlist', !empty($direction) ? ' float' . $direction : '', '"', (empty($buttons) ? ' style="display: none;"' : ''), (!empty($strip_options['id']) ? ' id="' . $strip_options['id'] . '"': ''), '>
-			<ul>',
+			<ul class="nav-list">',
 				implode('', $buttons), '
 			</ul>
-		</div>';
+		</div>
+		';
 }
 
 
