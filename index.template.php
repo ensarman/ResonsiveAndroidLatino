@@ -181,7 +181,8 @@ echo '
 			<header class="header header-transparent header-waterfall">
 				<div class=container-fluid>
 					<div class="row">
-						<div class="col-xs-10">
+						<div class="col-xs-8" style="border: 2px;">
+
 							<ul class="nav nav-list pull-left">
 								<li>
 									<a data-toggle="menu" href="#al_menu">
@@ -190,27 +191,31 @@ echo '
 								</li>
 							</ul>
 
+							<div class="">
+
 							<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
 
 							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+							</div>
 
-							<div class="container-fluid">
-								<div class="col-xs-4 busqueda visible-md-block visible-sm-block visible-lg-block ">
-									<form action="http://www.google.com" id="cse-search-box">
-										<div>
-											<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
-											<input type="hidden" name="ie" value="UTF-8" />
-											<input style="background-color:transparent; " type="text" name="q" class="form-control" />
-											<input class="oculto" type="submit" name="sa" value="Buscar" />
-										</div>
-									</form>
 
-									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
+						</div>
+						<div class="col-xs-4">
+						<div class="container-fluid">
+							<div class="col-sm-9 busqueda visible-md-block visible-sm-block visible-lg-block ">
+								<form action="http://www.google.com" id="cse-search-box">
+									<div>
+										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
+										<input type="hidden" name="ie" value="UTF-8" />
+										<input style="background-color:transparent; " type="text" name="q" class="form-control" />
+										<input class="oculto" type="submit" name="sa" value="Buscar" />
+									</div>
+								</form>
 
-								</div>
+								<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
+
 							</div>
 						</div>
-						<div class="col-xs-2">
 
 							<ul class="nav nav-list pull-right">
 								<li class="dropdown margin-right">
@@ -312,202 +317,129 @@ echo '
 	<div class="content">
 		<div class="content-heading">
 		</div>
-			<div class="container">
-				<div class="row">
-					<div class="visible-md-block visible-lg-block">
-
-						<div class="card margin-bottom-no">
-						<!-- div class="card col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2" -->
-					    <div class="card-main">
-					        <div class="card-inner mdc-text-grey-900"  style="margin-bottom: 0px;>
-										<div class="container">
-											<div class="row">
-												<div class="col-md-6">
-												';
-															if (!$context['user']['is_logged'])
-															{
-																// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
-																echo'
-																	<form class="form-inline" id="login-form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
-																		<div class="container-fluid">
-																			<div class="col-md-6">
-
-																					<input type="text" name="user" size="10" class="form-control" placeholder="',$txt['username'],'"/>
-																					<input type="password" name="passwrd" size="10" class="form-control" placeholder="',$txt['password'],'"/>
-																					';
-																					if (!empty($modSettings['enableOpenID']))
-																						echo '
-																								<input placeholder="',$txt['openid'],' no Obligatorio" type="text" name="openid_identifier" id="openid_url" size="25" class="form-control openid_login" />';
-
-																						echo '
-																								<input type="hidden" name="hash_passwrd" value="" />
-																			</div>
-																			<div class="col-md-6">
-																				<select name="cookielength" class="form-control">
-																					<option value="60">', $txt['one_hour'], '</option>
-																					<option value="1440">', $txt['one_day'], '</option>
-																					<option value="10080">', $txt['one_week'], '</option>
-																					<option value="43200">', $txt['one_month'], '</option>
-																					<option value="-1" selected="selected">', $txt['forever'], '</option>
-																				</select>
-
-																				<div>
-																					<a href="#" onclick="document.getElementById(\'login-form\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
-																					<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
-																					</a>
-																					<span class="oculto">
-																						<input type="submit" value="', $txt['login'], '" class="btn btn-default" />
-																					</span>
-																				</div>
-
-																			</div>
-
-																		</div>
-																	</form>
-																';
-															}
-															// If the user is logged in, display stuff like their name, new messages, etc.
-															else {
-																echo '
-																	<div class="bienvenido">
-																		',$txt['welmsg_welcome'].' '.$context['user']['name'].'
-																	</div>
-																';
-																echo '
-																<div>
-																<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
-																</a>
-												        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>
-																</div>';
-																// Is the forum in maintenance mode?
-																if ($context['in_maintenance'] && $context['user']['is_admin'])
-																	{
-																		echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';
-																	}
-																// Are there any members waiting for approval?
-																if (!empty($context['unapproved_members']))
-																	{
-																		echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';
-																	}
-
-																if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
-																	{
-																		echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';
-																	}
-															}
-
-
+		<div class="container">
+			<div class="row">
+				<div class="visible-md-block visible-lg-block">
+					<div class="card margin-bottom-no">
+				    <div class="card-main">
+			        <div class="card-inner mdc-text-grey-900"  style="margin-bottom: 0px;">
+								<div class="container">
+									<div class="row">
+										<div class="col-md-6">
+										';
+													if (!$context['user']['is_logged'])
+													{
+														// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
 														echo'
+											<form class="form-inline" id="login-form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+												<div class="container-fluid">
+													<div class="col-md-6">
+														<input type="text" name="user" size="10" class="form-control" placeholder="',$txt['username'],'"/>
+														<input type="password" name="passwrd" size="10" class="form-control" placeholder="',$txt['password'],'"/>
+																			';
+																			if (!empty($modSettings['enableOpenID']))
+																				echo '
+														<input placeholder="',$txt['openid'],' no Obligatorio" type="text" name="openid_identifier" id="openid_url" size="25" class="form-control openid_login" />';
+
+																				echo '
+														<input type="hidden" name="hash_passwrd" value="" />
+													</div>
+													<div class="col-md-6">
+														<select name="cookielength" class="form-control">
+															<option value="60">', $txt['one_hour'], '</option>
+															<option value="1440">', $txt['one_day'], '</option>
+															<option value="10080">', $txt['one_week'], '</option>
+															<option value="43200">', $txt['one_month'], '</option>
+															<option value="-1" selected="selected">', $txt['forever'], '</option>
+														</select>
+														<div>
+															<a href="#" onclick="document.getElementById(\'login-form\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
+															<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
+															</a>
+															<span class="oculto">
+																<input type="submit" value="', $txt['login'], '" class="btn btn-default" />
+															</span>
+														</div>
+													</div>
 												</div>
-
-												<div class="col-md-6">
-												';
-													//aqui para noticias en dispositivos grandes
-													echo'
-													<div class="text-center">',$txt['date'],':', $context['current_time'], '.</div>
-													';
-
-													if (!empty($settings['enable_news']))
-													{echo show_news("desktop");}
-
-											echo '
-												</div>
+											</form>
+														';
+													}
+													// If the user is logged in, display stuff like their name, new messages, etc.
+													else {
+														echo '
+											<div class="bienvenido">
+												',$txt['welmsg_welcome'].' '.$context['user']['name'].'
 											</div>
-										</div>
+														';
+														echo '
+											<div>
+												<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
+												</a>
+								        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>
+											</div>';
+														// Is the forum in maintenance mode?
+														if ($context['in_maintenance'] && $context['user']['is_admin'])
+															{
+																echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';
+															}
+														// Are there any members waiting for approval?
+														if (!empty($context['unapproved_members']))
+															{
+																echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';
+															}
 
-										<div class="container ">
-											<div class="row">
-												<div class="visible-md-block visible-lg-block">
-														', template_menu(),'
-												</div>
-											</div>
-										</div>
+														if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
+															{
+																echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';
+															}
+													}
 
-									</div>';
-									//aqui debe de ir el div dard action
-									echo'
-							</div>
+
+												echo'
+										</div>
+										<div class="col-md-6">
+										';
+											//aqui para noticias en dispositivos grandes
+											echo'
+											<div class="text-center">',$txt['date'],':', $context['current_time'], '.</div>
+											';
+
+											if (!empty($settings['enable_news']))
+											{echo show_news("desktop");}
+
+									echo '
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="container ">
+										<div class="visible-md-block visible-lg-block">
+												', template_menu(),'
+										</div>
+									</div>
+								</div>
+							</div>';
+							//aqui debe de ir el div dard action
+							echo'
 						</div>
 					</div>
 				</div>
-
 			</div>
+		</div>
 
-	<div class="clearfix"></div>
+
 	';
 
 // Agregar la seccion de noticias desplazables para tablets y celulares.
 	if (!empty($settings['enable_news']))
 	{	echo show_news("movil")	;}
 
-
-
-	echo '
-			</div>
-			<div class="news normaltext">
-				<form id="search_form" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
-					<input type="text" name="search" value="" class="input_text" />&nbsp;
-					<input type="submit" name="submit" value="', $txt['search'], '" class="button_submit" />
-					<input type="hidden" name="advanced" value="0" />';
-
-	// Search within current topic?
-	if (!empty($context['current_topic']))
-		echo '
-					<input type="hidden" name="topic" value="', $context['current_topic'], '" />';
-	// If we're on a certain board, limit it to this board ;).
-	elseif (!empty($context['current_board']))
-		echo '
-					<input type="hidden" name="brd[', $context['current_board'], ']" value="', $context['current_board'], '" />';
-
-	echo '</form>';
-
-	// Show a random news item? (or you could pick one from news_lines...)
-	if (!empty($settings['enable_news']))
-		echo '
-				<h2>', $txt['news'], ': </h2>
-				<p>', $context['random_news_line'], '</p>';
-
-	echo '
-			</div>
-		</div>
-		<br class="clear" />';
-
 	// Define the upper_section toggle in JavaScript.
-	echo '
-		<script type="text/javascript"><!-- // --><![CDATA[
-			var oMainHeaderToggle = new smc_Toggle({
-				bToggleEnabled: true,
-				bCurrentlyCollapsed: ', empty($options['collapse_header']) ? 'false' : 'true', ',
-				aSwappableContainers: [
-					\'upper_section\'
-				],
-				aSwapImages: [
-					{
-						sId: \'upshrink\',
-						srcExpanded: smf_images_url + \'/upshrink.png\',
-						altExpanded: ', JavaScriptEscape($txt['upshrink_description']), ',
-						srcCollapsed: smf_images_url + \'/upshrink2.png\',
-						altCollapsed: ', JavaScriptEscape($txt['upshrink_description']), '
-					}
-				],
-				oThemeOptions: {
-					bUseThemeSettings: ', $context['user']['is_guest'] ? 'false' : 'true', ',
-					sOptionName: \'collapse_header\',
-					sSessionVar: ', JavaScriptEscape($context['session_var']), ',
-					sSessionId: ', JavaScriptEscape($context['session_id']), '
-				},
-				oCookieOptions: {
-					bUseCookie: ', $context['user']['is_guest'] ? 'true' : 'false', ',
-					sCookieName: \'upshrink\'
-				}
-			});
-		// ]]></script>';
-
-
 
 	echo '
-		<br class="clear" />
-	</div></div>';
+		<div class="clearfix"></div>';
 
 	// The main content should go here.
 	echo '

@@ -76,3 +76,8 @@ h1{
 .busqueda{
 	margin-top: 6.8px; /*numero aureo xD*/
 }
+
+.wrap
+{
+	word-wrap: break-word;
+}
