@@ -37,12 +37,11 @@
 
 /*IcoFix es una clase para acomodar el icono porque sin el margin se veria arriba de todo por alguna razon*/
 
-#icofix {
-  margin-top:9px;
-}
 
-.avatar #icofix {
+
+.icofix {
   color:#fff;
+  margin-top:9px;
 }
 
 /*quitamos los margenes de h1 que es el titulo de cada página en el foro*/

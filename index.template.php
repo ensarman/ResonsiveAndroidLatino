@@ -455,17 +455,7 @@ echo '
 	echo'
 				</div>
 			</div>
-		</div>
-	</main>
 	';
-
-	echo '
-	<div id="content_section">
-		<div class="frame">
-			<div id="main_content_section">';
-
-
-
 }
 
 function show_news($cols="desktop"){
@@ -484,7 +474,7 @@ function show_news($cols="desktop"){
 							<div data-target="'. ($cols=="movil" ? '#doc_tile_example_2':'#doc_tile_example_1').'" data-toggle="tile">
 								<div class="pull-left tile-side" data-ignore="tile">
 									<div class="avatar avatar-sm mdc-bg-blue-500">
-										<span class="icon" id="icofix">public</span>
+										<span class="icon icofix">public</span>
 									</div>
 								</div>
 								<div class="tile-inner">
@@ -514,30 +504,33 @@ function template_body_below()
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	echo '
+
 		</div>
-	</div></div>';
+	</main>';
 
 	// Show the "Powered by" and "Valid" logos, as well as the copyright. Remember, the copyright must be somewhere!
 	echo '
-	<div class="container">
-		<div id="row">
-			<div class="col-xs-12">
-				<ul class="nav-list">
-					<li class="padding-right-lg copyright">', theme_copyright(), '</li>
-					<li class="padding-right-lg"><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="', $txt['valid_xhtml'], '"><span>', $txt['xhtml'], '</span></a></li>
-					', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li class="padding-right-lg"><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
-					<li class="padding-right-lg last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
-				</ul>';
+	<footer>
+		<div class="container-fluid">
+			<div id="row">
+				<div class="col-xs-12">
+					<ul class="nav-justified">
+						<li class="padding-right-lg waves-attach copyright">', theme_copyright(), '</li>
+						<li class="padding-right-lg waves-attach"><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="', $txt['valid_xhtml'], '"><span>', $txt['xhtml'], '</span></a></li>
+						', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li class="padding-right-lg waves-attach "><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
+						<li class="padding-right-lg waves-attach last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
+					</ul>';
 
-		// Show the load time?
-		if ($context['show_load_time'])
+			// Show the load time?
+			if ($context['show_load_time'])
+				echo '
+					<p>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</p>';
+
 			echo '
-				<p>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</p>';
-
-		echo '
+				</div>
 			</div>
 		</div>
-	</div>', !empty($settings['forum_width']) ? '
+	</footer>', !empty($settings['forum_width']) ? '
 </div>' : '';
 }
 
@@ -546,7 +539,8 @@ function template_html_below()
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	echo '
-</body></html>';
+</body>
+</html>';
 }
 
 // Show a linktree. This is that thing that shows "My Community | General Category | General Discussion"..
