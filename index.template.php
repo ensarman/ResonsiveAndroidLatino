@@ -81,7 +81,7 @@ function template_html_above()
 
 	// Show right to left and the character set for ease of translating.
 	echo '<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
+<html lang="es-PE" xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 <head>';
 
 	// The ?fin20 part of this link is just here to make sure browsers don't cache it wrongly.
@@ -444,7 +444,7 @@ echo '
 	// The main content should go here.
 	echo'
 	<main>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
 	';
