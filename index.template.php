@@ -443,18 +443,17 @@ echo '
 
 	// The main content should go here.
 	echo'
-	<main>
+	<main class="contenedor">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12 col-md-8">
+				<div class="col-xs-12 col-md-10">
 	';
 	// Custom banners and shoutboxes should be placed here, before the linktree.
 
 	// Show the navigation tree.
 	theme_linktree();
 	echo'
-				</div>
-			</div>
+				
 	';
 }
 
@@ -504,7 +503,8 @@ function template_body_below()
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	echo '
-
+                </div>
+			</div>
 		</div>
 	</main>';
 
