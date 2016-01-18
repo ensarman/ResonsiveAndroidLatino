@@ -195,7 +195,22 @@ echo '
 
 							<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
 
-							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">', $context['page_title_html_safe'], '</span></h1>
+							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">';
+							//Trabajando en el fix del titulo, ya que esto afecta solo al index.template.php
+							//Sacar el forumname 
+							$valnombre=strlen($context['forum_name']);
+							$valortitulo=substr($context['page_title_html_safe'],0,$valnombre);
+							//Aca se pregunta si tiene un valor igual al nombre de foro, asi se sabe que hacer. En caso de que si, se hace una cuenta para mostrar solo index
+							if ($valortitulo== $context['forum_name'])
+								{
+								$rmtitulo=strlen($context['forum_name'])+ 3;
+								$cttitulo=strlen($context['page_title_html_safe']);
+								echo substr($context['page_title_html_safe'], $rmtitulo, $cttitulo);}
+							//Sino se muestra la el titulo de la pagina lo más normal posible
+							else 
+								{
+								echo $context['page_title_html_safe'];}
+							echo '</span></h1>
 							</div>
 
 
