@@ -242,7 +242,8 @@ echo '
 										if ($context['user']['is_logged'])
 										{
 											echo
-												'<li>
+												'
+												<li>
 													<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
 												</li>
 												<li>
@@ -307,6 +308,13 @@ echo '
 					</li>
 					<li>
 						<a class="waves-attach" href="', $scripturl, '?action=pm"><span class="icon icon-lg margin-right">inbox</span>',$txt['pm'],'</a>
+					</li>
+					<li class="hidden-md">
+						<a class="waves-attach" href="javascript:void(0)" data-target="#doc_menu_profile_settings" data-toggle="collapse"><span class="icon icon-lg margin-right">menu</span>',$txt['almenu'],'</a>
+						<span class="collapsed menu-collapse-toggle waves-attach" data-target="#doc_menu_profile_settings" data-toggle="collapse"><i class="icon menu-collapse-toggle-close">close</i><i class="icon menu-collapse-toggle-default">add</i></span>
+						<ul class="collapse menu-collapse" id="doc_menu_profile_settings">';
+						menu_lateral();
+						echo '</ul>
 					</li>';
 					// Muestra los Likes del Like Mod
           if (!empty($modSettings['LikePosts::$LikePostsUtils->showLikeNotification())']))
@@ -655,6 +663,22 @@ function template_menu()
 	echo '
 			</ul>
 		</nav>';
+}
+
+//Esta function es para el menú del costado, para celulares 
+function menu_lateral()
+{
+	global $context, $settings, $options, $scripturl, $txt;
+	//Ahora nos encargamos de usar los elementos de la lista
+	foreach ($context['menu_buttons'] as $act => $button)
+	{
+		echo '
+				<li>
+					<a href="', $button['href'], '" class="waves-attach waves-effect">', $button['title'], '
+					</a>';
+		echo '
+				</li>';
+	}
 }
 
 // Generate a strip of buttons.

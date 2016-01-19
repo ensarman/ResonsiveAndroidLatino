@@ -72,12 +72,12 @@ main.contenedor{
   filter: blur(5px);
 }
 
-.menu-content .nav .a, .menu-content .nav a {
+.menu-content .nav .a, .menu-content .nav a,.menu-collapse-toggle {
 	color:rgba(255,255,255,0.87);
 }
-.menu-content .nav a:hover{
+.menu-content .nav a:hover,.menu-collapse-toggle:hover{
 	background-color:transparent;
-	color:rgba(255,255,255,1);
+	color:rgba(255,255,255,1)!important;
 }
 
 /*IcoFix es una clase para acomodar el icono porque sin el margin se veria arriba de todo por alguna razon*/
@@ -127,4 +127,10 @@ h1{
 
 .navegacion{
   margin: 0;
+}
+
+
+/*Arreglando los colores del menu*/
+.menu-content .nav a:hover, .menu-content .nav a:focus {
+  background-color: #607D8B;
 }
