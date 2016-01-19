@@ -81,7 +81,7 @@ function template_html_above()
 
 	// Show right to left and the character set for ease of translating.
 	echo '<!DOCTYPE html>
-<html lang="es-PE" xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
+<html lang="es-PE"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 <head>';
 
 	// The ?fin20 part of this link is just here to make sure browsers don't cache it wrongly.
@@ -181,7 +181,7 @@ echo '
 			<header class="header header-transparent header-waterfall">
 				<div class=container-fluid>
 					<div class="row">
-						<div class="col-xs-8" style="border: 2px;">
+						<div class="col-xs-8" >
 
 							<ul class="nav nav-list pull-left">
 								<li>
@@ -197,7 +197,7 @@ echo '
 
 							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">';
 							//Trabajando en el fix del titulo, ya que esto afecta solo al index.template.php
-							//Sacar el forumname 
+							//Sacar el forumname
 							$valnombre=strlen($context['forum_name']);
 							$valortitulo=substr($context['page_title_html_safe'],0,$valnombre);
 							//Aca se pregunta si tiene un valor igual al nombre de foro, asi se sabe que hacer. En caso de que si, se hace una cuenta para mostrar solo index
@@ -207,7 +207,7 @@ echo '
 								$cttitulo=strlen($context['page_title_html_safe']);
 								echo substr($context['page_title_html_safe'], $rmtitulo, $cttitulo);}
 							//Sino se muestra la el titulo de la pagina lo más normal posible
-							else 
+							else
 								{
 								echo $context['page_title_html_safe'];}
 							echo '</span></h1>
@@ -468,7 +468,7 @@ echo '
 	// Show the navigation tree.
 	theme_linktree();
 	echo'
-				
+
 	';
 }
 
