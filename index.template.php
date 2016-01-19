@@ -179,10 +179,10 @@ function template_body_above()
 /*Navbar responsive, estilizada al foro*/
 echo '
 			<header class="header header-transparent header-waterfall">
-				<div class=container-fluid>
-					<div class="row">
-						<div class="col-xs-8" >
 
+				<table>
+					<tr>
+						<td class="tresrayas">
 							<ul class="nav nav-list pull-left">
 								<li>
 									<a data-toggle="menu" href="#al_menu">
@@ -190,12 +190,12 @@ echo '
 									</a>
 								</li>
 							</ul>
+						</td>
+						<td class="titulo-overflow contenido">
 
-							<div class="">
+							<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="50" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
 
-							<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
-
-							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="40" data-spy="affix">';
+							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="50" data-spy="affix">';
 							//Trabajando en el fix del titulo, ya que esto afecta solo al index.template.php
 							//Sacar el forumname
 							$valnombre=strlen($context['forum_name']);
@@ -211,13 +211,13 @@ echo '
 								{
 								echo $context['page_title_html_safe'];}
 							echo '</span></h1>
-							</div>
+						</td>
 
 
-						</div>
-						<div class="col-xs-4">
-						<div class="container-fluid">
-							<div class="col-sm-9 busqueda visible-md-block visible-sm-block visible-lg-block ">
+
+
+						<td class="tbusqueda ocultar-pequeno">
+							<div class="busqueda  ">
 								<form action="http://www.google.com" id="cse-search-box">
 									<div>
 										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
@@ -230,8 +230,8 @@ echo '
 								<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
 
 							</div>
-						</div>
-
+						</td>
+						<td class="menu-usuario">
 							<ul class="nav nav-list pull-right">
 								<li class="dropdown margin-right">
 									<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
@@ -266,12 +266,9 @@ echo '
 									</ul>
 								</li>
 							</ul>
-
-						</div>
-					</div>
-				</div>
-
-
+						</td>
+					</tr>
+				</table>
 			</header>
 
 	';
