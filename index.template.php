@@ -227,7 +227,7 @@ echo '
 									</div>
 								</form>
 
-								<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
+								<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
 
 							</div>
 						</td>
