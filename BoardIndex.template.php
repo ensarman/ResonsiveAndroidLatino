@@ -13,7 +13,9 @@
 function template_main()
 {
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
-
+	
+	var_dump($settings);
+	
 	// Show some statistics if stat info is off.
 	if (!$settings['show_stats_index'])
 		echo '

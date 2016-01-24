@@ -1,7 +1,7 @@
-main.contenedor{
+/*main.contenedor{
   margin-left: 10px;
   margin-right: 10px;
-}
+}*/
 
 .content-heading {
   background-image: url(../images/material/bg.png);
@@ -14,7 +14,10 @@ main.contenedor{
 .page-brand .header-transparent.affix{
 	background-color: #388ccc;
 }
-
+/*Añadiendo el color de arriba en las lineas del dropdown*/
+.form-control:focus, .picker__select--month:focus, .picker__select--year:focus {
+  border-color:#388ccc;
+}
 .header{
   margin-top: 0;
   padding-top: 0;

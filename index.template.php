@@ -218,7 +218,7 @@ echo '
 
 						<td class="tbusqueda ocultar-pequeno">
 							<div class="busqueda  ">
-								<form action="http://www.google.com" id="cse-search-box">
+								<form action="https://www.google.com" id="cse-search-box">
 									<div>
 										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
 										<input type="hidden" name="ie" value="UTF-8" />
