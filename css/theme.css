@@ -120,20 +120,17 @@ h1{
 
 }
 
-
-
-
-.wrap
-{
-	word-wrap: break-word;
-}
-
-.navegacion{
-  margin: 0;
-}
-
-
 /*Arreglando los colores del menu*/
 .menu-content .nav a:hover, .menu-content .nav a:focus {
   background-color: #607D8B;
+}
+
+/*seccion de las categorias*/
+
+.sinmargen{
+  margin: 0;
+}
+
+.cat_bar{
+  background-color: #eee;
 }
