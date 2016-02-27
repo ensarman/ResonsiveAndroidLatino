@@ -464,9 +464,9 @@ echo '
 	// The main content should go here.
 	echo'
 	<main class="contenedor">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-md-10">
+				<div class="col-xs-12">
 	';
 	// Custom banners and shoutboxes should be placed here, before the linktree.
 
@@ -573,7 +573,7 @@ function theme_linktree($force_show = false)
 		return;
 
 	echo '
-	<div class="navegacion">
+	<div class="sinmargen">
 		<ul class="breadcrumb">';
 
 	// Each tree item has a URL and name. Some may have extra_before and extra_after.
@@ -665,7 +665,7 @@ function template_menu()
 		</nav>';
 }
 
-//Esta function es para el menú del costado, para celulares 
+//Esta function es para el menú del costado, para celulares
 function menu_lateral()
 {
 	global $context, $settings, $options, $scripturl, $txt;

@@ -13,9 +13,7 @@
 function template_main()
 {
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
-	
-	var_dump($settings);
-	
+
 	// Show some statistics if stat info is off.
 	if (!$settings['show_stats_index'])
 		echo '
@@ -84,10 +82,9 @@ function template_main()
 		});
 	// ]]></script>';
 	}
-
 	echo '
-	<div id="boardindex_table">
-		<table class="table table-hover table-stripe">';
+	<div id="boardindex_table" class="table-responsive">
+		<table class="table table-hover table-strip">';
 
 	/* Each category in categories is made up of:
 	id, href, link, name, is_collapsed (is it collapsed?), can_collapse (is it okay if it is?),
@@ -95,40 +92,45 @@ function template_main()
 	and boards. (see below.) */
 	foreach ($context['categories'] as $category)
 	{
+		var_dump($category);
 		// If theres no parent boards we can see, avoid showing an empty category (unless its collapsed)
 		if (empty($category['boards']) && !$category['is_collapsed'])
 			continue;
 
 		echo '
-			<tbody class="header" id="category_', $category['id'], '">
+			<thead class="cat_bar" id="category_', $category['id'], '">
 				<tr>
 					<td colspan="4">
-						<div class="cat_bar">
-							<h3 class="catbg">';
+						<div>
+							<h3 class="sinmargen">';
 
 		// If this category even can collapse, show a link to collapse it.
 		if ($category['can_collapse'])
 			echo '
-								<a class="collapse" href="', $category['collapse_href'], '">', $category['collapse_image'], '</a>';
+								<a href="', $category['collapse_href'], '"> <span class="icon margin-left-sm">keyboard_arrow_down</span> </a>';
+
+		echo ' ',$category['link'];
 
 		if (!$context['user']['is_guest'] && !empty($category['show_unread']))
 			echo '
-								<a class="unreadlink" href="', $scripturl, '?action=unread;c=', $category['id'], '">', $txt['view_unread_category'], '</a>';
+							<div class="pull-right">
+								<a href="', $scripturl, '?action=unread;c=', $category['id'], '">', $txt['view_unread_category'], '</a>
+							</div>';
+
 
 		echo '
-								', $category['link'], '
 							</h3>
 						</div>
 					</td>
 				</tr>
-			</tbody>';
+			</thead>';
 
 		// Assuming the category hasn't been collapsed...
 		if (!$category['is_collapsed'])
 		{
 
 		echo '
-			<tbody class="content" id="category_', $category['id'], '_boards">';
+			<tbody id="category_', $category['id'], '_boards">';
 			/* Each board in each category's boards has:
 			new (is it new?), id, name, description, moderators (see below), link_moderators (just a list.),
 			children (see below.), link_children (easier to use.), children_new (are they new?),
