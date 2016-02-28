@@ -92,7 +92,7 @@ function template_main()
 	and boards. (see below.) */
 	foreach ($context['categories'] as $category)
 	{
-		var_dump($category);
+
 		// If theres no parent boards we can see, avoid showing an empty category (unless its collapsed)
 		if (empty($category['boards']) && !$category['is_collapsed'])
 			continue;
@@ -146,7 +146,7 @@ function template_main()
 				if ($board['new'] || $board['children_new'])
 							{echo '
 							<img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'on', $board['new'] ? '' : '2', '.png" alt="', $txt['new_posts'], '" title="', $txt['new_posts'], '" />';}
-								
+
 				// Is it a redirection board?
 				elseif ($board['is_redirect'])
 					echo '
