@@ -92,7 +92,6 @@ function template_main()
 	and boards. (see below.) */
 	foreach ($context['categories'] as $category)
 	{
-
 		// If theres no parent boards we can see, avoid showing an empty category (unless its collapsed)
 		if (empty($category['boards']) && !$category['is_collapsed'])
 			continue;
@@ -145,16 +144,16 @@ function template_main()
 				// If the board or children is new, show an indicator.
 				if ($board['new'] || $board['children_new'])
 							{echo '
-							<a class="avatar avatar-brand-accent avatar-md" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon"> ', $txt['new_posts'], ' </span></a>';}
+							<a class="avatar avatar-brand-accent avatar-md mdc-bg-blue-700 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">forum</span></a>';}
 
 				// Is it a redirection board?
 				elseif ($board['is_redirect'])
 					echo '
-							<a class="avatar avatar-brand avatar-md" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon"> R </span></a>';
+							<a class="avatar avatar-brand avatar-md mdc-bg-cyan-700 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">subdirectory_arrow_right</span></a>';
 				// No new posts at all! The agony!!
 				else
 					echo '
-							<a class="avatar avatar-md" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon"> ', $txt['old_posts'], ' </span></a>';
+							<a class="avatar avatar-md mdc-bg-blue-grey-300 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">forum</span></a>';
 
 				echo '
 						</a>
