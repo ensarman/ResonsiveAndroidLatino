@@ -138,23 +138,23 @@ function template_main()
 			foreach ($category['boards'] as $board)
 			{
 				echo '
-				<tr id="board_', $board['id'], '" class="windowbg2">
-					<td class="icon windowbg"', !empty($board['children']) ? ' rowspan="2"' : '', '>
+				<tr id="board_', $board['id'], '" >
+					<td ', !empty($board['children']) ? ' rowspan="2"' : '', '>
 						<a href="', ($board['is_redirect'] || $context['user']['is_guest'] ? $board['href'] : $scripturl . '?action=unread;board=' . $board['id'] . '.0;children'), '">';
 
 				// If the board or children is new, show an indicator.
 				if ($board['new'] || $board['children_new'])
 							{echo '
-							<img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'on', $board['new'] ? '' : '2', '.png" alt="', $txt['new_posts'], '" title="', $txt['new_posts'], '" />';}
+							<a class="avatar avatar-brand-accent avatar-md" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon"> ', $txt['new_posts'], ' </span></a>';}
 
 				// Is it a redirection board?
 				elseif ($board['is_redirect'])
 					echo '
-							<img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'redirect.png" alt="*" title="*" />';
+							<a class="avatar avatar-brand avatar-md" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon"> R </span></a>';
 				// No new posts at all! The agony!!
 				else
 					echo '
-							<img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'off.png" alt="', $txt['old_posts'], '" title="', $txt['old_posts'], '" />';
+							<a class="avatar avatar-md" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon"> ', $txt['old_posts'], ' </span></a>';
 
 				echo '
 						</a>
