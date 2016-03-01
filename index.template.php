@@ -102,6 +102,9 @@ function template_html_above()
 		echo '
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/rtl.css" />';
 
+	//Miniupdate: Chrome acepta el atributo theme-color, asi que vamos a colorear la navbar
+	echo '<meta name="theme-color" content="#388ccc">';
+
 	// Here comes the JavaScript bits!
 	echo '
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/script.js?fin20"></script>

@@ -144,7 +144,7 @@ function template_main()
 				// If the board or children is new, show an indicator.
 				if ($board['new'] || $board['children_new'])
 							{echo '
-							<a class="avatar avatar-brand-accent avatar-md mdc-bg-blue-700 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">forum</span></a>';}
+							<a class="avatar avatar-brand-accent avatar-md mdc-bg-blue-700 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">android</span></a>';}
 
 				// Is it a redirection board?
 				elseif ($board['is_redirect'])
@@ -153,7 +153,7 @@ function template_main()
 				// No new posts at all! The agony!!
 				else
 					echo '
-							<a class="avatar avatar-md mdc-bg-blue-grey-300 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">forum</span></a>';
+							<a class="avatar avatar-md mdc-bg-blue-grey-300 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">android</span></a>';
 
 				echo '
 						</a>
