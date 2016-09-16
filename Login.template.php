@@ -100,9 +100,6 @@ function template_login()
 						</label>
 						';
 		echo '
-
-						<p><input type="submit" value="', $txt['login'], '" class="button_submit" /></p>
-
 						<a href="#" onclick="document.getElementById(\'frmLogin\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
 
 						<a href="', $scripturl, '?action=reminder" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['forgot_your_password'], '</a>
