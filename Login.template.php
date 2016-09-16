@@ -25,7 +25,8 @@ function template_login()
 							<img src="', $settings['images_url'], '/material/icons/login-variant.svg" alt="" class="icon-2x" />
 						</h3>
 					</aside>
-					<form action="', $scripturl, '?action=login2" name="frmLogin" id="frmLogin" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+					<div class="card-main">
+						<form action="', $scripturl, '?action=login2" name="frmLogin" id="frmLogin" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 
 					';
 
@@ -41,7 +42,7 @@ function template_login()
 				<p class="description">', $context['description'], '</p>';
 
 	// Now just get the basic information - username, password, etc.
-	echo '		<div class="card-main">
+	echo '
 							<div class="card-inner">
 
 									<div class="form-group">
@@ -85,7 +86,7 @@ function template_login()
 							</div>
 						</div>
 					</div>
-					<div class="card-action">
+				<div class="card-action">
 			';
 	// If they have deleted their account, give them a chance to change their mind.
 	if (isset($context['login_show_undelete']))
@@ -106,8 +107,8 @@ function template_login()
 						<input type="hidden" name="hash_passwrd" value="" />
 
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
