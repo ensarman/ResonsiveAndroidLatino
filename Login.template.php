@@ -25,8 +25,6 @@ function template_login()
 						<div class="card-inner">
 							<h3>
 								',$txt['login'],'
-								<!-- span class="icon">login</span -->
-								<!-- img src="', $settings['images_url'], '/material/icons/login-variant.svg" alt="" class="icon-2x" / -->
 							</h3>
 						</div>
 						<form action="', $scripturl, '?action=login2" name="frmLogin" id="frmLogin" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
@@ -63,7 +61,7 @@ function template_login()
 												<label class="floating-label" for="',$txt['password'],'">',$txt['password'],'</label>
 												<input type="password" name="passwrd" value="', $context['default_password'], '" class="form-control" placeholder="',$txt['password'],'"/>
 											</div>
-									</div>
+										</div>
 									</div>
 
 					';
@@ -209,36 +207,69 @@ function template_maintenance()
 	// Display the administrator's message at the top.
 	echo '
 <script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/sha1.js"></script>
-<form action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '"', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
-	<div class="tborder login" id="maintenance_mode">
-		<div class="cat_bar">
-			<h3 class="catbg">', $context['title'], '</h3>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sx-12">
+		<div class="card">
+			<div class="card-main">
+				
+				<div class="card-header card-red">
+					<div class="card-inner">
+							<h3 class="card-heading">', $context['title'], '</h3>
+							 <p><i class="icon">build</i> ', $context['description'], '</p>
+					</div>
+				</div>
+
+				<form action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '"', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+					<div class="card-inner">
+						<h3 class="card-heading">', $txt['admin_login'], '</h3>
+					</div>
+
+					<div class="card-inner">
+						<div class="form-group form-group-label">
+							<div class="row">
+								<div class="col-md-12 ">
+									<label class="floating-label" for="',$txt['username'],'">',$txt['username'],'</label>
+									<input type="text" name="user" value="', $context['default_username'], '" class="form-control" />
+								</div>
+							</div>
+							</div>
+							<div class="form-group form-group-label">
+								<div class="row">
+									<div class="col-md-12 ">
+										<label class="floating-label" for="',$txt['password'],'">',$txt['password'],'</label>
+										<input type="password" name="passwrd" value="', $context['default_password'], '" class="form-control" placeholder="',$txt['password'],'"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group form-group-label">
+								<label class="floating-label" for="', $txt['mins_logged_in'], '"> ', $txt['mins_logged_in'], ': </label>
+								<input type="text" name="cookielength" size="4" maxlength="4" value="', $modSettings['cookieTime'], '"', $context['never_expire'] ? ' disabled="disabled"' : '', ' class="form-control" />
+							</div>
+							<div class="form-group">
+								<div class="checkbox checkbox-adv">
+									<label for="', $txt['always_logged_in'], '">
+										<input class="access-hide" id="', $txt['always_logged_in'], '" name="cookieneverexp" ', $context['never_expire'] ? ' checked="checked"' : '', ' type="checkbox" onclick="this.form.cookielength.disabled = this.checked;" >
+										', $txt['always_logged_in'], '
+										<span class="checkbox-circle"></span>
+										<span class="checkbox-circle-check"></span>
+										<span class="checkbox-circle-icon icon">done</span>
+									</label>
+								</div>
+							</div>
+
+							<div class="card-action">
+								<a href="#" onclick="document.getElementById(\'frmLogin\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="hash_passwrd" value="" />
+				</form>
+			</div>
 		</div>
-		<p class="description">
-			<img class="floatleft" src="', $settings['images_url'], '/construction.png" width="40" height="40" alt="', $txt['in_maintain_mode'], '" />
-			', $context['description'], '<br class="clear" />
-		</p>
-		<div class="title_bar">
-			<h4 class="titlebg">', $txt['admin_login'], '</h4>
-		</div>
-		<span class="upperframe"><span></span></span>
-		<div class="roundframe">
-			<dl>
-				<dt>', $txt['username'], ':</dt>
-				<dd><input type="text" name="user" size="20" class="input_text" /></dd>
-				<dt>', $txt['password'], ':</dt>
-				<dd><input type="password" name="passwrd" size="20" class="input_password" /></dd>
-				<dt>', $txt['mins_logged_in'], ':</dt>
-				<dd><input type="text" name="cookielength" size="4" maxlength="4" value="', $modSettings['cookieTime'], '" class="input_text" /></dd>
-				<dt>', $txt['always_logged_in'], ':</dt>
-				<dd><input type="checkbox" name="cookieneverexp" class="input_check" /></dd>
-			</dl>
-			<p class="centertext"><input type="submit" value="', $txt['login'], '" class="button_submit" /></p>
-		</div>
-		<span class="lowerframe"><span></span></span>
-		<input type="hidden" name="hash_passwrd" value="" />
 	</div>
-</form>';
+</div>
+';
 }
 
 // This is for the security stuff - makes administrators login every so often.
