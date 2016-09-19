@@ -20,12 +20,15 @@ function template_login()
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4 col-sx-12">
 				<div class="card">
-					<aside class="card-side pull-left">
-						<h3>
-							<img src="', $settings['images_url'], '/material/icons/login-variant.svg" alt="" class="icon-2x" />
-						</h3>
-					</aside>
+
 					<div class="card-main">
+						<div class="card-inner">
+							<h3>
+								',$txt['login'],'
+								<!-- span class="icon">login</span -->
+								<!-- img src="', $settings['images_url'], '/material/icons/login-variant.svg" alt="" class="icon-2x" / -->
+							</h3>
+						</div>
 						<form action="', $scripturl, '?action=login2" name="frmLogin" id="frmLogin" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 
 					';
@@ -45,13 +48,22 @@ function template_login()
 	echo '
 							<div class="card-inner">
 
-									<div class="form-group">
-										<input type="text" name="user" value="', $context['default_username'], '" class="form-control" placeholder="',$txt['username'],'"/>
+									<div class="form-group form-group-label">
+										<div class="row">
+											<div class="col-md-12 ">
+												<label class="floating-label" for="',$txt['username'],'">',$txt['username'],'</label>
+												<input type="text" name="user" value="', $context['default_username'], '" class="form-control" />
+											</div>
+										</div>
 									</div>
 
-									<div class="form-group">
-
-										<input type="password" name="passwrd" value="', $context['default_password'], '" class="form-control" placeholder="',$txt['password'],'"/>
+									<div class="form-group form-group-label">
+										<div class="row">
+											<div class="col-md-12 ">
+												<label class="floating-label" for="',$txt['password'],'">',$txt['password'],'</label>
+												<input type="password" name="passwrd" value="', $context['default_password'], '" class="form-control" placeholder="',$txt['password'],'"/>
+											</div>
+									</div>
 									</div>
 
 					';

@@ -88,7 +88,9 @@ function template_html_above()
 	echo '
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/base.min.css?fin20" />
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/project.min.css?fin20" />
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/mdcp/material-design-color-palette.min.css?fin20" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/theme.css?fin20" />';
 
 	// Some browsers need an extra stylesheet due to bugs/compatibility issues.
@@ -111,6 +113,7 @@ function template_html_above()
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/theme.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/jquery/dist/jquery.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/base.min.js?fin20"></script>
+	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/project.min.js?fin20"></script>
 	<script type="text/javascript"><!-- // --><![CDATA[
 		var smf_theme_url = "', $settings['theme_url'], '";
 		var smf_default_theme_url = "', $settings['default_theme_url'], '";
@@ -357,8 +360,16 @@ echo '
 											<form class="form-inline" id="login-form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 												<div class="container-fluid">
 													<div class="col-md-6">
-														<input type="text" name="user" size="10" class="form-control" placeholder="',$txt['username'],'"/>
-														<input type="password" name="passwrd" size="10" class="form-control" placeholder="',$txt['password'],'"/>
+														<div class="form-group sinmargen">
+															<div class="form-group-label sinmargen">
+																<label class="floating-label" for="',$txt['username'],'">',$txt['username'],'</label>
+																<input type="text" name="user" size="10" class="form-control" placeholder="',$txt['username'],'"/>
+															</div>
+															<div class="form-group-label sinmargen" style="margin-top: 10px;">
+																<label class="floating-label" for="',$txt['password'],'">',$txt['password'],'</label>														
+																<input type="password" name="passwrd" size="10" class="form-control" placeholder="',$txt['password'],'"/>
+															</div>
+														</div>
 																			';
 																			if (!empty($modSettings['enableOpenID']))
 																				echo '
@@ -368,13 +379,15 @@ echo '
 														<input type="hidden" name="hash_passwrd" value="" />
 													</div>
 													<div class="col-md-6">
-														<select name="cookielength" class="form-control">
-															<option value="60">', $txt['one_hour'], '</option>
-															<option value="1440">', $txt['one_day'], '</option>
-															<option value="10080">', $txt['one_week'], '</option>
-															<option value="43200">', $txt['one_month'], '</option>
-															<option value="-1" selected="selected">', $txt['forever'], '</option>
-														</select>
+														<div class="form-group sinmargen">
+															<select name="cookielength" class="form-control">
+																<option value="60">', $txt['one_hour'], '</option>
+																<option value="1440">', $txt['one_day'], '</option>
+																<option value="10080">', $txt['one_week'], '</option>
+																<option value="43200">', $txt['one_month'], '</option>
+																<option value="-1" selected="selected">', $txt['forever'], '</option>
+															</select>
+														</div>
 														<div>
 															<a href="#" onclick="document.getElementById(\'login-form\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
 															<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="' , $scripturl , '?action=register">' , $txt['register'] , '
@@ -425,7 +438,7 @@ echo '
 										';
 											//aqui para noticias en dispositivos grandes
 											echo'
-											<div class="text-center">',$txt['date'],':', $context['current_time'], '.</div>
+											<div class="text-center">',$txt['date'],': ', $context['current_time'], '.</div>
 											';
 
 											if (!empty($settings['enable_news']))
