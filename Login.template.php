@@ -3,12 +3,14 @@
  * Simple Machines Forum (SMF)
  *
  * @package SMF
- * @author Simple Machines
- * @copyright 2011 Simple Machines
+ * @author Android Latino
+ * @copyright 2016 Android Latino
  * @license http://www.simplemachines.org/about/smf/license.php BSD
  *
  * @version 2.0
  */
+
+//Notas : faltan algunas funciones migrar a material Dessing
 
 // This is just the basic "login" form.
 function template_login()

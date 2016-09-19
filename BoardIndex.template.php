@@ -252,8 +252,8 @@ function template_main()
 
 		echo '
 		<ul class="reset">
-			<li class="floatleft"><img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'new_some.png" alt="" /> ', $txt['new_posts'], '</li>
-			<li class="floatleft"><img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'new_none.png" alt="" /> ', $txt['old_posts'], '</li>
+			<li class="floatleft"><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" ><span class="icon">create_new_folder </span></span>', $txt['new_posts'], '</li>
+			<li class="floatleft"><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" ><span class="icon">create_new_folder </span></span>', $txt['old_posts'], '</li>
 			<li class="floatleft"><img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'new_redirect.png" alt="" /> ', $txt['redirect_board'], '</li>
 		</ul>
 	</div>';

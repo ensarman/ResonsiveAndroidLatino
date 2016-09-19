@@ -135,10 +135,4 @@ h1{
   background-color: #eee;
 }
 
-.text-danger {
-  color: #a94442;
-}
-a.text-danger:hover,
-a.text-danger:focus {
-  color: #843534;
-}
+
