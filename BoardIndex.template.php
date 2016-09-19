@@ -251,11 +251,12 @@ function template_main()
 		);
 
 		echo '
-		<ul class="reset">
-			<li class="floatleft"><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" ><span class="icon">create_new_folder </span></span>', $txt['new_posts'], '</li>
-			<li class="floatleft"><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" ><span class="icon">create_new_folder </span></span>', $txt['old_posts'], '</li>
-			<li class="floatleft"><img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'new_redirect.png" alt="" /> ', $txt['redirect_board'], '</li>
-		</ul>
+			<ul class="nav-justified ulsinpuntos">
+				<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['new_posts'], '</li>
+				<li><span class="avatar avatar-brand-accent avatar-xs mdc-bg-blue-700 mdc-text-grey-50" style="display:inline-block;" ><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
+				<li><span class="avatar avatar-brand avatar-xs mdc-bg-cyan-700 mdc-text-grey-50" style="display:inline-block;" > <span class="icon">subdirectory_arrow_right</span></span>&nbsp;', $txt['redirect_board'], '</li>
+			</ul>
+		
 	</div>';
 
 		// Show the mark all as read button?
