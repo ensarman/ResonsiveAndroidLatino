@@ -220,7 +220,7 @@ function template_maintenance()
 					</div>
 				</div>
 
-				<form action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '"', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+				<form id="frmLogin" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '"', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 					<div class="card-inner">
 						<h3 class="card-heading">', $txt['admin_login'], '</h3>
 					</div>
@@ -233,7 +233,7 @@ function template_maintenance()
 									<input type="text" name="user" value="', $context['default_username'], '" class="form-control" />
 								</div>
 							</div>
-							</div>
+							
 							<div class="form-group form-group-label">
 								<div class="row">
 									<div class="col-md-12 ">
@@ -281,70 +281,52 @@ function template_admin_login()
 	echo '
 <script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/sha1.js"></script>
 
-<form action="', $scripturl, $context['get_data'], '" method="post" accept-charset="', $context['character_set'], '" name="frmLogin" id="frmLogin" onsubmit="hashAdminPassword(this, \'', $context['user']['username'], '\', \'', $context['session_id'], '\');">
-	<div class="tborder login" id="admin_login">
-		<div class="cat_bar">
-			<h3 class="catbg">
-				<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/icons/login_sm.gif" alt="" class="icon" /> ', $txt['login'], '</span>
-			</h3>
-		</div>
-		<span class="upperframe"><span></span></span>
-		<div class="roundframe centertext">';
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sx-12">
+		<div class="card">
+			<form class="form-inline" action="', $scripturl, $context['get_data'], '" method="post" accept-charset="', $context['character_set'], '" name="frmLogin" id="frmLogin" onsubmit="hashAdminPassword(this, \'', $context['user']['username'], '\', \'', $context['session_id'], '\');">
+				<div class="card-main">
+					<div class="card-header">
+						<div class="card-inner">
+							<span class="card-heading"><span class="icon">supervisor_account</span> ', $txt['admin_login'], ' <a href="', $scripturl, '?action=helpadmin;help=securityDisable_why" onclick="return reqWin(this.href);" class="help"><span class="icon">help</a></span>
+						</div>
+					</div>
+					<div class="card-inner">';
+						if (!empty($context['incorrect_password']))
+							echo '
+								<div class="mdc-text-red-900">', $txt['admin_incorrect_password'], '</div>';
+						echo '
+						<div class="row">
+							<div class="form-group form-group-label">
+								<div class="col-md-12 ">
+									<label class="floating-label" for="',$txt['password'],'">',$txt['password'],'  </label>
 
-	if (!empty($context['incorrect_password']))
-		echo '
-			<div class="error">', $txt['admin_incorrect_password'], '</div>';
-
-	echo '
-			<strong>', $txt['password'], ':</strong>
-			<input type="password" name="admin_pass" size="24" class="input_password" />
-			<a href="', $scripturl, '?action=helpadmin;help=securityDisable_why" onclick="return reqWin(this.href);" class="help"><img src="', $settings['images_url'], '/helptopics.gif" alt="', $txt['help'], '" /></a><br />
-			<input type="submit" style="margin-top: 1em;" value="', $txt['login'], '" class="button_submit" />';
+									<input type="password" name="admin_pass" value="" class="form-control" />
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-action">
+						<a href="#" onclick="document.getElementById(\'frmLogin\').submit()" class="btn mdc-text-blue-800 btn-flat waves-attach waves-button waves-effect">', $txt['login'], '</a>
+						<button type="submit" class="btn btn-default" value="', $txt['login'], '" >Submit</button>';
 
 	// Make sure to output all the old post data.
-	echo $context['post_data'], '
+	echo $context['post_data'],' 		
+					</div>
+				</div>
+			<input type="hidden" name="admin_hash_pass" value="" />
+			</form>
 		</div>
-		<span class="lowerframe"><span></span></span>
 	</div>
-	<input type="hidden" name="admin_hash_pass" value="" />
-</form>';
+</div>
+';
 
-	// Focus on the password box.
-	echo '
+// Focus on the password box.
+echo '
 <script type="text/javascript"><!-- // --><![CDATA[
 	document.forms.frmLogin.admin_pass.focus();
 // ]]></script>';
-}
-
-// Activate your account manually?
-function template_retry_activate()
-{
-	global $context, $settings, $options, $txt, $scripturl;
-
-	// Just ask them for their code so they can try it again...
-	echo '
-		<form action="', $scripturl, '?action=activate;u=', $context['member_id'], '" method="post" accept-charset="', $context['character_set'], '">
-			<div class="title_bar">
-				<h3 class="titlebg">', $context['page_title'], '</h3>
-			</div>
-			<span class="upperframe"><span></span></span>
-			<div class="roundframe">';
-
-	// You didn't even have an ID?
-	if (empty($context['member_id']))
-		echo '
-				<dl>
-					<dt>', $txt['invalid_activation_username'], ':</dt>
-					<dd><input type="text" name="user" size="30" class="input_text" /></dd>';
-
-	echo '
-					<dt>', $txt['invalid_activation_retry'], ':</dt>
-					<dd><input type="text" name="code" size="30" class="input_text" /></dd>
-				</dl>
-				<p><input type="submit" value="', $txt['invalid_activation_submit'], '" class="button_submit" /></p>
-			</div>
-			<span class="lowerframe"><span></span></span>
-		</form>';
 }
 
 // Activate your account manually?
