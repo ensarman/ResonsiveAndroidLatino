@@ -252,8 +252,8 @@ function template_main()
 
 		echo '
 			<ul class="nav-justified ulsinpuntos">
-				<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['new_posts'], '</li>
-				<li><span class="avatar avatar-brand-accent avatar-xs mdc-bg-blue-700 mdc-text-grey-50" style="display:inline-block;" ><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
+				<li><span class="avatar avatar-brand-accent avatar-xs mdc-bg-blue-700 mdc-text-grey-50" style="display:inline-block;" ><span class="icon">android</span></span>&nbsp;', $txt['new_posts'], '</li>
+				<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
 				<li><span class="avatar avatar-brand avatar-xs mdc-bg-cyan-700 mdc-text-grey-50" style="display:inline-block;" > <span class="icon">subdirectory_arrow_right</span></span>&nbsp;', $txt['redirect_board'], '</li>
 			</ul>
 		
@@ -266,10 +266,10 @@ function template_main()
 	else
 	{
 		echo '
-	<div id="posting_icons" class="flow_hidden">
-		<ul class="reset">
-			<li class="floatleft"><img src="', $settings['images_url'], '/new_none.png" alt="" /> ', $txt['old_posts'], '</li>
-			<li class="floatleft"><img src="', $settings['images_url'], '/new_redirect.png" alt="" /> ', $txt['redirect_board'], '</li>
+	<div id="posting_icons">
+		<ul class="nav-justified ulsinpuntos">
+			<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
+			<li><span class="avatar avatar-brand avatar-xs mdc-bg-cyan-700 mdc-text-grey-50" style="display:inline-block;" > <span class="icon">subdirectory_arrow_right</span></span>&nbsp;', $txt['redirect_board'], '</li>
 		</ul>
 	</div>';
 	}
