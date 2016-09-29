@@ -277,6 +277,9 @@ function template_main()
 	template_info_center();
 }
 
+/**
+ *
+ */
 function template_info_center()
 {
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
@@ -337,141 +340,80 @@ function template_info_center()
 		';
 
 	}
-	echo'
-				</div>
-			</div>
-		</div>
-	</div>';
-
-	echo'
-	<div class="roundframe"><div class="innerframe">
-		
-		<div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>';
-
-	// This is the "Recent Posts" bar.
-	if (!empty($settings['number_recent_posts']) && (!empty($context['latest_posts']) || !empty($context['latest_post'])))
-	{
-		echo '
-			<div class="title_barIC">
-				<h4 class="titlebg">
-					<span class="ie6_header floatleft">
-						<a href="', $scripturl, '?action=recent"><img class="icon" src="', $settings['images_url'], '/post/xx.gif" alt="', $txt['recent_posts'], '" /></a>
-						', $txt['recent_posts'], '
-					</span>
-				</h4>
-			</div>
-			<div class="hslice" id="recent_posts_content">
-				<div class="entry-title" style="display: none;">', $context['forum_name_html_safe'], ' - ', $txt['recent_posts'], '</div>
-				<div class="entry-content" style="display: none;">
-					<a rel="feedurl" href="', $scripturl, '?action=.xml;type=webslice">', $txt['subscribe_webslice'], '</a>
-				</div>';
-
-		// Only show one post.
-		if ($settings['number_recent_posts'] == 1)
-		{
-			// latest_post has link, href, time, subject, short_subject (shortened with...), and topic. (its id.)
-			echo '
-				<strong><a href="', $scripturl, '?action=recent">', $txt['recent_posts'], '</a></strong>
-				<p id="infocenter_onepost" class="middletext">
-					', $txt['recent_view'], ' &quot;', $context['latest_post']['link'], '&quot; ', $txt['recent_updated'], ' (', $context['latest_post']['time'], ')<br />
-				</p>';
-		}
-		// Show lots of posts.
-		elseif (!empty($context['latest_posts']))
-		{
-			echo '
-				<dl id="ic_recentposts" class="middletext">';
-
-			/* Each post in latest_posts has:
-					board (with an id, name, and link.), topic (the topic's id.), poster (with id, name, and link.),
-					subject, short_subject (shortened with...), time, link, and href. */
-			foreach ($context['latest_posts'] as $post)
-				echo '
-					<dt><strong>', $post['link'], '</strong> ', $txt['by'], ' ', $post['poster']['link'], ' (', $post['board']['link'], ')</dt>
-					<dd>', $post['time'], '</dd>';
-			echo '
-				</dl>';
-		}
-		echo '
-			</div>';
-	}
 
 	// Show information about events, birthdays, and holidays on the calendar.
 	if ($context['show_calendar'])
 	{
 		echo '
-			<div class="title_barIC">
-				<h4 class="titlebg">
-					<span class="ie6_header floatleft">
-						<a href="', $scripturl, '?action=calendar' . '"><img class="icon" src="', $settings['images_url'], '/icons/calendar.gif', '" alt="', $context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming'], '" /></a>
-						', $context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming'], '
-					</span>
-				</h4>
-			</div>
-			<p class="smalltext">';
-
+					<div class="row">
+						<div class="col-xs-12">
+							<div >
+								<a href="\', $scripturl, \'?action=calendar\' . \'"><span class="icon">date_range</span> </a>
+							</div>
+							<small>';
 		// Holidays like "Christmas", "Chanukah", and "We Love [Unknown] Day" :P.
 		if (!empty($context['calendar_holidays']))
-				echo '
-				<span class="holiday">', $txt['calendar_prompt'], ' ', implode(', ', $context['calendar_holidays']), '</span><br />';
-
+			echo '
+								<p class="holiday">\', $txt[\'calendar_prompt\'], \' \', implode(\', \', $context[\'calendar_holidays\']), \'</p>';
 		// People's birthdays. Like mine. And yours, I guess. Kidding.
 		if (!empty($context['calendar_birthdays']))
 		{
-				echo '
-				<span class="birthday">', $context['calendar_only_today'] ? $txt['birthdays'] : $txt['birthdays_upcoming'], '</span> ';
-		/* Each member in calendar_birthdays has:
+			echo '
+								<span class="birthday">\', $context[\'calendar_only_today\'] ? $txt[\'birthdays\'] : $txt[\'birthdays_upcoming\'], \'</span>
+			';
+			/* Each member in calendar_birthdays has:
 				id, name (person), age (if they have one set?), is_last. (last in list?), and is_today (birthday is today?) */
-		foreach ($context['calendar_birthdays'] as $member)
+			foreach ($context['calendar_birthdays'] as $member)
 				echo '
-				<a href="', $scripturl, '?action=profile;u=', $member['id'], '">', $member['is_today'] ? '<strong>' : '', $member['name'], $member['is_today'] ? '</strong>' : '', isset($member['age']) ? ' (' . $member['age'] . ')' : '', '</a>', $member['is_last'] ? '<br />' : ', ';
+								<a href="', $scripturl, '?action=profile;u=', $member['id'], '">', $member['is_today'] ? '<strong>' : '', $member['name'], $member['is_today'] ? '</strong>' : '', isset($member['age']) ? ' (' . $member['age'] . ')' : '', '</a>', $member['is_last'] ? '<br />' : ', ';
 		}
 		// Events like community get-togethers.
 		if (!empty($context['calendar_events']))
 		{
 			echo '
-				<span class="event">', $context['calendar_only_today'] ? $txt['events'] : $txt['events_upcoming'], '</span> ';
+								<span class="event">', $context['calendar_only_today'] ? $txt['events'] : $txt['events_upcoming'], '</span> ';
 			/* Each event in calendar_events should have:
 					title, href, is_last, can_edit (are they allowed?), modify_href, and is_today. */
 			foreach ($context['calendar_events'] as $event)
 				echo '
-					', $event['can_edit'] ? '<a href="' . $event['modify_href'] . '" title="' . $txt['calendar_edit'] . '"><img src="' . $settings['images_url'] . '/icons/modify_small.gif" alt="*" /></a> ' : '', $event['href'] == '' ? '' : '<a href="' . $event['href'] . '">', $event['is_today'] ? '<strong>' . $event['title'] . '</strong>' : $event['title'], $event['href'] == '' ? '' : '</a>', $event['is_last'] ? '<br />' : ', ';
+							', $event['can_edit'] ? '<a href="' . $event['modify_href'] . '" title="' . $txt['calendar_edit'] . '"><img src="' . $settings['images_url'] . '/icons/modify_small.gif" alt="*" /></a> ' : '', $event['href'] == '' ? '' : '<a href="' . $event['href'] . '">', $event['is_today'] ? '<strong>' . $event['title'] . '</strong>' : $event['title'], $event['href'] == '' ? '' : '</a>', $event['is_last'] ? '<br />' : ', ';
 		}
 		echo '
-			</p>';
+							</small>
+						</div>
+					</div>';
 	}
 
 	// Show statistical style information...
 	if ($settings['show_stats_index'])
 	{
 		echo '
-			<div class="title_barIC">
-				<h4 class="titlebg">
-					<span class="ie6_header floatleft">
-						<a href="', $scripturl, '?action=stats"><img class="icon" src="', $settings['images_url'], '/icons/info.gif" alt="', $txt['forum_stats'], '" /></a>
-						', $txt['forum_stats'], '
-					</span>
-				</h4>
-			</div>
-			<p>
-				', $context['common_stats']['total_posts'], ' ', $txt['posts_made'], ' ', $txt['in'], ' ', $context['common_stats']['total_topics'], ' ', $txt['topics'], ' ', $txt['by'], ' ', $context['common_stats']['total_members'], ' ', $txt['members'], '. ', !empty($settings['show_latest_member']) ? $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : '', '<br />
-				', (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong>  ( ' . $context['latest_post']['time'] . ' )<br />' : ''), '
-				<a href="', $scripturl, '?action=recent">', $txt['recent_view'], '</a>', $context['show_stats'] ? '<br />
-				<a href="' . $scripturl . '?action=stats">' . $txt['more_stats'] . '</a>' : '', '
-			</p>';
+					<div class="row">
+						<div class="col-xs-12">
+							<h4 class="sinmargen">
+								<a href="', $scripturl, '?action=stats"><span class="icon">assessment</span></a>
+								', $txt['forum_stats'], '
+							</h4>
+							<p>
+								', $context['common_stats']['total_posts'], ' ', $txt['posts_made'], ' ', $txt['in'], ' ', $context['common_stats']['total_topics'], ' ', $txt['topics'], ' ', $txt['by'], ' ', $context['common_stats']['total_members'], ' ', $txt['members'], '. ', !empty($settings['show_latest_member']) ? $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : '', '<br />
+								', (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong>  ( ' . $context['latest_post']['time'] . ' )<br />' : ''), '
+								<a href="', $scripturl, '?action=recent">', $txt['recent_view'], '</a>', $context['show_stats'] ? '<br />
+								<a href="' . $scripturl . '?action=stats">' . $txt['more_stats'] . '</a>' : '', '							
+							</p>
+						</div>
+					</div>
+		';
 	}
 
 	// "Users online" - in order of activity.
 	echo '
-			<div class="title_barIC">
-				<h4 class="titlebg">
-					<span class="ie6_header floatleft">
-						', $context['show_who'] ? '<a href="' . $scripturl . '?action=who' . '">' : '', '<img class="icon" src="', $settings['images_url'], '/icons/online.gif', '" alt="', $txt['online_users'], '" />', $context['show_who'] ? '</a>' : '', '
-						', $txt['online_users'], '
-					</span>
-				</h4>
-			</div>
-			<p class="inline stats">
+					<div class="row">
+						<div class="col-xs-12">
+							<h4 class="sinmargen">
+								', $context['show_who'] ? '<a href="' . $scripturl . '?action=who' . '">' : '', '<span class="icon">people</span>', $context['show_who'] ? '</a>' : '', '
+								', $txt['online_users'], '
+							</h4>
+							<p>
 				', $context['show_who'] ? '<a href="' . $scripturl . '?action=who">' : '', comma_format($context['num_guests']), ' ', $context['num_guests'] == 1 ? $txt['guest'] : $txt['guests'], ', ' . comma_format($context['num_users_online']), ' ', $context['num_users_online'] == 1 ? $txt['user'] : $txt['users'];
 
 	// Handle hidden users and buddies.
@@ -487,52 +429,58 @@ function template_info_center()
 		echo ' (' . implode(', ', $bracketList) . ')';
 
 	echo $context['show_who'] ? '</a>' : '', '
-			</p>
-			<p class="inline smalltext">';
+							</p>
+							<small>';
 
 	// Assuming there ARE users online... each user in users_online has an id, username, name, group, href, and link.
 	if (!empty($context['users_online']))
 	{
 		echo '
-				', sprintf($txt['users_active'], $modSettings['lastActive']), ':<br />', implode(', ', $context['list_users_online']);
+			', sprintf($txt['users_active'], $modSettings['lastActive']), ':<br />', implode(', ', $context['list_users_online']);
 
 		// Showing membergroups?
 		if (!empty($settings['show_group_key']) && !empty($context['membergroups']))
 			echo '
-				<br />[' . implode(']&nbsp;&nbsp;[', $context['membergroups']) . ']';
+							<br />[' . implode(']&nbsp;&nbsp;[', $context['membergroups']) . ']';
 	}
-
 	echo '
-			</p>
-			<p class="last smalltext">
-				', $txt['most_online_today'], ': <strong>', comma_format($modSettings['mostOnlineToday']), '</strong>.
-				', $txt['most_online_ever'], ': ', comma_format($modSettings['mostOnline']), ' (', timeformat($modSettings['mostDate']), ')
-			</p>';
+							</small>
+							<small>
+								', $txt['most_online_today'], ': <strong>', comma_format($modSettings['mostOnlineToday']), '</strong>.
+								', $txt['most_online_ever'], ': ', comma_format($modSettings['mostOnline']), ' (', timeformat($modSettings['mostDate']), ')
+							</small>
+						</div>
+					</div>';
 
 	// If they are logged in, but statistical information is off... show a personal message bar.
 	if ($context['user']['is_logged'] && !$settings['show_stats_index'])
 	{
 		echo '
-			<div class="title_barIC">
-				<h4 class="titlebg">
-					<span class="ie6_header floatleft">
-						', $context['allow_pm'] ? '<a href="' . $scripturl . '?action=pm">' : '', '<img class="icon" src="', $settings['images_url'], '/message_sm.gif" alt="', $txt['personal_message'], '" />', $context['allow_pm'] ? '</a>' : '', '
-						<span>', $txt['personal_message'], '</span>
-					</span>
-				</h4>
-			</div>
-			<p class="pminfo">
-				<strong><a href="', $scripturl, '?action=pm">', $txt['personal_message'], '</a></strong>
-				<span class="smalltext">
-					', $txt['you_have'], ' ', comma_format($context['user']['messages']), ' ', $context['user']['messages'] == 1 ? $txt['message_lowercase'] : $txt['msg_alert_messages'], '.... ', $txt['click'], ' <a href="', $scripturl, '?action=pm">', $txt['here'], '</a> ', $txt['to_view'], '
-				</span>
-			</p>';
+					<div class="row">
+						<div class="col-xs-12">
+							<h4 class="sinmargen">
+								', $context['allow_pm'] ? '<a href="' . $scripturl . '?action=pm">' : '', '<span class="icon" >message</span>', $context['allow_pm'] ? '</a>' : '', '
+								<span>', $txt['personal_message'], '</span>
+							</h4>
+							<p>
+								<strong><a href="', $scripturl, '?action=pm">', $txt['personal_message'], '</a></strong>
+								<small>
+									', $txt['you_have'], ' ', comma_format($context['user']['messages']), ' ', $context['user']['messages'] == 1 ? $txt['message_lowercase'] : $txt['msg_alert_messages'], '.... ', $txt['click'], ' <a href="', $scripturl, '?action=pm">', $txt['here'], '</a> ', $txt['to_view'], '
+								</small>
+							</p>
+						</div>
+					</div>
+		';
 	}
 
-	echo '
+
+
+
+	echo'
+				</div>
+			</div>
 		</div>
-	</div></div>
-	<span class="lowerframe"><span></span></span>';
+	</div>';
 
 	// Info center collapse object.
 	echo '
