@@ -283,14 +283,69 @@ function template_info_center()
 
 	// Here's where the "Info Center" starts...
 	echo '
-	<span class="clear upperframe"><span></span></span>
-	<div class="roundframe"><div class="innerframe">
-		<div class="cat_bar">
-			<h3 class="catbg">
-				<img class="icon" id="upshrink_ic" src="', $settings['images_url'], '/collapse.gif" alt="*" title="', $txt['upshrink_description'], '" style="display: none;" />
-				', sprintf($txt['info_center_title'], $context['forum_name_html_safe']), '
-			</h3>
+    <div class="row">
+    	<div class="col-xs-12">
+    		<div><h3 class="sinmargen"><span id="upshrink_ic" class="icon">expand_more</span>', sprintf($txt['info_center_title'], $context['forum_name_html_safe']), '</h3></div>
 		</div>
+		<div class="col-xs-12">
+			<div class="container">
+				<div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>';
+
+	// This is the "Recent Posts" bar.
+	if (!empty($settings['number_recent_posts']) && (!empty($context['latest_posts']) || !empty($context['latest_post'])))
+	{
+		echo '
+				
+					<div class="row">
+						<div class="col-xs-12">
+							<h4 class="sinmargen"><a href="', $scripturl,'?action=recent" ><span class="icon">note</span></a>', $txt['recent_posts'], '</h4>				
+						</div>
+
+				
+		';
+		// Only show one post.
+		if ($settings['number_recent_posts'] == 1)
+		{
+			// latest_post has link, href, time, subject, short_subject (shortened with...), and topic. (its id.)
+			echo '
+						<div class="col-xs-12">
+							', $txt['recent_view'], ' &quot;', $context['latest_post']['link'], '&quot; ', $txt['recent_updated'], ' (', $context['latest_post']['time'], ')
+						 </div>
+				';
+		}
+		// Show lots of posts.
+		elseif (!empty($context['latest_posts']))
+		{
+			/* Each post in latest_posts has:
+					board (with an id, name, and link.), topic (the topic's id.), poster (with id, name, and link.),
+					subject, short_subject (shortened with...), time, link, and href. */
+			echo' 
+						<div class="col-xs-12">';
+			foreach ($context['latest_posts'] as $post)
+				echo '
+							<div>
+								<span class="icon">fiber_new</span><b>', $post['link'], '</b> ', $txt['by'], ' ', $post['poster']['link'], ' (', $post['board']['link'], ') <span class="pull-right visible-md-block visible-lg-block">', $post['time'], '</span>
+							</div>';
+			echo '
+						</div>';
+		}
+
+
+		echo '
+					</div>
+							
+		';
+
+	}
+	echo'
+				</div>
+			</div>
+		</div>
+	</div>';
+
+	echo'
+	<div class="roundframe"><div class="innerframe">
+		
 		<div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>';
 
 	// This is the "Recent Posts" bar.
