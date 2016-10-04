@@ -35,11 +35,11 @@ function template_main()
 		</div>
 		<ul class="reset" id="smfFadeScroller"', empty($options['collapse_news_fader']) ? '' : ' style="display: none;"', '>';
 
-			foreach ($context['news_lines'] as $news)
-				echo '
+		foreach ($context['news_lines'] as $news)
+			echo '
 			<li>', $news, '</li>';
 
-	echo '
+		echo '
 		</ul>
 	</div>
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/fader.js"></script>
@@ -128,7 +128,7 @@ function template_main()
 		if (!$category['is_collapsed'])
 		{
 
-		echo '
+			echo '
 			<tbody id="category_', $category['id'], '_boards">';
 			/* Each board in each category's boards has:
 			new (is it new?), id, name, description, moderators (see below), link_moderators (just a list.),
@@ -138,12 +138,12 @@ function template_main()
 			{
 				echo '
 				<tr id="board_', $board['id'], '" >
-					<td ', !empty($board['children']) ? ' rowspan="2"' : '', '>
+					<td class="echoneing"  ', !empty($board['children']) ? ' rowspan="2"' : '', '>
 						<a href="', ($board['is_redirect'] || $context['user']['is_guest'] ? $board['href'] : $scripturl . '?action=unread;board=' . $board['id'] . '.0;children'), '">';
 
 				// If the board or children is new, show an indicator.
 				if ($board['new'] || $board['children_new'])
-							{echo '
+				{echo '
 							<a class="avatar avatar-brand-accent avatar-md mdc-bg-blue-700 mdc-text-grey-50" href="', $board['href'], '" name="b', $board['id'], '"><span class="icon">android</span></a>';}
 
 				// Is it a redirection board?
@@ -176,7 +176,7 @@ function template_main()
 						<p class="moderators">', count($board['moderators']) == 1 ? $txt['moderator'] : $txt['moderators'], ': ', implode(', ', $board['link_moderators']), '</p>';
 
 				// Show some basic information about the number of posts, etc.
-					echo '
+				echo '
 					</td>
 					<td class="stats windowbg">
 						<p>', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : $txt['posts'], ' <br />
@@ -226,15 +226,9 @@ function template_main()
 					</tr>';
 				}
 			}
-		echo '
+			echo '
 			</tbody>';
 		}
-		echo '
-			<tbody class="divider">
-				<tr>
-					<td colspan="4"></td>
-				</tr>
-			</tbody>';
 	}
 	echo '
 		</table>

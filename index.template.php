@@ -180,10 +180,10 @@ function template_html_above()
 function template_body_above()
 {
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
-/*Empezando a escribir lo del body, thx smf*/
+	/*Empezando a escribir lo del body, thx smf*/
 
-/*Navbar responsive, estilizada al foro*/
-echo '
+	/*Navbar responsive, estilizada al foro*/
+	echo '
 			<header class="header header-transparent header-waterfall">
 
 				<table>
@@ -202,21 +202,21 @@ echo '
 							<a class="header-affix-hide header-logo margin-left-no margin-right-no" data-offset-top="50" data-spy="affix" href="', $scripturl, '">',$context['forum_name'],'</a>
 
 							<h1><span class="header-affix header-logo margin-left-no margin-right-no" data-offset-top="50" data-spy="affix">';
-							//Trabajando en el fix del titulo, ya que esto afecta solo al index.template.php
-							//Sacar el forumname
-							$valnombre=strlen($context['forum_name']);
-							$valortitulo=substr($context['page_title_html_safe'],0,$valnombre);
-							//Aca se pregunta si tiene un valor igual al nombre de foro, asi se sabe que hacer. En caso de que si, se hace una cuenta para mostrar solo index
-							if ($valortitulo== $context['forum_name'])
-								{
-								$rmtitulo=strlen($context['forum_name'])+ 3;
-								$cttitulo=strlen($context['page_title_html_safe']);
-								echo substr($context['page_title_html_safe'], $rmtitulo, $cttitulo);}
-							//Sino se muestra la el titulo de la pagina lo más normal posible
-							else
-								{
-								echo $context['page_title_html_safe'];}
-							echo '</span></h1>
+	//Trabajando en el fix del titulo, ya que esto afecta solo al index.template.php
+	//Sacar el forumname
+	$valnombre=strlen($context['forum_name']);
+	$valortitulo=substr($context['page_title_html_safe'],0,$valnombre);
+	//Aca se pregunta si tiene un valor igual al nombre de foro, asi se sabe que hacer. En caso de que si, se hace una cuenta para mostrar solo index
+	if ($valortitulo== $context['forum_name'])
+	{
+		$rmtitulo=strlen($context['forum_name'])+ 3;
+		$cttitulo=strlen($context['page_title_html_safe']);
+		echo substr($context['page_title_html_safe'], $rmtitulo, $cttitulo);}
+	//Sino se muestra la el titulo de la pagina lo más normal posible
+	else
+	{
+		echo $context['page_title_html_safe'];}
+	echo '</span></h1>
 						</td>
 
 
@@ -245,10 +245,10 @@ echo '
 										<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
 									</a>
 									<ul class="dropdown-menu">';
-										if ($context['user']['is_logged'])
-										{
-											echo
-												'
+	if ($context['user']['is_logged'])
+	{
+		echo
+		'
 												<li>
 													<a class="padding-right-lg waves-attach" href="', $scripturl, '?action=profile;area=forumprofile;"><span class="icon icon-lg margin-right">edit</span>' , $txt['edit_profile'] , '</a>
 												</li>
@@ -258,18 +258,18 @@ echo '
 												<li>
 													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=logout;sesc=', $context['session_id'], '"><span class="icon icon-lg margin-right">exit_to_app</span>' , $txt['logout'] , '</a>
 												</li>';
-										}
-										else
-										{
-											echo '
+	}
+	else
+	{
+		echo '
 												<li>
 													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=login"><span class="icon icon-lg margin-right">person</span>' , $txt['login'] , '</a>
 												</li>
 												<li>
 													<a class="padding-right-lg waves-attach" href="' , $scripturl , '?action=register"><span class="icon icon-lg margin-right">assignment_ind</span>' , $txt['register'] , '</a>
 												</li>';
-										}
-										echo '
+	}
+	echo '
 									</ul>
 								</li>
 							</ul>
@@ -289,11 +289,11 @@ echo '
 				</div>
 				<div class="menu-top-info">
 					<a class="menu-top-user" href="', $scripturl, '?action=profile"><span class="avatar pull-left"><img src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'"></span>';
-					if ($context['user']['is_logged'])
-						{echo $context['user']['name'];}
-					else
-						{echo $txt['guest_title'];}
-				echo'
+	if ($context['user']['is_logged'])
+	{echo $context['user']['name'];}
+	else
+	{echo $txt['guest_title'];}
+	echo'
 					</a>
 				</div>
 				<div class="menu-top-info-sub">
@@ -305,10 +305,10 @@ echo '
 				<li>
 					<a class="waves-attach" href="', $scripturl, '"><span class="icon icon-lg margin-right">home</span>',$txt['home'],'</a>
 				</li>';
-				//Editando el listado para mostrar los menus mas importantes del mod
-				 if(!empty($context['user']['is_logged']))
-				{
-					echo '
+	//Editando el listado para mostrar los menus mas importantes del mod
+	if(!empty($context['user']['is_logged']))
+	{
+		echo '
 					<li>
 						<a class="waves-attach" href="', $scripturl, '?action=profile"><span class="icon icon-lg margin-right">account_circle</span>',$txt['forumprofile_short'],'</a>
 					</li>
@@ -319,19 +319,19 @@ echo '
 						<a class="waves-attach" href="javascript:void(0)" data-target="#doc_menu_profile_settings" data-toggle="collapse"><span class="icon icon-lg margin-right">menu</span>',$txt['almenu'],'</a>
 						<span class="collapsed menu-collapse-toggle waves-attach" data-target="#doc_menu_profile_settings" data-toggle="collapse"><i class="icon menu-collapse-toggle-close">close</i><i class="icon menu-collapse-toggle-default">add</i></span>
 						<ul class="collapse menu-collapse" id="doc_menu_profile_settings">';
-						menu_lateral();
-						echo '</ul>
+		menu_lateral();
+		echo '</ul>
 					</li>';
-					// Muestra los Likes del Like Mod
-          if (!empty($modSettings['LikePosts::$LikePostsUtils->showLikeNotification())']))
-					{
-						echo '
+		// Muestra los Likes del Like Mod
+		if (!empty($modSettings['LikePosts::$LikePostsUtils->showLikeNotification())']))
+		{
+			echo '
 					<li>
 						<a class="waves-attach" href="', $scripturl, '?action=likepostsstats"><span class="icon icon-lg margin-right">thumb_up</span>', $txt['like_show_notifications'], '</a>
 					</li>';
-					}
-				}
-					echo '<li>
+		}
+	}
+	echo '<li>
 						<a class="waves-attach" href="', $scripturl, '?action=help"><span class="icon icon-lg margin-right">help</span>',$txt['help'],'</a>
 					</li>
 				</ul>
@@ -353,10 +353,10 @@ echo '
 									<div class="row">
 										<div class="col-md-6">
 										';
-													if (!$context['user']['is_logged'])
-													{
-														// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
-														echo'
+	if (!$context['user']['is_logged'])
+	{
+		// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
+		echo'
 											<form class="form-inline" id="login-form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 												<div class="container-fluid">
 													<div class="col-md-6">
@@ -371,11 +371,11 @@ echo '
 															</div>
 														</div>
 																			';
-																			if (!empty($modSettings['enableOpenID']))
-																				echo '
+		if (!empty($modSettings['enableOpenID']))
+			echo '
 														<input placeholder="',$txt['openid'],' no Obligatorio" type="text" name="openid_identifier" id="openid_url" size="25" class="form-control openid_login" />';
 
-																				echo '
+		echo '
 														<input type="hidden" name="hash_passwrd" value="" />
 													</div>
 													<div class="col-md-6">
@@ -400,51 +400,51 @@ echo '
 												</div>
 											</form>
 														';
-													}
-													// If the user is logged in, display stuff like their name, new messages, etc.
-													else {
-														echo '
+	}
+	// If the user is logged in, display stuff like their name, new messages, etc.
+	else {
+		echo '
 											<div class="bienvenido">
 												',$txt['welmsg_welcome'].' '.$context['user']['name'].'
 											</div>
 														';
-														echo '
+		echo '
 											<div>
 												<a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unread"> ', $txt['view_unread_category'] , '
 												</a>
 								        <a class="btn mdc-text-blue-800 btn-flat waves-attach waves-button" href="', $scripturl, '?action=unreadreplies"> ', $txt['replies'] , '</a>
 											</div>';
-														// Is the forum in maintenance mode?
-														if ($context['in_maintenance'] && $context['user']['is_admin'])
-															{
-																echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';
-															}
-														// Are there any members waiting for approval?
-														if (!empty($context['unapproved_members']))
-															{
-																echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';
-															}
+		// Is the forum in maintenance mode?
+		if ($context['in_maintenance'] && $context['user']['is_admin'])
+		{
+			echo '<span class="notice">', $txt['maintain_mode_on'], '</span>';
+		}
+		// Are there any members waiting for approval?
+		if (!empty($context['unapproved_members']))
+		{
+			echo '<span>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</span>';
+		}
 
-														if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
-															{
-																echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';
-															}
-													}
+		if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
+		{
+			echo '<span><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></span>';
+		}
+	}
 
 
-												echo'
+	echo'
 										</div>
 										<div class="col-md-6">
 										';
-											//aqui para noticias en dispositivos grandes
-											echo'
+	//aqui para noticias en dispositivos grandes
+	echo'
 											<div class="text-center">',$txt['date'],': ', $context['current_time'], '.</div>
 											';
 
-											if (!empty($settings['enable_news']))
-											{echo show_news("desktop");}
+	if (!empty($settings['enable_news']))
+	{echo show_news("desktop");}
 
-									echo '
+	echo '
 										</div>
 									</div>
 								</div>
@@ -457,8 +457,8 @@ echo '
 									</div>
 								</div>
 							</div>';
-							//aqui debe de ir el div dard action
-							echo'
+	//aqui debe de ir el div dard action
+	echo'
 						</div>
 					</div>
 				</div>
@@ -498,12 +498,12 @@ function show_news($cols="desktop"){
 
 	$titlewarp='
 	'.
-	($cols=="movil" ? '
+		($cols=="movil" ? '
 	<div class="hidden-lg hidden-md">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-4 col-md-4">':'	<div class="visible-md-block visible-lg-block">' )
-	.'
+		.'
 					<div class="tile-wrap">
 						<div class="tile tile-collapse">
 							<div data-target="'. ($cols=="movil" ? '#doc_tile_example_2':'#doc_tile_example_1').'" data-toggle="tile">
@@ -523,7 +523,7 @@ function show_news($cols="desktop"){
 							</div>
 						</div>
 					</div>'.
-					($cols=="movil" ? '
+		($cols=="movil" ? '
 					</div>
 				</div>
 			</div>
@@ -557,12 +557,12 @@ function template_body_below()
 						<li class="padding-right-lg waves-attach last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
 					</ul>';
 
-			// Show the load time?
-			if ($context['show_load_time'])
-				echo '
+	// Show the load time?
+	if ($context['show_load_time'])
+		echo '
 					<p>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</p>';
 
-			echo '
+	echo '
 				</div>
 			</div>
 		</div>
@@ -669,7 +669,7 @@ function template_menu()
 				echo '
 						</li>';
 			}
-				echo '
+			echo '
 					</ul>';
 		}
 		echo '
@@ -715,7 +715,7 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
 			$buttons[] = '
-				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
+				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class=" button_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' btn btn-flat btn-brand " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
 	}
 
 	// No buttons? No button strip either.
@@ -727,8 +727,8 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 
 	echo '
 		<div class="buttonlist', !empty($direction) ? ' float' . $direction : '', '"', (empty($buttons) ? ' style="display: none;"' : ''), (!empty($strip_options['id']) ? ' id="' . $strip_options['id'] . '"': ''), '>
-			<ul class="nav-list">',
-				implode('', $buttons), '
+			<ul class="nav nav-list ulsinpuntos sinmargen">',
+	implode('', $buttons), '
 			</ul>
 		</div>
 		';
