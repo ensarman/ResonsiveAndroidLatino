@@ -284,13 +284,13 @@ function template_info_center()
     if (!empty($settings['number_recent_posts']) && (!empty($context['latest_posts']) || !empty($context['latest_post'])))
     {
         $tabs .= '
-                  <li class="active">
+                  <li>
                         <a href="'.$scripturl.'?action=recent" ><span class="icon">note</span></a>
-                        <a class="waves-attach waves-light" data-toggle="tab" href="#'.$txt['recent_posts'].'">'.$txt['recent_posts'].'</a>
+                        <a class="waves-attach waves-light" data-toggle="tab" href="#recent">'.$txt['recent_posts'].'</a>
                   </li>';
 
 		$contenido .= '
-				<div class="tab-pane fade active in" id="'.$txt['recent_posts'].'">
+				<div class="tab-pane fade active in" id="recent">
 				';
 
 		// Only show one post.
@@ -313,10 +313,71 @@ function template_info_center()
 					</div>
 					';
 		}
-
 		$contenido.= '
 				</div>';
     }
+	// Show information about events, birthdays, and holidays on the calendar.
+	if ($context['show_calendar'])
+	{
+		$tabs .= '<li class="active">
+                        <a href="'.$scripturl.'?action=calendar" ><span class="icon">date_range</span></a>
+                        <a class="waves-attach waves-light" data-toggle="tab" href="#calendar">'.($context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming']).'</a>
+                  </li>';
+		$contenido .= '
+				<div class="tab-pane fade" id="calendar">
+					<small>
+				';
+		// Holidays like "Christmas", "Chanukah", and "We Love [Unknown] Day" :P.
+		if (!empty($context['calendar_holidays']))
+			$contenido .= '
+						<span class="holiday">'. $txt['calendar_prompt']. ' '. implode(', ', $context['calendar_holidays']). '</span><br />';
+
+		// People's birthdays. Like mine. And yours, I guess. Kidding.
+		if (!empty($context['calendar_birthdays'])) {
+			$contenido .= '
+						<span class="birthday">'.($context['calendar_only_today'] ? $txt['birthdays'] : $txt['birthdays_upcoming']).'</span>';
+			/* Each member in calendar_birthdays has:
+                    id, name (person), age (if they have one set?), is_last. (last in list?), and is_today (birthday is today?) */
+			foreach ($context['calendar_birthdays'] as $member)
+				$contenido .= '
+						<a href="'.$scripturl.'?action=profile;u='.$member['id'].'">'.($member['is_today'] ? '<strong>' : '').$member['name'].($member['is_today'] ? '</strong>' : '').(isset($member['age']) ? ' ('.$member['age'].')' : '').'</a>'.($member['is_last'] ? '<br />' : ', ');
+
+		}
+		// Events like community get-togethers.
+		if (!empty($context['calendar_events']))
+		{
+			$contenido .= '
+					<span class="event">'.( $context['calendar_only_today'] ? $txt['events'] : $txt['events_upcoming']). '</span>';
+			/* Each event in calendar_events should have:
+				title, href, is_last, can_edit (are they allowed?), modify_href, and is_today. */
+			foreach ($context['calendar_events'] as $event)
+				$contenido .= '
+					'. ($event['can_edit'] ? '<a href="' . $event['modify_href'] . '" title="' . $txt['calendar_edit'] . '"><img src="' . $settings['images_url'] . '/icons/modify_small.gif" alt="*" /></a> ' : ''). ($event['href'] == '' ? '' : '<a href="' . $event['href'] . '">'). ($event['is_today'] ? '<strong>' . $event['title'] . '</strong>' : $event['title']). ($event['href'] == '' ? '' : '</a>'). ($event['is_last'] ? '<br />' : ', ');
+		}
+		$contenido .= '
+					</small>
+				</div>';
+	}
+
+	// Show statistical style information...
+	if ($settings['show_stats_index'])
+	{
+
+		$tabs .= '
+			  <li>
+					<a href="'. $scripturl. '?action=stats"><span class="icon">assessment</span></a>
+					<a class="waves-attach waves-light" data-toggle="tab" href="#stats"><span class="icon">assessment</span>'.$txt['forum_stats'].'</a>
+			  </li>';
+		$contenido .= '
+				<div class="tab-pane fade" id="stats">
+					<p>
+						'. $context['common_stats']['total_posts']. ' '. $txt['posts_made']. ' '. $txt['in']. ' '. $context['common_stats']['total_topics']. ' '. $txt['topics']. ' '. $txt['by']. ' '. $context['common_stats']['total_members']. ' '. $txt['members']. '. '. (!empty($settings['show_latest_member']) ? $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : ''). '<br />
+						'. (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong>  ( ' . $context['latest_post']['time'] . ' )<br />' : ''). '
+						<a href="'. $scripturl. '?action=recent">'. $txt['recent_view']. '</a>'. ($context['show_stats'] ? '<br />
+						<a href="' . $scripturl . '?action=stats">' . $txt['more_stats'] . '</a>' : ''). '
+					</p>
+				</div>';
+	}
 
 
 
@@ -334,21 +395,20 @@ function template_info_center()
                                 </h3>
                             </div>
                         </div>
-                        <div class="card-header">
-                            <div class="card-inner">
-                                <nav class="tab-nav tab-nav-brand card-menu">
-							        <ul class="nav nav-justified">
-                                        ',$tabs,'
-                                    </ul>
-                                 </nav>
-                             </div>
+                        <div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>
+							<div class="card-header">
+								<div class="card-inner">
+									<nav class="tab-nav tab-nav-brand card-menu">
+										<ul class="nav nav-justified">
+											',$tabs,'
+										</ul>
+									 </nav>
+								 </div>
+							</div>
+							<div class="card-inner"> 
+								',$contenido,'                           
+							</div>
                         </div>
-                        <div class="card-inner"> 
-                            <div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>
-                                ',$contenido,'
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
