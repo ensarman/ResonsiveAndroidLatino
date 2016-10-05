@@ -285,8 +285,7 @@ function template_info_center()
     {
         $tabs .= '
                   <li>
-                        <a href="'.$scripturl.'?action=recent" ><span class="icon">note</span></a>
-                        <a class="waves-attach waves-light" data-toggle="tab" href="#recent">'.$txt['recent_posts'].'</a>
+                        <a class="waves-attach waves-light" data-toggle="tab" href="#recent"><span class="icon">note</span>'.$txt['recent_posts'].'</a>
                   </li>';
 
 		$contenido .= '
@@ -314,14 +313,14 @@ function template_info_center()
 					';
 		}
 		$contenido.= '
+					<a href="'.$scripturl.'?action=recent" ><span class="icon">note</span> '.$txt['recent_posts'].'</a>
 				</div>';
     }
 	// Show information about events, birthdays, and holidays on the calendar.
 	if ($context['show_calendar'])
 	{
 		$tabs .= '<li class="active">
-                        <a href="'.$scripturl.'?action=calendar" ><span class="icon">date_range</span></a>
-                        <a class="waves-attach waves-light" data-toggle="tab" href="#calendar">'.($context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming']).'</a>
+                        <a class="waves-attach waves-light" data-toggle="tab" href="#calendar"><span class="icon">date_range</span>'.($context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming']).'</a>
                   </li>';
 		$contenido .= '
 				<div class="tab-pane fade" id="calendar">
@@ -356,6 +355,7 @@ function template_info_center()
 		}
 		$contenido .= '
 					</small>
+					<a href="'.$scripturl.'?action=calendar" ><span class="icon">date_range</span>'.($context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming']).'</a>
 				</div>';
 	}
 
@@ -365,7 +365,6 @@ function template_info_center()
 
 		$tabs .= '
 			  <li>
-					<a href="'. $scripturl. '?action=stats"><span class="icon">assessment</span></a>
 					<a class="waves-attach waves-light" data-toggle="tab" href="#stats"><span class="icon">assessment</span>'.$txt['forum_stats'].'</a>
 			  </li>';
 		$contenido .= '
@@ -376,6 +375,7 @@ function template_info_center()
 						<a href="'. $scripturl. '?action=recent">'. $txt['recent_view']. '</a>'. ($context['show_stats'] ? '<br />
 						<a href="' . $scripturl . '?action=stats">' . $txt['more_stats'] . '</a>' : ''). '
 					</p>
+					<a href="'. $scripturl. '?action=stats"><span class="icon">assessment</span>'.$txt['forum_stats'].'</a>
 				</div>';
 	}
 
@@ -395,17 +395,13 @@ function template_info_center()
                                 </h3>
                             </div>
                         </div>
-                        <div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>
-							<div class="card-header">
-								<div class="card-inner">
-									<nav class="tab-nav tab-nav-brand card-menu">
+                        <div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>		
+							<div class="card-inner margin-top-no">
+							 	<nav class="tab-nav tab-nav-brand margin-top-no">
 										<ul class="nav nav-justified">
 											',$tabs,'
 										</ul>
-									 </nav>
-								 </div>
-							</div>
-							<div class="card-inner"> 
+								</nav>
 								',$contenido,'                           
 							</div>
                         </div>
