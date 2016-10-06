@@ -237,7 +237,7 @@ function template_main()
 	if ($context['user']['is_logged'])
 	{
 		echo '
-	<div id="posting_icons" class="floatleft">';
+	<div id="posting_icons" align="center">';
 
 		// Mark read button.
 		$mark_read_button = array(
@@ -260,7 +260,7 @@ function template_main()
 	else
 	{
 		echo '
-	<div id="posting_icons">
+	<div id="posting_icons" align="center">
 		<ul class="nav-justified ulsinpuntos">
 			<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
 			<li><span class="avatar avatar-brand avatar-xs mdc-bg-cyan-700 mdc-text-grey-50" style="display:inline-block;" > <span class="icon">subdirectory_arrow_right</span></span>&nbsp;', $txt['redirect_board'], '</li>
