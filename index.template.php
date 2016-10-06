@@ -238,8 +238,8 @@ function template_body_above()
 							</div>
 						</td>
 						<td class="menu-usuario">
-							<ul class="nav nav-list pull-right">
-								<li class="dropdown margin-right">
+							<ul class="nav nav-list">
+								<li class="dropdown margin-right pull-right">
 									<a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
 										<span class="access-hide">', $context['user']['name'],'</span>
 										<span class="avatar avatar-sm"><img alt="avatar de ', $context['user']['name'],'" src="', !empty($context['user']['avatar']['href']) ? $context['user']['avatar']['href'] : $settings['images_url']. '/noavatar.png' ,'" alt="', $context['user']['name'],'" /></span>
