@@ -375,7 +375,6 @@ function template_info_center()
 						<a href="'. $scripturl. '?action=recent">'. $txt['recent_view']. '</a>'. ($context['show_stats'] ? '<br />
 						<a href="' . $scripturl . '?action=stats">' . $txt['more_stats'] . '</a>' : ''). '
 					</p>
-					<a href="'. $scripturl. '?action=stats"><span class="icon">assessment</span>'.$txt['forum_stats'].'</a>
 				</div>';
 	}
 
