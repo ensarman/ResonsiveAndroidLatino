@@ -378,6 +378,48 @@ function template_info_center()
 				</div>';
 	}
 
+	// "Users online" - in order of activity.
+	$usuariosOnline = '
+				<h4 class="sinmargen">'. ($context['show_who'] ? '<a href="' . $scripturl . '?action=who' . '">' : ''). '<span class="icon">people</span>'.($context['show_who'] ? '</a>' : '').'
+						'.$txt['online_users'].'</h4>';
+	$usuariosOnline .='
+				<p>'. ($context['show_who'] ? '<a href="' . $scripturl . '?action=who">' : ''). comma_format($context['num_guests']). ' '. ($context['num_guests'] == 1 ? $txt['guest'] : $txt['guests']). ', ' . comma_format($context['num_users_online']). ' '. ($context['num_users_online'] == 1 ? $txt['user'] : $txt['users']);
+
+
+
+
+	// Handle hidden users and buddies.
+	$bracketList = array();
+	if ($context['show_buddies'])
+		$bracketList[] = comma_format($context['num_buddies']) . ' ' . ($context['num_buddies'] == 1 ? $txt['buddy'] : $txt['buddies']);
+	if (!empty($context['num_spiders']))
+		$bracketList[] = comma_format($context['num_spiders']) . ' ' . ($context['num_spiders'] == 1 ? $txt['spider'] : $txt['spiders']);
+	if (!empty($context['num_users_hidden']))
+		$bracketList[] = comma_format($context['num_users_hidden']) . ' ' . $txt['hidden'];
+
+	if (!empty($bracketList))
+		$usuariosOnline .= ' (' . implode(', ', $bracketList) . ')';
+
+	$usuariosOnline .= ($context['show_who'] ? '</a>' : '').'<br />';
+
+	// Assuming there ARE users online... each user in users_online has an id, username, name, group, href, and link.
+	if (!empty($context['users_online']))
+	{
+		$usuariosOnline .= sprintf($txt['users_active'], $modSettings['lastActive']).':<br />'. implode(', ', $context['list_users_online']);
+
+		// Showing membergroups?
+		if (!empty($settings['show_group_key']) && !empty($context['membergroups']))
+			$usuariosOnline .= '<br />[' . implode(']&nbsp;&nbsp;[', $context['membergroups']) . ']';
+
+	}
+
+	$usuariosOnline .= '
+			</p>
+			<p class="last smalltext">
+				'. $txt['most_online_today']. ': <strong>'. comma_format($modSettings['mostOnlineToday']). '</strong>.
+				'.$txt['most_online_ever']. ': '. comma_format($modSettings['mostOnline']). ' ('. timeformat($modSettings['mostDate']). ')
+			</p>';
+
 
 
 	echo'
@@ -394,15 +436,22 @@ function template_info_center()
                                 </h3>
                             </div>
                         </div>
-                        <div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>		
-							<div class="card-inner margin-top-no">
-							 	<nav class="tab-nav tab-nav-brand margin-top-no">
-										<ul class="nav nav-justified">
-											',$tabs,'
-										</ul>
-								</nav>
-								',$contenido,'                           
-							</div>
+                        <div id="upshrinkHeaderIC"', empty($options['collapse_header_ic']) ? '' : ' style="display: none;"', '>	
+													<div class="card-header">
+														<div class="card-inner margin-top-no">
+															<nav class="tab-nav tab-nav-brand margin-top-no">
+																	<ul class="nav nav-justified">
+																		',$tabs,'
+																	</ul>
+															</nav>
+															',$contenido,'                           
+														</div>
+													</div>
+                        </div>
+                        <div class="card-header"> 	
+                        	<div class="card-inner"> 	
+                        		'.$usuariosOnline.'
+                        	</div>
                         </div>
                     </div>
                 </div>
