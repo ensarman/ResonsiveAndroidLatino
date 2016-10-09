@@ -596,7 +596,7 @@ function theme_linktree($force_show = false)
 	foreach ($context['linktree'] as $link_num => $tree)
 	{
 		echo '
-			<li ', ($link_num == count($context['linktree']) - 1) ? ' class="active"' : '', '>';
+			<li>';
 
 		// Show something before the link?
 		if (isset($tree['extra_before']))
@@ -604,7 +604,7 @@ function theme_linktree($force_show = false)
 
 		// Show the link, including a URL if it should have one.
 		echo $settings['linktree_link'] && isset($tree['url']) ? '
-				<a href="' . $tree['url'] . '"><span>' . $tree['name'] . '</span></a>' : '<span>' . $tree['name'] . '</span>';
+				<a href="' . $tree['url'] . '">' . $tree['name'] . '</a>' : $tree['name'] ;
 
 		// Show something after the link...?
 		if (isset($tree['extra_after']))
