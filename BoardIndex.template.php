@@ -385,9 +385,6 @@ function template_info_center()
 	$usuariosOnline .='
 				<p>'. ($context['show_who'] ? '<a href="' . $scripturl . '?action=who">' : ''). comma_format($context['num_guests']). ' '. ($context['num_guests'] == 1 ? $txt['guest'] : $txt['guests']). ', ' . comma_format($context['num_users_online']). ' '. ($context['num_users_online'] == 1 ? $txt['user'] : $txt['users']);
 
-
-
-
 	// Handle hidden users and buddies.
 	$bracketList = array();
 	if ($context['show_buddies'])
@@ -413,6 +410,8 @@ function template_info_center()
 
 	}
 
+
+
 	$usuariosOnline .= '
 			</p>
 			<p class="last smalltext">
@@ -420,10 +419,27 @@ function template_info_center()
 				'.$txt['most_online_ever']. ': '. comma_format($modSettings['mostOnline']). ' ('. timeformat($modSettings['mostDate']). ')
 			</p>';
 
+	// If they are logged in, but statistical information is off... show a personal message bar.
+	if ($context['user']['is_logged'] && !$settings['show_stats_index'])
+	{
+		$tabs .= '
+			<li> 
+				'.($context['allow_pm'] ? '<a href="' . $scripturl . '?action=pm">' : ''). '<span class="icon" >message</span>'. ($context['allow_pm'] ? '</a>' : ''). '
+						<span>'. $txt['personal_message']. '</span>
+			</li>';
+		$contenido .= '
+			<p>
+				<strong><a href="'. $scripturl. '?action=pm">'. $txt['personal_message']. '</a></strong>
+				<small>
+					'. $txt['you_have']. ' '. comma_format($context['user']['messages']). ' '. ($context['user']['messages'] == 1 ? $txt['message_lowercase'] : $txt['msg_alert_messages']). '.... '. $txt['click']. ' <a href="'. $scripturl. '?action=pm">'. $txt['here']. '</a> '. $txt['to_view']. '
+				</small>
+			</p>
+		';
 
+
+	}
 
 	echo'
-    <p>new info center</p>
     <div class="container">
         <div class="row">
             <div class="xs-col-12">
