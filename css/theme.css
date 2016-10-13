@@ -1,0 +1,156 @@
+/*main.contenedor{
+  margin-left: 10px;
+  margin-right: 10px;
+}*/
+
+.content-heading {
+  background-image: url(../images/material/bg.png);
+  padding-bottom: 100px;
+  padding-top: 40px;
+  margin-bottom: -68px;
+  z-index: -1;
+}
+/*Agregando el color blue 700 caracteristico de AL*/
+.page-brand .header-transparent.affix{
+	background-color: #388ccc;
+}
+/*Añadiendo el color de arriba en las lineas del dropdown*/
+.form-control:focus, .picker__select--month:focus, .picker__select--year:focus {
+  border-color:#388ccc;
+}
+.header{
+  margin-top: 0;
+  padding-top: 0;
+}
+.header table{
+  width: 100%;
+  table-layout:fixed;
+}
+
+.header table .tresrayas{
+  width: 50px;
+}
+
+.header table .contenido{
+
+  text-align: left;
+}
+/*para la busqueda de google*/
+.header table .tbusqueda{
+  text-align: right;
+  margin-left: auto;
+  margin-right: 30px;
+  width: 300px;
+}
+
+@media(max-width: 768px){
+  .ocultar-pequeno{
+    display: none;
+  }
+}
+
+.busqueda{
+  margin-top: 13px;
+  margin-bottom: -13px;
+  width: 260px;
+}
+
+
+
+.header table .menu-usuario{
+  width: 50px;
+}
+
+.titulo-overflow{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-top-img img {
+	-webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.menu-content .nav .a, .menu-content .nav a,.menu-collapse-toggle {
+	color:rgba(255,255,255,0.87);
+}
+.menu-content .nav a:hover,.menu-collapse-toggle:hover{
+	background-color:transparent;
+	color:rgba(255,255,255,1)!important;
+}
+
+/*IcoFix es una clase para acomodar el icono porque sin el margin se veria arriba de todo por alguna razon*/
+
+
+
+.icofix {
+  color:#fff;
+  margin-top:9px;
+}
+
+/*quitamos los margenes de h1 que es el titulo de cada página en el foro*/
+
+h1{
+  margin: 0;
+  padding: 0;
+}
+
+.bienvenido{
+  font-size: 1.5em;
+  margin: 10px 0 10px 0;
+}
+
+.oculto{
+  	visibility: hidden;
+}
+
+
+.card-menu{
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.openid_login
+{
+	background:  url(../images/openid.gif) no-repeat;
+
+}
+
+/*Arreglando los colores del menu*/
+.menu-content .nav a:hover, .menu-content .nav a:focus {
+  background-color: #607D8B;
+}
+
+/*seccion de las categorias*/
+
+.sinmargen{
+  margin: 0;
+}
+
+.cat_bar{
+  background-color: #eee;
+}
+
+.ulsinpuntos{
+  list-style-type: none;
+}
+
+.birthday
+{
+  color: #920ac4;
+}
+
+.event
+{
+  color: #078907;
+}
+
+.holiday
+{
+  color: #000080;
+}
+
