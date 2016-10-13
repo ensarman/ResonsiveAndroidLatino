@@ -255,7 +255,10 @@ function template_main()
 
 		// Show the mark all as read button?
 		if ($settings['show_mark_read'] && !empty($context['categories']))
-			echo '<div class="mark_read">', template_button_strip($mark_read_button, 'right'), '</div>';
+			//echo '<div class="mark_read">', template_button_strip($mark_read_button, 'right'), '</div>';
+			echo '<div class="fbtn-container">
+							<a class="fbtn fbtn-brand waves-attach waves-circle waves-light" href="'. $scripturl . '?action=markasread;sa=all;' . $context['session_var'] . '=' . $context['session_id'] .'"> <span class="fbtn-text fbtn-text-left">'.$txt['mark_as_read'].'</span> + </a>
+						</div>';
 	}
 	else
 	{
