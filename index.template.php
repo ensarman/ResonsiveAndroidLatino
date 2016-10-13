@@ -549,12 +549,14 @@ function template_body_below()
 	<footer>
 		<div class="container-fluid">
 			<div id="row">
-				<div class="col-xs-12">
-					<ul class="nav-justified">
-						<li class="padding-right-lg waves-attach copyright">', theme_copyright(), '</li>
-						<li class="padding-right-lg waves-attach"><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="', $txt['valid_xhtml'], '"><span>', $txt['xhtml'], '</span></a></li>
-						', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li class="padding-right-lg waves-attach "><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
-						<li class="padding-right-lg waves-attach last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
+				<div class="col-xs-12 text-center">
+					<ul class="nav-justified ulsinpuntos">
+						
+							<li class="padding-right-lg waves-attach copyright">', theme_copyright(), '</li>
+							<li class="padding-right-lg waves-attach"><a id="button_xhtml" href="http://validator.w3.org/check?uri=referer" target="_blank" class="new_win" title="', $txt['valid_xhtml'], '"><span>', $txt['xhtml'], '</span></a></li>
+							', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li class="padding-right-lg waves-attach "><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
+							<li class="padding-right-lg waves-attach last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
+						
 					</ul>';
 
 	// Show the load time?
