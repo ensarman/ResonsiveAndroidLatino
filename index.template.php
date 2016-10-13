@@ -717,7 +717,7 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
 			$buttons[] = '
-				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class=" button_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' btn btn-flat btn-brand " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
+				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="btn btn-flat btn-brand  button_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
 	}
 
 	// No buttons? No button strip either.
