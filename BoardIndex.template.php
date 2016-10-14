@@ -256,13 +256,28 @@ function template_main()
 		// Show the mark all as read button?
 		if ($settings['show_mark_read'] && !empty($context['categories']))
 			//echo '<div class="mark_read">', template_button_strip($mark_read_button, 'right'), '</div>';
-			echo '<div class="fbtn-container">
-							<a class="fbtn fbtn-brand waves-attach waves-circle waves-light" href="'. $scripturl . '?action=markasread;sa=all;' . $context['session_var'] . '=' . $context['session_id'] .'"> <span class="fbtn-text fbtn-text-left">'.$txt['mark_as_read'].'</span> + </a>
-						</div>';
+			echo '	<div class="fbtn-container">
+		<div class="fbtn-inner">
+			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
+			<div class="fbtn-dropup">
+				<a class="fbtn waves-attach waves-circle" href="'. $scripturl . '?action=markasread;sa=all;' . $context['session_var'] . '=' . $context['session_id'] .'"> <span class="fbtn-text fbtn-text-left">'.$txt['mark_as_read'].'</span><i class="material-icons">check</i> </a>
+				<a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>
+			</div>
+		</div>
+	</div>
+';
 	}
 	else
 	{
 		echo '
+		<div class="fbtn-container">
+		<div class="fbtn-inner">
+			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
+			<div class="fbtn-dropup">
+				<a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>
+			</div>
+		</div>
+	</div>
 	<div id="posting_icons" align="center">
 		<ul class="nav-justified ulsinpuntos">
 			<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
