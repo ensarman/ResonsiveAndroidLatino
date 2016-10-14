@@ -334,9 +334,9 @@ function template_main()
 		if (!empty($context['can_quick_mod']) && $options['display_quick_mod'] == 1 && !empty($context['topics']))
 		{
 			echo '
-				<tr class="titlebg">
+				<tr>
 					<td colspan="6" align="right">
-						<select class="qaction" name="qaction"', $context['can_move'] ? ' onchange="this.form.moveItTo.disabled = (this.options[this.selectedIndex].value != \'move\');"' : '', '>
+						<select class="form-control form-control-inline" name="qaction"', $context['can_move'] ? ' onchange="this.form.moveItTo.disabled = (this.options[this.selectedIndex].value != \'move\');"' : '', '>
 							<option value="">--------</option>', $context['can_remove'] ? '
 							<option value="remove">' . $txt['quick_mod_remove'] . '</option>' : '', $context['can_lock'] ? '
 							<option value="lock">' . $txt['quick_mod_lock'] . '</option>' : '', $context['can_sticky'] ? '
@@ -352,7 +352,7 @@ function template_main()
 			if ($context['can_move'])
 			{
 				echo '
-						<select class="qaction" id="moveItTo" name="move_to" disabled="disabled">';
+						<select class="form-control form-control-inline" id="moveItTo" name="move_to" disabled="disabled">';
 
 				foreach ($context['move_to_boards'] as $category)
 				{
@@ -369,7 +369,7 @@ function template_main()
 			}
 
 			echo '
-						<input type="submit" value="', $txt['quick_mod_go'], '" onclick="return document.forms.quickModForm.qaction.value != \'\' &amp;&amp; confirm(\'', $txt['quickmod_confirm'], '\');" class="button_submit qaction" />
+						<input class="form-control form-control-inline" type="submit" value="', $txt['quick_mod_go'], '" onclick="return document.forms.quickModForm.qaction.value != \'\' &amp;&amp; confirm(\'', $txt['quickmod_confirm'], '\');" />			
 					</td>
 				</tr>';
 		}
