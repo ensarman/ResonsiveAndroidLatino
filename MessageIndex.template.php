@@ -161,7 +161,7 @@ function template_main()
 	<div class="table-responsive" id="messageindex">
 		<table class="table table-condensed table-responsive" cellspacing="0">
 			<thead>
-				<tr class="">';
+				<tr class="cat_bar">';
 
 		// Are there actually any topics to show?
 		if (!empty($context['topics']))
@@ -257,6 +257,7 @@ function template_main()
 			// Some columns require a different shade of the color class.
 			$alternate_class = $color_class . '2';
 
+
 			echo '
 				<tr>
 					<td class="icon1 ', $color_class, '">
@@ -280,7 +281,7 @@ function template_main()
 							</p>
 						</div>
 					</td>
-					<td class="visible-md-block visible-lg-block', $color_class, '">
+					<td class="hidden-sm hidden-xs hidden-xx text-center"', $color_class, '">
 						', $topic['replies'], ' ', $txt['replies'], '
 						<br />
 						', $topic['views'], ' ', $txt['views'], '
