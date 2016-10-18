@@ -106,13 +106,13 @@ function template_main()
 		// If this category even can collapse, show a link to collapse it.
 		if ($category['can_collapse'])
 			echo '
-								<a href="', $category['collapse_href'], '"> <span class="icon margin-left-sm">keyboard_arrow_down</span> </a>';
+								<a href="', $category['collapse_href'], '"> <span class="icon margin-left-sm ">keyboard_arrow_down</span> </a>';
 
 		echo ' ',$category['link'];
 
 		if (!$context['user']['is_guest'] && !empty($category['show_unread']))
 			echo '
-							<div class="pull-right">
+							<div class="hidden-xs hidden-xx text-center pull-right">
 								<a href="', $scripturl, '?action=unread;c=', $category['id'], '">', $txt['view_unread_category'], '</a>
 							</div>';
 
@@ -138,7 +138,7 @@ function template_main()
 			{
 				echo '
 				<tr id="board_', $board['id'], '" >
-					<td class="echoneing"  ', !empty($board['children']) ? ' rowspan="2"' : '', '>
+					<td class="hidden-xs hidden-xx text-center"  ', !empty($board['children']) ? ' rowspan="2"' : '', '>
 						<a href="', ($board['is_redirect'] || $context['user']['is_guest'] ? $board['href'] : $scripturl . '?action=unread;board=' . $board['id'] . '.0;children'), '">';
 
 				// If the board or children is new, show an indicator.
@@ -178,7 +178,7 @@ function template_main()
 				// Show some basic information about the number of posts, etc.
 				echo '
 					</td>
-					<td class="stats windowbg">
+					<td class="hidden-xs hidden-xx text-center ">
 						<p>', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : $txt['posts'], ' <br />
 						', $board['is_redirect'] ? '' : comma_format($board['topics']) . ' ' . $txt['board_topics'], '
 						</p>
@@ -245,7 +245,7 @@ function template_main()
 		);
 
 		echo '
-			<ul class="nav-justified ulsinpuntos">
+			<ul class="hidden-xs hidden-xx text-center nav-justified ulsinpuntos">
 				<li><span class="avatar avatar-brand-accent avatar-xs mdc-bg-blue-700 mdc-text-grey-50" style="display:inline-block;" ><span class="icon">android</span></span>&nbsp;', $txt['new_posts'], '</li>
 				<li><span class="avatar avatar-xs mdc-bg-blue-grey-300 mdc-text-grey-50" style="display:inline-block;"><span class="icon">android</span></span>&nbsp;', $txt['old_posts'], '</li>
 				<li><span class="avatar avatar-brand avatar-xs mdc-bg-cyan-700 mdc-text-grey-50" style="display:inline-block;" > <span class="icon">subdirectory_arrow_right</span></span>&nbsp;', $txt['redirect_board'], '</li>

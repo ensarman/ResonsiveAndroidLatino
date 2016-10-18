@@ -167,7 +167,7 @@ function template_main()
 		if (!empty($context['topics']))
 		{
 			echo '
-					<th scope="col" class="text-center" width="8%" 
+					<th scope="col" class="hidden-sm hidden-xs hidden-xx text-center" width="8%" 
 					colspan="2"><span class="icon text-brand">android</span></th>
 					
 					<th scope="col" class="text-left "><a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=subject', $context['sort_by'] == 'subject' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['subject'], $context['sort_by'] == 'subject' ? ' <span class="icon">sort</span>' : '', '</a> / <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=starter', $context['sort_by'] == 'starter' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['started_by'], $context['sort_by'] == 'starter' ? ' <span class="icon">sort</span>' : '', '</a></th>
@@ -260,10 +260,10 @@ function template_main()
 
 			echo '
 				<tr>
-					<td class="icon1 ', $color_class, '">
+					<td class="hidden-sm hidden-xs hidden-xx text-center ', $color_class, '">
 						<img src="', $settings['images_url'], '/topic/', $topic['class'], '.gif" alt="" />
 					</td>
-					<td class="icon2 ', $color_class, '">
+					<td class="hidden-sm hidden-xs hidden-xx text-center ', $color_class, '">
 						<img src="', $topic['first_post']['icon_url'], '" alt="" />
 					</td>
 					<td class="subject ', $alternate_class, '">
