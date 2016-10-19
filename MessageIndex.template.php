@@ -172,7 +172,7 @@ function template_main()
 					
 					<th scope="col" class="text-left "><a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=subject', $context['sort_by'] == 'subject' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['subject'], $context['sort_by'] == 'subject' ? ' <span class="icon">sort</span>' : '', '</a> / <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=starter', $context['sort_by'] == 'starter' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['started_by'], $context['sort_by'] == 'starter' ? ' <span class="icon">sort</span>' : '', '</a></th>
 
-					<th scope="col" class="hidden-sm hidden-xs hidden-xx text-center" width="16%"><div><a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=replies', $context['sort_by'] == 'replies' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['replies'], $context['sort_by'] == 'replies' ? '<span class="icon">sort</span>' : '', '</a>/<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=views', $context['sort_by'] == 'views' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['views'], $context['sort_by'] == 'views' ? '<span class="icon">sort</span>' : '', '</a></div></th>';
+					<th scope="col" class="hidden-xs hidden-xx text-center" width="16%"><div><a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=replies', $context['sort_by'] == 'replies' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['replies'], $context['sort_by'] == 'replies' ? '<span class="icon">sort</span>' : '', '</a>/<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=views', $context['sort_by'] == 'views' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['views'], $context['sort_by'] == 'views' ? '<span class="icon">sort</span>' : '', '</a></div></th>';
 
 			// Show a "select all" box for quick moderation?
 			if (empty($context['can_quick_mod']))
@@ -281,7 +281,7 @@ function template_main()
 							</p>
 						</div>
 					</td>
-					<td class="hidden-sm hidden-xs hidden-xx text-center"', $color_class, '">
+					<td class="hidden-xs hidden-xx text-center"', $color_class, '">
 						', $topic['replies'], ' ', $txt['replies'], '
 						<br />
 						', $topic['views'], ' ', $txt['views'], '
