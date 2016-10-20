@@ -458,7 +458,7 @@ function template_body_above()
 									</div>
 								</div>
 							</div>';
-	//aqui debe de ir el div dard action
+	//aqui debe de ir el div card action
 	echo'
 						</div>
 					</div>

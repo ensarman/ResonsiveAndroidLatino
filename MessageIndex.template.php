@@ -438,6 +438,19 @@ function template_main()
 		</div>
 	</div>';
 
+	//floating ation button
+	echo '
+	<div class="fbtn-container">
+		<div class="fbtn-inner">
+			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
+			<div class="fbtn-dropup">
+				<a class="fbtn waves-attach waves-circle" href="'. $scripturl . '?action=markasread;sa=board;board=' . $context['current_board'] . '.0;' . $context['session_var'] . '=' . $context['session_id'] .'"> <span class="fbtn-text fbtn-text-left">'.$txt['mark_read_short'].'</span><i class="material-icons">check</i> </a>
+				<a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>
+				<a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;board=' . $context['current_board'] . '.0" ><span class="fbtn-text fbtn-text-left">'.$txt["new_topic"].'</span><span class="material-icons">create</span></a>
+			</div>
+		</div>
+	</div>';
+
 	// Javascript for inline editing.
 	echo '
 <script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/topic.js"></script>

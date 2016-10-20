@@ -256,7 +256,8 @@ function template_main()
 		// Show the mark all as read button?
 		if ($settings['show_mark_read'] && !empty($context['categories']))
 			//echo '<div class="mark_read">', template_button_strip($mark_read_button, 'right'), '</div>';
-			echo '	<div class="fbtn-container">
+			echo '	
+	<div class="fbtn-container">
 		<div class="fbtn-inner">
 			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
 			<div class="fbtn-dropup">
