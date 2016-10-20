@@ -148,7 +148,7 @@ function template_main()
 		echo '
 	<div class="container-full">
 		<div class="col-sm-2 col-xs-12 pull-right"><div class="pull-right">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . '&nbsp;&nbsp;<a href="#bot"><strong>' . $txt['go_down'] . '</strong></a>' : '', '</div></div>
-		<div class="col-sm-10 col-xs-12 pull-left">', template_button_strip($normal_buttons, 'right'), '</div>
+		<div class="col-sm-10 col-xs-12 pull-left hidden-xx hidden-xs">', template_button_strip($normal_buttons, 'right'), '</div>
 	</div>
 	<div class="clearfix"></div>';
 
@@ -389,9 +389,9 @@ function template_main()
 
 		echo '
 	<div class="container-full">
-		<div class="col-sm-10 col-xs-12">', template_button_strip($normal_buttons, 'right'), '</div>
+		<div class="col-sm-10 col-xs-12 pull-left hidden-xx hidden-xs">', template_button_strip($normal_buttons, 'right'), '</div>
 		<div class="col-sm-2 col-xs-12"><div class="pull-right">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . '&nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div></div>
-	</div>
+		</div>
 	<div class="clearfix"></div>
 	';
 	}
@@ -444,9 +444,12 @@ function template_main()
 		<div class="fbtn-inner">
 			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
 			<div class="fbtn-dropup">
-				<a class="fbtn waves-attach waves-circle" href="'. $scripturl . '?action=markasread;sa=board;board=' . $context['current_board'] . '.0;' . $context['session_var'] . '=' . $context['session_id'] .'"> <span class="fbtn-text fbtn-text-left">'.$txt['mark_read_short'].'</span><i class="material-icons">check</i> </a>
+				',$context['user']['is_logged']?'<a class="fbtn waves-attach waves-circle" href="'. $scripturl . '?action=markasread;sa=board;board=' . $context['current_board'] . '.0;' . $context['session_var'] . '=' . $context['session_id'] .'"> <span class="fbtn-text fbtn-text-left">'.$txt['mark_read_short'].'</span><i class="material-icons">check</i> </a>':'','
 				<a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>
-				<a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;board=' . $context['current_board'] . '.0" ><span class="fbtn-text fbtn-text-left">'.$txt["new_topic"].'</span><span class="material-icons">create</span></a>
+				<a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;board=' . $context['current_board'] . '.0;poll" 
+				><span class="fbtn-text fbtn-text-left">'.$txt["new_poll"].'</span><span class="material-icons">poll</span></a>
+				<a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;board=' . $context['current_board'] . '.0" 
+				><span class="fbtn-text fbtn-text-left">'.$txt["new_topic"].'</span><span class="material-icons">create</span></a>
 			</div>
 		</div>
 	</div>';
