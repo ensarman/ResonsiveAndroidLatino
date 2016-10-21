@@ -109,13 +109,12 @@ function template_html_above()
 
 	// Here comes the JavaScript bits!
 	echo '
-	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/script.js?fin20"></script>
+	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/script.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/theme.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/jquery/dist/jquery.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/base.min.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/project.min.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/script.js?fin20"></script>
-	<script type="text/javascript"><!-- // --><![CDATA[
+	
+		<script type="text/javascript"><!-- // --><![CDATA[
 		var smf_theme_url = "', $settings['theme_url'], '";
 		var smf_default_theme_url = "', $settings['default_theme_url'], '";
 		var smf_images_url = "', $settings['images_url'], '";
