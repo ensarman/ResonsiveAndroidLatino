@@ -131,6 +131,10 @@ h1{
   margin: 0;
 }
 
+.sinmarge > li{
+  margin: 0;
+}
+
 .cat_bar{
   background-color: #eee;
 }
@@ -194,4 +198,24 @@ h1{
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+
+.flow_hidden
+{
+	overflow: hidden;
+}
+
+.messageicon
+{
+	float: left;
+	margin: 0 0.5em 0 0;
+}
+.messageicon img
+{
+	padding: 6px 3px;
+}
+
+.acciones {
+  z-index: 99;
 }
