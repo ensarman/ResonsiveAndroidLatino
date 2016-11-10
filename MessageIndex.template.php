@@ -281,7 +281,7 @@ function template_main()
 							</p>
 						</div>
 					</td>
-					<td class="hidden-xs hidden-xx text-center"', $color_class, '">
+					<td class="hidden-xs hidden-xx text-center ', $color_class, '">
 						', $topic['replies'], ' ', $txt['replies'], '
 						<br />
 						', $topic['views'], ' ', $txt['views'], '
