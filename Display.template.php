@@ -14,8 +14,8 @@ function template_main()
 {
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
-	echo '<div class="container-fluid">
-			<div class="row">' ;
+	echo '
+			<div class="container-fluid">' ;
 	
 	// Let them know, if their report was a success!
 	if ($context['report_sent'])
@@ -35,87 +35,92 @@ function template_main()
 	if ($context['is_poll'])
 	{
 			echo '
-				<div id="poll">
-					<div class="cat_bar">
-						<h3 class="catbg">
-							<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/topic/', $context['poll']['is_locked'] ? 'normal_poll_locked' : 'normal_poll', '.gif" alt="" class="icon" /> ', $txt['poll'], '</span>
-						</h3>
-					</div>
-					<div class="windowbg">
-						<span class="topslice"><span></span></span>
-						<div class="content" id="poll_options">
-							<h4 id="pollquestion">
-								', $context['poll']['question'], '
-							</h4>';
+				<div class="row">
+					<div id="poll">
+						<div class="cat_bar">
+							<h3 class="catbg">
+								<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/topic/', $context['poll']['is_locked'] ? 'normal_poll_locked' : 'normal_poll', '.gif" alt="" class="icon" /> ', $txt['poll'], '</span>
+							</h3>
+						</div>
+						<div class="windowbg">
+							<span class="topslice"><span></span></span>
+							<div class="content text-center" id="poll_options">
+								<h4 id="pollquestion" class="sinmargen text-black-sec">
+									', $context['poll']['question'], '
+								</h4>';
 
 		// Are they not allowed to vote but allowed to view the options?
 		if ($context['poll']['show_results'] || !$context['allow_vote'])
 		{
 			echo '
-							<dl class="options">';
+								<dl class="options">';
 
 			// Show each option with its corresponding percentage bar.
 			foreach ($context['poll']['options'] as $option)
 			{
 				echo '
-							<dt class="middletext', $option['voted_this'] ? ' voted' : '', '">', $option['option'], '</dt>
-							<dd class="middletext statsbar', $option['voted_this'] ? ' voted' : '', '">';
+								<dt class="middletext', $option['voted_this'] ? ' voted' : '', '">', $option['option'], '</dt>
+								<dd class="middletext statsbar', $option['voted_this'] ? ' voted' : '', '">';
 
 				if ($context['allow_poll_view'])
 					echo '
 								', $option['bar_ndt'], '
-								<span class="percentage">', $option['votes'], ' (', $option['percent'], '%)</span>';
+									<span class="percentage">', $option['votes'], ' (', $option['percent'], '%)</span>';
 
 				echo '
-							</dd>';
+								</dd>';
 			}
 
 			echo '
-							</dl>';
+								</dl>';
 
 			if ($context['allow_poll_view'])
 				echo '
-							<p><strong>', $txt['poll_total_voters'], ':</strong> ', $context['poll']['total_votes'], '</p>';
+								<p><strong>', $txt['poll_total_voters'], ':</strong> ', $context['poll']['total_votes'], '</p>';
 		}
 		// They are allowed to vote! Go to it!
 		else
 		{
 			echo '
-							<form action="', $scripturl, '?action=vote;topic=', $context['current_topic'], '.', $context['start'], ';poll=', $context['poll']['id'], '" method="post" accept-charset="', $context['character_set'], '">';
+								<form id="pool" action="', $scripturl, '?action=vote;topic=', $context['current_topic'], '.', $context['start'], ';poll=', $context['poll']['id'], '" method="post" accept-charset="', $context['character_set'], '">';
 
 			// Show a warning if they are allowed more than one option.
 			if ($context['poll']['allowed_warning'])
 				echo '
-								<p class="smallpadding">', $context['poll']['allowed_warning'], '</p>';
+									<p class="smallpadding">', $context['poll']['allowed_warning'], '</p>';
 
 			echo '
-								<ul class="reset options">';
+									<div class="form-group">
+										<ul	class="ulsinpuntos sinpadding options ">';
 
 			// Show each option with its button - a radio likely.
 			foreach ($context['poll']['options'] as $option)
 				echo '
-									<li class="middletext">', $option['vote_button'], ' <label for="', $option['id'], '">', $option['option'], '</label></li>';
+											<li class="middletext">', $option['vote_button'], ' <label for="', $option['id'], '">', $option['option'], '</label></li>';
 
 			echo '
-								</ul>
-								<div class="submitbutton">
-									<input type="submit" value="', $txt['poll_vote'], '" class="button_submit" />
-									<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-								</div>
-							</form>';
+										</ul>
+									</div>
+									<div class="submitbutton form-group-brand">
+										
+										<a href="#" onclick="document.getElementById(\'pool\').submit()" class="btn  btn-flat btn-brand waves-attach waves-button waves-effect button_submit ">', $txt['poll_vote'], '</a>
+
+										<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
+									</div>
+								</form>';
 		}
 
 		// Is the clock ticking?
 		if (!empty($context['poll']['expire_time']))
 			echo '
-							<p><strong>', ($context['poll']['is_expired'] ? $txt['poll_expired_on'] : $txt['poll_expires_on']), ':</strong> ', $context['poll']['expire_time'], '</p>';
+								<p><strong>', ($context['poll']['is_expired'] ? $txt['poll_expired_on'] : $txt['poll_expires_on']), ':</strong> ', $context['poll']['expire_time'], '</p>';
 
 		echo '
+							</div>
+							<span class="botslice"><span></span></span>
 						</div>
-						<span class="botslice"><span></span></span>
 					</div>
-				</div>
-				<div id="pollmoderation">';
+					<div id="pollmoderation" class="pull-right">';
 
 		// Build the poll moderation button array.
 		$poll_buttons = array(
@@ -178,25 +183,28 @@ function template_main()
 	echo '
 			<div class="row">
 				<div class="pagesection hidden-xx hidden-xs">
-					<div class="nextlinks">', $context['previous_next'], '</div>', template_button_strip($normal_buttons, 'right'), '
-					<div class="pagelinks floatleft">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#lastPost"><strong>' . $txt['go_down'] . '</strong></a>' : '', '</div>
+					', template_button_strip($normal_buttons, 'right'), '
+					<div class="pagelinks pull-left" style="margin-top: 10px; margin-bottom: 10px">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#lastPost"><strong>' . $txt['go_down'] . '</strong></a>' : '', '</div>
+					<div class="nextlinks pull-right">', $context['previous_next'], '</div>
 				</div>
 			</div>';
 
 	// Show the topic information - icon, subject, etc.
 	echo '
 			<div id="forumposts">
-				<div class="cat_bar">
-					<h3>
-						<img src="', $settings['images_url'], '/topic/', $context['class'], '.gif" alt="" />
-						<span id="author">', $txt['author'], '</span><span class="pull-right">
-						', $txt['topic'], ': ', $context['subject'], ' &nbsp;(', $txt['read'], ' ', $context['num_views'], ' ', $txt['times'], ')</span>
-					</h3>
+				<div class=row>
+					<div class="cat_bar">
+						<h3 class="sinmargen">
+							<img src="', $settings['images_url'], '/topic/', $context['class'], '.gif" alt="" />
+							<span id="author">', $txt['author'], '</span><span class="pull-right">
+							', $txt['topic'], ': ', $context['subject'], ' &nbsp;(', $txt['read'], ' ', $context['num_views'], ' ', $txt['times'], ')</span>
+						</h3>
+					</div>
 				</div>';
 
 	if (!empty($settings['display_who_viewing']))
 	{
-		echo '
+		echo '<div class="row">
 				<p id="whoisviewing" class="smalltext">';
 
 		// Show just numbers...?
@@ -208,7 +216,8 @@ function template_main()
 
 		// Now show how many guests are here too.
 		echo $txt['who_and'], $context['view_num_guests'], ' ', $context['view_num_guests'] == 1 ? $txt['guest'] : $txt['guests'], $txt['who_viewing_topic'], '
-				</p>';
+				</p>
+				</div>';
 	}
 
 	echo '
@@ -258,7 +267,7 @@ function template_main()
 		echo '
 									', $message['member']['link'], '
 								</h4>
-								<ul class="reset smalltext" id="msg_', $message['id'], '_extra_info">';
+								<ul class="ulsinpuntos sinpadding reset smalltext" id="msg_', $message['id'], '_extra_info">';
 
 		// Show the member's custom title, if they have one.
 		if (!empty($message['member']['title']))
@@ -333,7 +342,7 @@ function template_main()
 						$shown = true;
 						echo '
 									<li class="im_icons">
-										<ul>';
+										<ul class="ulinline">';
 					}
 					echo '
 											<li>', $custom['value'], '</li>';
@@ -347,8 +356,8 @@ function template_main()
 			// This shows the popular messaging icons.
 			if ($message['member']['has_messenger'] && $message['member']['can_view_profile'])
 				echo '
-									<li class="im_icons">
-										<ul>
+									<li class="profile">
+										<ul class="ulinline">
 											', !empty($message['member']['icq']['link']) ? '<li>' . $message['member']['icq']['link'] . '</li>' : '', '
 											', !empty($message['member']['msn']['link']) ? '<li>' . $message['member']['msn']['link'] . '</li>' : '', '
 											', !empty($message['member']['aim']['link']) ? '<li>' . $message['member']['aim']['link'] . '</li>' : '', '
@@ -361,7 +370,7 @@ function template_main()
 			{
 				echo '
 									<li class="profile">
-										<ul>';
+										<ul class="ulinline ulsinpuntos sinpadding">';
 				// Don't show the profile button if you're not allowed to view the profile.
 				if ($message['member']['can_view_profile'])
 					echo '
@@ -644,7 +653,8 @@ function template_main()
 						</div>
 						<span class="botslice"><span></span></span>
 					</div>
-					<hr class="post_separator" />';
+					<hr class="post_separator" />
+					<div class="clearfix"></div>';
 	}
 
 	echo '
@@ -654,9 +664,9 @@ function template_main()
 
 	// Show the page index... "Pages: [1]".
 	echo '
-			<div class="pagesection">
+			<div class="pagesection row">
 				', template_button_strip($normal_buttons, 'right'), '
-				<div class="pagelinks floatleft">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div>
+				<div class="pagelinks">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div>
 				<div class="nextlinks_bottom">', $context['previous_next'], '</div>
 			</div>';
 

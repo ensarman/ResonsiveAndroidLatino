@@ -131,6 +131,10 @@ h1{
   margin: 0;
 }
 
+.sinpadding{
+  padding: 0;
+}
+
 .sinmarge > li{
   margin: 0;
 }
@@ -141,6 +145,14 @@ h1{
 
 .ulsinpuntos{
   list-style-type: none;
+}
+.ulinline li{
+  display: inline;
+}
+
+
+.ulleft li{
+  float: left;
 }
 
 .birthday
@@ -159,6 +171,11 @@ h1{
 }
 
 .button_strip_new_topic{
+  border-color: #ff4081;
+  border-bottom: solid;
+}
+
+.button_strip_reply{
   border-color: #ff4081;
   border-bottom: solid;
 }
