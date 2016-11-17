@@ -735,6 +735,34 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 		</div>
 		';
 }
+function template_fbtn_strip($button_strip){
+
+		$buttons =
+
+	$buttons = array();
+	foreach ($button_strip as $key => $value)
+	{
+		if (!isset($value['test']) || !empty($context[$value['test']]))
+			$buttons[] = '
+				<a' . (isset($value['id']) ? ' id="fbutton_strip_' . $value['id'] . '"' : '') . ' class="fbtn waves-attach waves-circle  fbutton_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a>
+				';
+	}
+
+		if (empty($buttons))
+		return;
+
+
+		echo '
+	<div class="fbtn-container">
+		<div class="fbtn-inner">
+			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
+			<div class="fbtn-dropup">
+				<a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>',
+		implode('', $buttons),'
+			</div>
+		</div>
+	</div>';
+}
 
 
 ?>

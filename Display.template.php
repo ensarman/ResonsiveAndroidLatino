@@ -182,12 +182,15 @@ function template_main()
 	// Show the page index... "Pages: [1]".
 	echo '
 			<div class="row">
-				<div class="pagesection hidden-xx hidden-xs">
+				<div class="pagesection  hidden-xx hidden-xs">
 					', template_button_strip($normal_buttons, 'right'), '
 					<div class="pagelinks pull-left" style="margin-top: 10px; margin-bottom: 10px">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#lastPost"><strong>' . $txt['go_down'] . '</strong></a>' : '', '</div>
 					<div class="nextlinks pull-right">', $context['previous_next'], '</div>
 				</div>
 			</div>';
+
+  //show floating buttons
+
 
 	// Show the topic information - icon, subject, etc.
 	echo '
@@ -664,10 +667,13 @@ function template_main()
 
 	// Show the page index... "Pages: [1]".
 	echo '
-			<div class="pagesection row">
-				', template_button_strip($normal_buttons, 'right'), '
-				<div class="pagelinks">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div>
-				<div class="nextlinks_bottom">', $context['previous_next'], '</div>
+      <div class="row">  
+        <div class="pagesection  hidden-xx hidden-xs">
+        ', template_button_strip($normal_buttons, 'right'), '
+          <div class="pagelinks">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div>
+            <div class="nextlinks_bottom">', $context['previous_next'], '</div>
+        </div>
+        
 			</div>';
 
 	// Show the lower breadcrumbs.
