@@ -216,7 +216,7 @@ function template_main()
   //poll
   echo ($context['can_add_poll'] ? '
       <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=editpoll;add;topic=' . $context['current_topic'] . '.' . $context['start'].'" 
-				><span class="fbtn-text fbtn-text-left">'.$txt["reply"].'</span><span class="material-icons">poll</span></a>': '');
+				><span class="fbtn-text fbtn-text-left">'.$txt["add_poll"].'</span><span class="material-icons">poll</span></a>': '');
   //reply
   echo ($context['can_reply'] ? '
       <a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;topic=' . $context['current_topic'] . '.' . $context['start'] . ';last_msg=' . $context['topic_last_message'].'" 
