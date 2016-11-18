@@ -744,7 +744,7 @@ function template_fbtn_strip($button_strip){
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
 			$buttons[] = '
-				<a' . (isset($value['id']) ? ' id="fbutton_strip_' . $value['id'] . '"' : '') . ' class="fbtn waves-attach waves-circle  fbutton_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a>
+				<a' . (isset($value['id']) ? ' id="fbutton_strip_' . $value['id'] . '"' : '') . ' class="fbtn waves-attach waves-circle  fbutton_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="material-icons">' . $txt[$value['text']] . '</span></a>
 				';
 	}
 
