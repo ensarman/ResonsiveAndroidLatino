@@ -212,7 +212,7 @@ function template_main()
   //notify
   echo ($context['can_mark_notify'] ? '
       <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=notify;sa=' . ($context['is_marked_notify'] ? 'off' : 'on') . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id'].'" 
-				><span class="fbtn-text fbtn-text-left">'.($context['is_marked_notify'] ? 'unnotify' : 'notify').'</span><span class="material-icons">'.($context['is_marked_notify']?'notifications_none':'notifications_active').'</span></a>': '');
+				><span class="fbtn-text fbtn-text-left">'.($context['is_marked_notify'] ? $txt['unnotify'] : $txt['notify']).'</span><span class="material-icons">'.($context['is_marked_notify']?'notifications_none':'notifications_active').'</span></a>': '');
   //poll
   echo ($context['can_add_poll'] ? '
       <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=editpoll;add;topic=' . $context['current_topic'] . '.' . $context['start'].'" 
