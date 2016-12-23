@@ -216,6 +216,10 @@ h1{
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+.post_separator{
+  border-top: solid;
+  border-color: #EEEEEE;
+}
 
 .poster{
   text-align: center;

@@ -629,7 +629,7 @@ function template_main()
 
 		echo '
 								</div>
-								<div class="smalltext reportlinks">';
+								<div class="smalltext reportlinks pull-right">';
 
 		// Maybe they want to report this post to the moderator(s)?
 		if ($context['can_report_moderator'])
@@ -696,8 +696,10 @@ function template_main()
 							</div>
 						
 						
-					<hr class="post_separator" />
-					<div class="clearfix"></div>';
+					
+					<div class="clearfix"></div>
+					<div class="post_separator"> </div>
+					';
 	}
 
 	echo '
