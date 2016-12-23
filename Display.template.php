@@ -14,6 +14,45 @@ function template_main()
 {
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
+	//show floating buttons
+	echo'
+  <div class="fbtn-container">
+		<div class="fbtn-inner">
+			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
+			<div class="fbtn-dropup">
+			  <a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>';
+
+	//here fab buttons
+	//send
+	echo ($context['can_send_topic'] ? '
+      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=emailuser;sa=sendtopic;topic=' . $context['current_topic'] . '.0'.'"><span class="fbtn-text fbtn-text-left">'.$txt["send_topic"].'</span><span class="material-icons">share</span></a>': '');
+	//print
+	echo '
+      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=printpage;topic=' . $context['current_topic'] . '.0'.'" 
+				><span class="fbtn-text fbtn-text-left">'.$txt["print"].'</span><span class="material-icons">print</span></a>';
+	//mark read-unread
+	echo ($context['can_mark_unread'] ? '
+      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=markasread;sa=topic;t=' . $context['mark_unread_time'] . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id'].'" 
+				><span class="fbtn-text fbtn-text-left">'.$txt["mark_unread"].'</span><span class="material-icons">markunread</span></a>': '');
+	//notify
+	echo ($context['can_mark_notify'] ? '
+      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=notify;sa=' . ($context['is_marked_notify'] ? 'off' : 'on') . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id'].'" 
+				><span class="fbtn-text fbtn-text-left">'.($context['is_marked_notify'] ? $txt['unnotify'] : $txt['notify']).'</span><span class="material-icons">'.($context['is_marked_notify']?'notifications_none':'notifications_active').'</span></a>': '');
+	//poll
+	echo ($context['can_add_poll'] ? '
+      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=editpoll;add;topic=' . $context['current_topic'] . '.' . $context['start'].'" 
+				><span class="fbtn-text fbtn-text-left">'.$txt["add_poll"].'</span><span class="material-icons">poll</span></a>': '');
+	//reply
+	echo ($context['can_reply'] ? '
+      <a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;topic=' . $context['current_topic'] . '.' . $context['start'] . ';last_msg=' . $context['topic_last_message'].'" 
+				><span class="fbtn-text fbtn-text-left">'.$txt["reply"].'</span><span class="material-icons">reply</span></a>': '');
+
+
+	echo'
+			</div>
+		</div>
+	</div>';
+
 	echo '
 			<div class="container-fluid">' ;
 	
@@ -188,45 +227,6 @@ function template_main()
 					<div class="nextlinks pull-right">', $context['previous_next'], '</div>
 				</div>
 			</div>';
-
-  //show floating buttons
-  echo'
-  <div class="fbtn-container">
-		<div class="fbtn-inner">
-			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
-			<div class="fbtn-dropup">
-			  <a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>';
-
-  //here fab buttons
-  //send
-  echo ($context['can_send_topic'] ? '
-      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=emailuser;sa=sendtopic;topic=' . $context['current_topic'] . '.0'.'"><span class="fbtn-text fbtn-text-left">'.$txt["send_topic"].'</span><span class="material-icons">share</span></a>': '');
-  //print
-  echo '
-      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=printpage;topic=' . $context['current_topic'] . '.0'.'" 
-				><span class="fbtn-text fbtn-text-left">'.$txt["print"].'</span><span class="material-icons">print</span></a>';
-  //mark read-unread
-  echo ($context['can_mark_unread'] ? '
-      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=markasread;sa=topic;t=' . $context['mark_unread_time'] . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id'].'" 
-				><span class="fbtn-text fbtn-text-left">'.$txt["mark_unread"].'</span><span class="material-icons">markunread</span></a>': '');
-  //notify
-  echo ($context['can_mark_notify'] ? '
-      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=notify;sa=' . ($context['is_marked_notify'] ? 'off' : 'on') . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id'].'" 
-				><span class="fbtn-text fbtn-text-left">'.($context['is_marked_notify'] ? $txt['unnotify'] : $txt['notify']).'</span><span class="material-icons">'.($context['is_marked_notify']?'notifications_none':'notifications_active').'</span></a>': '');
-  //poll
-  echo ($context['can_add_poll'] ? '
-      <a class="fbtn waves-attach waves-circle" href="'.$scripturl . '?action=editpoll;add;topic=' . $context['current_topic'] . '.' . $context['start'].'" 
-				><span class="fbtn-text fbtn-text-left">'.$txt["add_poll"].'</span><span class="material-icons">poll</span></a>': '');
-  //reply
-  echo ($context['can_reply'] ? '
-      <a class="fbtn waves-attach waves-circle" href="'.$scripturl.'?action=post;topic=' . $context['current_topic'] . '.' . $context['start'] . ';last_msg=' . $context['topic_last_message'].'" 
-				><span class="fbtn-text fbtn-text-left">'.$txt["reply"].'</span><span class="material-icons">reply</span></a>': '');
-
-
-  echo'
-			</div>
-		</div>
-	</div>';
 
 	// Show the topic information - icon, subject, etc.
 	echo '
@@ -689,9 +689,7 @@ function template_main()
 		echo '
 							</div>
 						
-						</div>
-						<span class="botslice"><span></span></span>
-					</div>
+						
 					<hr class="post_separator" />
 					<div class="clearfix"></div>';
 	}
