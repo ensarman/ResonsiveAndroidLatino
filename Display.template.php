@@ -296,7 +296,6 @@ function template_main()
 						<div class="col-xx-12 col-sm-2">
 							<div class="poster ">
 								<h4>';
-
 		// Show online and offline buttons?
 		if (!empty($modSettings['onlineEnable']) && !$message['member']['is_guest'])
 			echo '
@@ -311,12 +310,12 @@ function template_main()
 		// Show the member's custom title, if they have one.
 		if (!empty($message['member']['title']))
 			echo '
-									<li class="title">', $message['member']['title'], '</li>';
+									<li class="title hidden-xx hidden-xs">', $message['member']['title'], '</li>';
 
 		// Show the member's primary group (like 'Administrator') if they have one.
 		if (!empty($message['member']['group']))
 			echo '
-									<li class="membergroup">', $message['member']['group'], '</li>';
+									<li class="membergroup hidden-xx hidden-xs">', $message['member']['group'], '</li>';
 
 		// Don't show these things for guests.
 		if (!$message['member']['is_guest'])
@@ -324,14 +323,14 @@ function template_main()
 			// Show the post group if and only if they have no other group or the option is on, and they are in a post group.
 			if ((empty($settings['hide_post_group']) || $message['member']['group'] == '') && $message['member']['post_group'] != '')
 				echo '
-									<li class="postgroup">', $message['member']['post_group'], '</li>';
+									<li class="postgroup hidden-xx hidden-xs">', $message['member']['post_group'], '</li>';
 			echo '
 									<li class="stars">', $message['member']['group_stars'], '</li>';
 
 			// Show avatars, images, etc.?
 			if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image']))
 				echo '
-									<li class="avatar">
+									<li class="avatar center-block">
 										<a href="', $scripturl, '?action=profile;u=', $message['member']['id'], '">
 											', $message['member']['avatar']['image'], '
 										</a>
@@ -340,7 +339,7 @@ function template_main()
 			// Show how many posts they have made.
 			if (!isset($context['disabled_fields']['posts']))
 				echo '
-									<li class="postcount">', $txt['member_postcount'], ': ', $message['member']['posts'], '</li>';
+									<li class="postcount hidden-xx hidden-xs">', $txt['member_postcount'], ': ', $message['member']['posts'], '</li>';
 
 			// Is karma display enabled?  Total or +/-?
 			if ($modSettings['karmaMode'] == '1')
@@ -361,12 +360,12 @@ function template_main()
 			// Show the member's gender icon?
 			if (!empty($settings['show_gender']) && $message['member']['gender']['image'] != '' && !isset($context['disabled_fields']['gender']))
 				echo '
-									<li class="gender">', $txt['gender'], ': ', $message['member']['gender']['image'], '</li>';
+									<li class="gender hidden-xx hidden-xs">', $txt['gender'], ': ', $message['member']['gender']['image'], '</li>';
 
 			// Show their personal text?
 			if (!empty($settings['show_blurb']) && $message['member']['blurb'] != '')
 				echo '
-									<li class="blurb">', $message['member']['blurb'], '</li>';
+									<li class="blurb hidden-xx hidden-xs">', $message['member']['blurb'], '</li>';
 
 			// Any custom fields to show as icons?
 			if (!empty($message['member']['custom_fields']))
@@ -380,7 +379,7 @@ function template_main()
 					{
 						$shown = true;
 						echo '
-									<li class="im_icons">
+									<li class="im_icons ">
 										<ul class="ulinline">';
 					}
 					echo '
@@ -459,25 +458,28 @@ function template_main()
 								</ul>
 							</div>
 						</div> 
-						
+						<div class="col-sm-10 col-xx-12">
 							<div class="postarea">
-								<div class="flow_hidden">
+								<div class="row" style="margin-top: 5px;">
+								<div class="flow_hidden col-sm-10 col-xx-12">
 									<div class="keyinfo">
-										<div class="messageicon pull-left">
+										<div class="messageicon">
 											<img src="', $message['icon_url'] . '" alt=""', $message['can_modify'] ? ' id="msg_icon_' . $message['id'] . '"' : '', ' />
 										</div>
-										<h5 class="sinmargen pull-left" id="subject_', $message['id'], '">
+										<h5 class="sinmargen" id="subject_', $message['id'], '">
 											<a href="', $message['href'], '" rel="nofollow">', $message['subject'], '</a>
 										</h5>
-										<small class="pull-right">&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</small>
+										<small>&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</small>
 										<div id="msg_', $message['id'], '_quick_mod"></div>
 									</div>
-									<div class="clearfix"></div>';
+									<div class="clearfix"></div>
+								</div>';// este ultimo div cierra el flow hidden y arregla el dropdown menu de abajo
 
 		// If this is the first post, (#0) just say when it was posted - otherwise give the reply #.
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
 			echo '
-									<div class="dropdown-wrap pull-right acciones">
+								<div class="col-sm-2 col-xx-12">
+									<div class="dropdown-wrap pull-right ">
 										<div class="dropdown dropdown-inline">
 											<a class="btn dropdown-toggle-btn waves-attach waves-effect" data-toggle="dropdown"> acciones <span class="icon margin-left-sm">keyboard_arrow_down</span> </a>
 												<ul class="dropdown-menu nav sinmargen">';
@@ -530,6 +532,8 @@ function template_main()
 										</div>
 									</div>
 								</div>
+								</div>
+							</div>
 								';
 
 		// Ignoring this user? Hide the post.

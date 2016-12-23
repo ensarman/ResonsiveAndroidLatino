@@ -217,9 +217,27 @@ h1{
   visibility: visible;
 }
 
+.poster{
+  text-align: center;
+}
+
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .flow_hidden
 {
 	overflow: hidden;
+}
+.cabecera_post{
+
+  display: inline;
+}
+
+.acciones {
+  display: inline;
 }
 
 .messageicon
@@ -232,6 +250,5 @@ h1{
 	padding: 6px 3px;
 }
 
-.acciones {
-  z-index: 99;
-}
+
+
