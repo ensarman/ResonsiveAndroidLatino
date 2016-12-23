@@ -461,7 +461,7 @@ function template_main()
 						<div class="col-sm-10 col-xx-12">
 							<div class="postarea">
 								<div class="row" style="margin-top: 5px;">
-								<div class="flow_hidden col-sm-10 col-xx-12">
+								<div class="flow_hidden col-xs-8 col-xx-12">
 									<div class="keyinfo">
 										<div class="messageicon">
 											<img src="', $message['icon_url'] . '" alt=""', $message['can_modify'] ? ' id="msg_icon_' . $message['id'] . '"' : '', ' />
@@ -478,7 +478,7 @@ function template_main()
 		// If this is the first post, (#0) just say when it was posted - otherwise give the reply #.
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
 			echo '
-								<div class="col-sm-2 col-xx-12">
+								<div class="col-xs-4 col-xx-12">
 									<div class="dropdown-wrap pull-right ">
 										<div class="dropdown dropdown-inline">
 											<a class="btn dropdown-toggle-btn waves-attach waves-effect" data-toggle="dropdown"> acciones <span class="icon margin-left-sm">keyboard_arrow_down</span> </a>
@@ -560,7 +560,9 @@ function template_main()
 		// Can the user modify the contents of this post?  Show the modify inline image.
 		if ($message['can_modify'])
 			echo '
-								<img src="', $settings['images_url'], '/icons/modify_inline.gif" alt="', $txt['modify_msg'], '" title="', $txt['modify_msg'], '" class="modifybutton" id="modify_button_', $message['id'], '" style="cursor: ', ($context['browser']['is_ie5'] || $context['browser']['is_ie5.5'] ? 'hand' : 'pointer'), '; display: none;" onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')" />';
+								
+								<span class="icon modifybutton pull-right" id="modify_button_', $message['id'], '" style="cursor: ', ($context['browser']['is_ie5'] || $context['browser']['is_ie5.5'] ? 'hand' : 'pointer'), '; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')">edit</span>
+								';
 
 		// Assuming there are attachments...
 		if (!empty($message['attachment']))
