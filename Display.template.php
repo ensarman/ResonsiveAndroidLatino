@@ -74,7 +74,7 @@ function template_main()
 	if ($context['is_poll'])
 	{
 			echo '
-				<div class="row">
+				<div class="poll row">
 					<div id="poll">
 						<div class="cat_bar">
 							<h3 class="catbg">
@@ -175,7 +175,9 @@ function template_main()
 
 		echo '
 				</div>
-			</div>';
+			</div>
+			<div class="post_separator"></div>
+			';
 	}
 
 	// Does this topic have some events linked to it?
@@ -232,7 +234,7 @@ function template_main()
 	echo '
 			<div class="row">
 			<div id="forumposts">
-				<div class=row>
+				
 					<div class="cat_bar">
 						<h3 class="sinmargen">
 							<img src="', $settings['images_url'], '/topic/', $context['class'], '.gif" alt="" />
@@ -240,7 +242,7 @@ function template_main()
 							', $txt['topic'], ': ', $context['subject'], ' &nbsp;(', $txt['read'], ' ', $context['num_views'], ' ', $txt['times'], ')</span>
 						</h3>
 					</div>
-				</div>';
+				';
 
 	if (!empty($settings['display_who_viewing']))
 	{
@@ -459,8 +461,9 @@ function template_main()
 		echo '
 								</ul>
 							</div>
-						</div> 
-						<div class="col-sm-10 col-xx-12">
+						</div>
+						
+						<div class="postarea col-sm-10 col-xx-12">
 							<div class="subtitulo">
 								<div class="row" style="margin-top: 5px;">
 									<div class="flow_hidden col-xs-8 col-xx-12">
@@ -475,7 +478,7 @@ function template_main()
 											<div id="msg_', $message['id'], '_quick_mod"></div>
 										</div>
 										<div class="clearfix"></div>
-									</div><!-- cierre fel flow hidden -->';// este ultimo div cierra el flow hidden y arregla el dropdown menu de abajo
+									</div><!-- cierre del flow hidden -->';// este ultimo div cierra el flow hidden y arregla el dropdown menu de abajo
 
 		// If this is the first post, (#0) just say when it was posted - otherwise give the reply #.
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
@@ -565,7 +568,8 @@ function template_main()
 		if ($message['can_modify'])
 			echo '
 								
-								<span class="icon modifybutton pull-right" id="modify_button_', $message['id'], '" style="cursor: ', ($context['browser']['is_ie5'] || $context['browser']['is_ie5.5'] ? 'hand' : 'pointer'), '; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')">edit</span>
+								<span class="icon icon-15x modifybutton pull-right" id="modify_button_', $message['id'], '" style="cursor: ', ($context['browser']['is_ie5'] || $context['browser']['is_ie5.5'] ? 'hand' : 'pointer'), '; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')">edit</span>
+									
 								';
 
 		// Assuming there are attachments...
@@ -624,17 +628,19 @@ function template_main()
 		}
 
 		echo '
-							</div>
+							
+							
 							<div class="moderatorbar">
-								<div class="smalltext modified" id="modified_', $message['id'], '">';
+								<div class="" id="modified_', $message['id'], '">';
 
 		// Show "� Last Edit: Time by Person �" if this post was edited.
 		if ($settings['show_modify'] && !empty($message['modified']['name']))
 			echo '
-									&#171; <em>', $txt['last_edit'], ': ', $message['modified']['time'], ' ', $txt['by'], ' ', $message['modified']['name'], '</em> &#187;';
+									&#171; <small class="text-brand">', $txt['last_edit'], ': ', $message['modified']['time'], ' ', $txt['by'], ' ', $message['modified']['name'], '</small> &#187;';
 
 		echo '
 								</div>
+								<div class="clearfix"></div>
 								<div class="smalltext reportlinks pull-right">';
 
 		// Maybe they want to report this post to the moderator(s)?
@@ -667,6 +673,7 @@ function template_main()
 									', $txt['logged'];
 
 		echo '
+									</div>
 								</div>';
 
 		// Are there any custom profile fields for above the signature?
@@ -754,71 +761,73 @@ function template_main()
 	if ($context['can_reply'] && !empty($options['display_quick_reply']))
 	{
 		echo '
-			<a id="quickreply"></a>
-			<div class="tborder" id="quickreplybox">
-				<div class="cat_bar">
-					<h3 class="catbg">
-						<span class="ie6_header floatleft"><a href="javascript:oQuickReply.swap();">
-							<img src="', $settings['images_url'], '/', $options['display_quick_reply'] == 2 ? 'collapse' : 'expand', '.gif" alt="+" id="quickReplyExpand" class="icon" />
-						</a>
-						<a href="javascript:oQuickReply.swap();">', $txt['quick_reply'], '</a>
-						</span>
-					</h3>
-				</div>
-				<div id="quickReplyOptions"', $options['display_quick_reply'] == 2 ? '' : ' style="display: none"', '>
-					<span class="upperframe"><span></span></span>
-					<div class="roundframe">
-						<p class="smalltext lefttext">', $txt['quick_reply_desc'], '</p>
-						', $context['is_locked'] ? '<p class="alert smalltext">' . $txt['quick_reply_warning'] . '</p>' : '',
-						$context['oldTopicError'] ? '<p class="alert smalltext">' . sprintf($txt['error_old_topic'], $modSettings['oldTopicDays']) . '</p>' : '', '
-						', $context['can_reply_approved'] ? '' : '<em>' . $txt['wait_for_approval'] . '</em>', '
-						', !$context['can_reply_approved'] && $context['require_verification'] ? '<br />' : '', '
-						<form action="', $scripturl, '?board=', $context['current_board'], ';action=post2" method="post" accept-charset="', $context['character_set'], '" name="postmodify" id="postmodify" onsubmit="submitonce(this);" style="margin: 0;">
-							<input type="hidden" name="topic" value="', $context['current_topic'], '" />
-							<input type="hidden" name="subject" value="', $context['response_prefix'], $context['subject'], '" />
-							<input type="hidden" name="icon" value="xx" />
-							<input type="hidden" name="from_qr" value="1" />
-							<input type="hidden" name="notify" value="', $context['is_marked_notify'] || !empty($options['auto_notify']) ? '1' : '0', '" />
-							<input type="hidden" name="not_approved" value="', !$context['can_reply_approved'], '" />
-							<input type="hidden" name="goback" value="', empty($options['return_to_post']) ? '0' : '1', '" />
-							<input type="hidden" name="last_msg" value="', $context['topic_last_message'], '" />
-							<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-							<input type="hidden" name="seqnum" value="', $context['form_sequence_number'], '" />';
+			<div class="container-fluid">
+				<a id="quickreply"></a>
+				<div class="tborder" id="quickreplybox">
+					<div class="cat_bar">
+						<h3 class="catbg">
+							<span class="ie6_header floatleft"><a href="javascript:oQuickReply.swap();">
+								<span class="icon" id="quickReplyExpand">expand_more</span>
+							</a>
+							<a href="javascript:oQuickReply.swap();">', $txt['quick_reply'], '</a>
+							</span>
+						</h3>
+					</div>
+					<div id="quickReplyOptions"', $options['display_quick_reply'] == 2 ? '' : ' style="display: none"', '>
+						<span class="upperframe"><span></span></span>
+						<div class="roundframe">
+							<small>', $txt['quick_reply_desc'], '</small>
+							', $context['is_locked'] ? '<p class="alert smalltext"><small class="text-red">' . $txt['quick_reply_warning'] . '</small></p>' : '',
+							$context['oldTopicError'] ? '<p><small class="text-red">' . sprintf($txt['error_old_topic'], $modSettings['oldTopicDays']) . '</small></p>' : '', '
+							', $context['can_reply_approved'] ? '' : '<em>' . $txt['wait_for_approval'] . '</em>', '
+							', !$context['can_reply_approved'] && $context['require_verification'] ? '<br />' : '', '
+							<form action="', $scripturl, '?board=', $context['current_board'], ';action=post2" method="post" accept-charset="', $context['character_set'], '" name="postmodify" id="postmodify" onsubmit="submitonce(this);" style="margin: 0;">
+								<input type="hidden" name="topic" value="', $context['current_topic'], '" />
+								<input type="hidden" name="subject" value="', $context['response_prefix'], $context['subject'], '" />
+								<input type="hidden" name="icon" value="xx" />
+								<input type="hidden" name="from_qr" value="1" />
+								<input type="hidden" name="notify" value="', $context['is_marked_notify'] || !empty($options['auto_notify']) ? '1' : '0', '" />
+								<input type="hidden" name="not_approved" value="', !$context['can_reply_approved'], '" />
+								<input type="hidden" name="goback" value="', empty($options['return_to_post']) ? '0' : '1', '" />
+								<input type="hidden" name="last_msg" value="', $context['topic_last_message'], '" />
+								<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
+								<input type="hidden" name="seqnum" value="', $context['form_sequence_number'], '" />';
 
 			// Guests just need more.
 			if ($context['user']['is_guest'])
 				echo '
-							<strong>', $txt['name'], ':</strong> <input type="text" name="guestname" value="', $context['name'], '" size="25" class="input_text" tabindex="', $context['tabindex']++, '" />
-							<strong>', $txt['email'], ':</strong> <input type="text" name="email" value="', $context['email'], '" size="25" class="input_text" tabindex="', $context['tabindex']++, '" /><br />';
+								<strong>', $txt['name'], ':</strong> <input type="text" name="guestname" value="', $context['name'], '" size="25" class="input_text" tabindex="', $context['tabindex']++, '" />
+								<strong>', $txt['email'], ':</strong> <input type="text" name="email" value="', $context['email'], '" size="25" class="input_text" tabindex="', $context['tabindex']++, '" /><br />';
 
 			// Is visual verification enabled?
 			if ($context['require_verification'])
 				echo '
-							<strong>', $txt['verification'], ':</strong>', template_control_verification($context['visual_verification_id'], 'quick_reply'), '<br />';
+								<strong>', $txt['verification'], ':</strong>', template_control_verification($context['visual_verification_id'], 'quick_reply'), '<br />';
 
 			echo '
-							<div class="quickReplyContent">
-								<textarea cols="600" rows="7" name="message" tabindex="', $context['tabindex']++, '"></textarea>
-							</div>
-							<div class="righttext padding">
-								<input type="submit" name="post" value="', $txt['post'], '" onclick="return submitThisOnce(this);" accesskey="s" tabindex="', $context['tabindex']++, '" class="button_submit" />
-								<input type="submit" name="preview" value="', $txt['preview'], '" onclick="return submitThisOnce(this);" accesskey="p" tabindex="', $context['tabindex']++, '" class="button_submit" />';
+								<div class="quickReplyContent">
+									<textarea class="form-control" rows="7" name="message" tabindex="', $context['tabindex']++, '"></textarea>
+								</div>
+								<div class="pull-right padding">
+									<input class="form-control form-control-inline btn btn-flat btn-brand botonquickreply" type="submit" name="post" value="', $txt['post'], '" onclick="return submitThisOnce(this);" accesskey="s" tabindex="', $context['tabindex']++, '" class="button_submit" />
+									<input type="submit" name="preview" value="', $txt['preview'], '" onclick="return submitThisOnce(this);" accesskey="p" tabindex="', $context['tabindex']++, '" class="form-control form-control-inline btn btn-flat btn-brand button_submit botonquickreply" />';
 
 			if ($context['show_spellchecking'])
 				echo '
-								<input type="button" value="', $txt['spell_check'], '" onclick="spellCheck(\'postmodify\', \'message\');" tabindex="', $context['tabindex']++, '" class="button_submit" />';
+									<input class="form-control form-control-inline btn" type="button" value="', $txt['spell_check'], '" onclick="spellCheck(\'postmodify\', \'message\');" tabindex="', $context['tabindex']++, '" class="button_submit" />';
 
 			echo '
-							</div>
-						</form>
+								</div>
+							</form>
+						</div>
+						<span class="lowerframe"><span></span></span>
 					</div>
-					<span class="lowerframe"><span></span></span>
 				</div>
 			</div>';
 	}
 	else
 		echo '
-		<br class="clear" />';
+		<div class="clearfix"></div>';
 
 	if ($context['show_spellchecking'])
 		echo '
