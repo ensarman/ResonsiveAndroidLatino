@@ -230,6 +230,7 @@ function template_main()
 
 	// Show the topic information - icon, subject, etc.
 	echo '
+			<div class="row">
 			<div id="forumposts">
 				<div class=row>
 					<div class="cat_bar">
@@ -243,8 +244,9 @@ function template_main()
 
 	if (!empty($settings['display_who_viewing']))
 	{
-		echo '<div class="row">
-				<p id="whoisviewing" class="smalltext">';
+		echo '
+				<div class="row">
+					<p id="whoisviewing" class="smalltext">';
 
 		// Show just numbers...?
 		if ($settings['display_who_viewing'] == 1)
@@ -255,7 +257,7 @@ function template_main()
 
 		// Now show how many guests are here too.
 		echo $txt['who_and'], $context['view_num_guests'], ' ', $context['view_num_guests'] == 1 ? $txt['guest'] : $txt['guests'], $txt['who_viewing_topic'], '
-				</p>
+					</p>
 				</div>';
 	}
 
@@ -459,82 +461,84 @@ function template_main()
 							</div>
 						</div> 
 						<div class="col-sm-10 col-xx-12">
-							<div class="postarea">
+							<div class="subtitulo">
 								<div class="row" style="margin-top: 5px;">
-								<div class="flow_hidden col-xs-8 col-xx-12">
-									<div class="keyinfo">
-										<div class="messageicon">
-											<img src="', $message['icon_url'] . '" alt=""', $message['can_modify'] ? ' id="msg_icon_' . $message['id'] . '"' : '', ' />
+									<div class="flow_hidden col-xs-8 col-xx-12">
+										<div class="keyinfo">
+											<div class="messageicon">
+												<img src="', $message['icon_url'] . '" alt=""', $message['can_modify'] ? ' id="msg_icon_' . $message['id'] . '"' : '', ' />
+											</div>
+											<h5 class="sinmargen" id="subject_', $message['id'], '">
+												<a href="', $message['href'], '" rel="nofollow">', $message['subject'], '</a>
+											</h5>
+											<small>&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</small>
+											<div id="msg_', $message['id'], '_quick_mod"></div>
 										</div>
-										<h5 class="sinmargen" id="subject_', $message['id'], '">
-											<a href="', $message['href'], '" rel="nofollow">', $message['subject'], '</a>
-										</h5>
-										<small>&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</small>
-										<div id="msg_', $message['id'], '_quick_mod"></div>
-									</div>
-									<div class="clearfix"></div>
-								</div>';// este ultimo div cierra el flow hidden y arregla el dropdown menu de abajo
+										<div class="clearfix"></div>
+									</div><!-- cierre fel flow hidden -->';// este ultimo div cierra el flow hidden y arregla el dropdown menu de abajo
 
 		// If this is the first post, (#0) just say when it was posted - otherwise give the reply #.
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
 			echo '
-								<div class="col-xs-4 col-xx-12">
-									<div class="dropdown-wrap pull-right ">
-										<div class="dropdown dropdown-inline">
-											<a class="btn dropdown-toggle-btn waves-attach waves-effect" data-toggle="dropdown"> acciones <span class="icon margin-left-sm">keyboard_arrow_down</span> </a>
+									<div class="col-xs-4 col-xx-12">
+										<div class="dropdown-wrap pull-right ">
+											<div class="dropdown dropdown-inline">
+												<a class="btn dropdown-toggle-btn waves-attach waves-effect" data-toggle="dropdown"> acciones <span class="icon margin-left-sm">keyboard_arrow_down</span> </a>
 												<ul class="dropdown-menu nav sinmargen">';
 
 		// Maybe we can approve it, maybe we should?
 		if ($message['can_approve'])
 			echo '
-												<li class="approve_button"><a href="', $scripturl, '?action=moderate;area=postmod;sa=approve;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['approve'], '</a></li>';
+													<li class="approve_button"><a href="', $scripturl, '?action=moderate;area=postmod;sa=approve;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['approve'], '</a></li>';
 
 		// Can they reply? Have they turned on quick reply?
 		if ($context['can_quote'] && !empty($options['display_quick_reply']))
 			echo '
-												<li class="quote_button"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '" onclick="return oQuickReply.quote(', $message['id'], ');">', $txt['quote'], '</a></li>';
+													<li class="quote_button"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '" onclick="return oQuickReply.quote(', $message['id'], ');">', $txt['quote'], '</a></li>';
 
 		// So... quick reply is off, but they *can* reply?
 		elseif ($context['can_quote'])
 			echo '
-												<li class="quote_button"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '">', $txt['quote'], '</a></li>';
+													<li class="quote_button"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '">', $txt['quote'], '</a></li>';
 
 		// Can the user modify the contents of this post?
 		if ($message['can_modify'])
 			echo '
-												<li class="modify_button"><a href="', $scripturl, '?action=post;msg=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], '">', $txt['modify'], '</a></li>';
+													<li class="modify_button"><a href="', $scripturl, '?action=post;msg=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], '">', $txt['modify'], '</a></li>';
 
 		// How about... even... remove it entirely?!
 		if ($message['can_remove'])
 			echo '
-												<li class="remove_button"><a href="', $scripturl, '?action=deletemsg;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '" onclick="return confirm(\'', $txt['remove_message'], '?\');">', $txt['remove'], '</a></li>';
+													<li class="remove_button"><a href="', $scripturl, '?action=deletemsg;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '" onclick="return confirm(\'', $txt['remove_message'], '?\');">', $txt['remove'], '</a></li>';
 
 		// What about splitting it off the rest of the topic?
 		if ($context['can_split'] && !empty($context['real_num_replies']))
 			echo '
-												<li class="split_button"><a href="', $scripturl, '?action=splittopics;topic=', $context['current_topic'], '.0;at=', $message['id'], '">', $txt['split'], '</a></li>';
+													<li class="split_button"><a href="', $scripturl, '?action=splittopics;topic=', $context['current_topic'], '.0;at=', $message['id'], '">', $txt['split'], '</a></li>';
 
 		// Can we restore topics?
 		if ($context['can_restore_msg'])
 			echo '
-												<li class="restore_button"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['restore_message'], '</a></li>';
+													<li class="restore_button"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['restore_message'], '</a></li>';
 
 		// Show a checkbox for quick moderation?
 		if (!empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $message['can_remove'])
 			echo '
-												<li class="inline_mod_check" style="display: none;" id="in_topic_mod_check_', $message['id'], '"></li>';
+													<li class="inline_mod_check" style="display: none;" id="in_topic_mod_check_', $message['id'], '"></li>';
 
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
 			echo '
-											</ul>';
+												</ul>
+											</div><!-- del dropdown la lista que envuelve el ul  -->
+										</div><!-- del dropdown general  -->
+									</div><!-- aqui se cierra la columna del actions button  -->';
 
 		echo '
-										</div>
-									</div>
-								</div>
-								</div>
-							</div>
+									
+								</div> <!-- cerre row  -->
+							</div> <!-- cerre subtitulo  -->
 								';
+
 
 		// Ignoring this user? Hide the post.
 		if ($ignoring)
@@ -613,8 +617,10 @@ function template_main()
 										</fieldset>';
 
 			echo '
+
 									</div>
-								</div>';
+								</div>
+							</div>';
 		}
 
 		echo '
@@ -709,11 +715,12 @@ function template_main()
 
 	// Show the page index... "Pages: [1]".
 	echo '
+			<div class="clearfix"></div>
       <div class="row">  
         <div class="pagesection  hidden-xx hidden-xs">
         ', template_button_strip($normal_buttons, 'right'), '
-          <div class="pagelinks">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div>
-            <div class="nextlinks_bottom">', $context['previous_next'], '</div>
+          <div class="pagelinks pull-left" style="margin-top: 10px; margin-bottom: 10px">', $txt['pages'], ': ', $context['page_index'], !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' &nbsp;&nbsp;<a href="#top"><strong>' . $txt['go_up'] . '</strong></a>' : '', '</div>
+            <div class="nextlinks_bottom pull-right">', $context['previous_next'], '</div>
         </div>
         
 			</div>';
