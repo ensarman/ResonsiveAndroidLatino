@@ -16,13 +16,14 @@ function template_registration_agreement()
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	echo '
+		<div class="margin-bottom">
 		<form action="', $scripturl, '?action=register" method="post" accept-charset="', $context['character_set'], '" id="registration">
 			<div class="cat_bar">
 				<h3 class="catbg">', $txt['registration_agreement'], '</h3>
 			</div>
 			<span class="upperframe"><span></span></span>
 			<div class="roundframe">
-				<p>', $context['agreement'], '</p>
+				<p class="justified">', $context['agreement'], '</p>
 			</div>
 			<span class="lowerframe"><span></span></span>
 			<div id="confirm_buttons">';
@@ -31,15 +32,16 @@ function template_registration_agreement()
 	if ($context['show_coppa'])
 		echo '
 				<input type="submit" name="accept_agreement" value="', $context['coppa_agree_above'], '" class="button_submit" /><br /><br />
-				<input type="submit" name="accept_agreement_coppa" value="', $context['coppa_agree_below'], '" class="button_submit" />';
+				<input type="submit" name="accept_agreement_coppa" value="', $context['coppa_agree_below'], '" class="button_submit btn btn-flat btn-brand" />';
 	else
 		echo '
-				<input type="submit" name="accept_agreement" value="', $txt['agreement_agree'], '" class="button_submit" />';
+				<input  type="submit" name="accept_agreement" value="', $txt['agreement_agree'], '" class="button_submit form-control btn btn-flat btn-brand" />';
 
 	echo '
 			</div>
 			<input type="hidden" name="step" value="1" />
-		</form>';
+		</form>
+		</div>';
 
 }
 
