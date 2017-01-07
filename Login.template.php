@@ -20,7 +20,7 @@ function template_login()
 	echo '
 		<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/sha1.js"></script>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4 col-sx-12">
+			<div class="col-md-4 col-md-offset-4 col-xx-12">
 				<div class="card">
 
 					<div class="card-main">
