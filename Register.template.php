@@ -130,113 +130,116 @@ function template_registration_form()
 			<div class="cat_bar">
 				<h3 class="catbg">', $txt['registration_form'], '</h3>
 			</div>
-			<div class="col-md-4 col-md-offset-4 col-xx-12"> 
-				<div class="title_bar">
-					<h4>', $txt['required_info'], '</h4>
-				</div>
-				<div class="windowbg2">
-					<span class="topslice"><span></span></span>
-					
-					<fieldset class="content">
-							<div class="form-group form-group-label">
-								<label class="floating-label" for="smf_autov_username">', $txt['username'], ':</label>
-								<input type="text" name="user" id="smf_autov_username" size="30" tabindex="', $context['tabindex']++, '" maxlength="25" value="', isset($context['username']) ? $context['username'] : '', '" class="form-control form-control-inline input_text" />						
-								
-								<span id="smf_autov_username_div" style="display: none;">
-									<a id="smf_autov_username_link" href="#">
-										<img id="smf_autov_username_img" src="', $settings['images_url'], '/icons/field_check.gif" alt="*" />
-									</a>
-								</span>
+			<div class="col-md-4 col-md-offset-4 col-xx-12">
+				<div class="card">
+				 	<div class="card-main">
+				 		<div class="card-inner">
+							<div class="title_bar">
+								<h4>', $txt['required_info'], '</h4>
 							</div>
-							<div class="form-group form-group-label">
-								<strong><label class="floating-label" for="smf_autov_reserve1">', $txt['email'], ':</label></strong>
-							
-								<input type="text" name="email" id="smf_autov_reserve1" size="30" tabindex="', $context['tabindex']++, '" value="', isset($context['email']) ? $context['email'] : '', '" class="form-control form-control-inline input_text" />
-							</div>
-							<div class="form-group">
-								<div class="checkbox checkbox-adv">
+							<div class="windowbg2">
+								<span class="topslice"><span></span></span>
 								
-										<label for="allow_email">
-										  
-											<input type="checkbox" name="allow_email" id="allow_email" tabindex="', $context['tabindex']++, '" class="access-hide input_check" />
+								<fieldset class="content">
+										<div class="form-group form-group-label">
+											<label class="floating-label" for="smf_autov_username">', $txt['username'], ':</label>
+											<input type="text" name="user" id="smf_autov_username" size="30" tabindex="', $context['tabindex']++, '" maxlength="25" value="', isset($context['username']) ? $context['username'] : '', '" class="form-control form-control-inline input_text" />						
 											
-											', $txt['allow_user_email'], '
-
-											<span class="checkbox-circle"></span><span class="checkbox-circle-check"></span><span class="checkbox-circle-icon icon">done</span>
-										</label>
-								</div>
-							</div>
-						';
-
-	// If OpenID is enabled, give the user a choice between password and OpenID.
-	if (!empty($modSettings['enableOpenID']))
-	{
-		echo '
-						<dl class="register_form" id="authentication_group">
-							<dt>
-								<strong>', $txt['authenticate_label'], ':</strong>
-								<a href="', $scripturl, '?action=helpadmin;help=register_openid" onclick="return reqWin(this.href);" class="help">(?)</a>
-							</dt>
-							<dd>
-								<label for="auth_pass" id="option_auth_pass">
-									<input type="radio" name="authenticate" value="passwd" id="auth_pass" tabindex="', $context['tabindex']++, '" ', empty($context['openid']) ? 'checked="checked" ' : '', ' onclick="updateAuthMethod();" class="input_radio" />
-									', $txt['authenticate_password'], '
-								</label>
-								<label for="auth_openid" id="option_auth_openid">
-									<input type="radio" name="authenticate" value="openid" id="auth_openid" tabindex="', $context['tabindex']++, '" ', !empty($context['openid']) ? 'checked="checked" ' : '', ' onclick="updateAuthMethod();" class="input_radio" />
-									', $txt['authenticate_openid'], '
-								</label>
-							</dd>
-						</dl>';
-	}
-
-	echo '
-						<div class="form-group form-group-label register_form" id="password1_group">
-							
-							<label class="floating-label" for="smf_autov_pwmain">', $txt['choose_pass'], ':</label>
-							<input type="password" name="passwrd1" id="smf_autov_pwmain" size="30" tabindex="', $context['tabindex']++, '" class="form-control form-control-inline input_password" />
-							<span id="smf_autov_pwmain_div" style="display: none;">
-									<img id="smf_autov_pwmain_img" src="', $settings['images_url'], '/icons/field_invalid.gif" alt="*" />
-								</span>
-						</div>
-						<div class="form-group form-group-label register_form" id="password2_group">
-							<label class="floating-label" for="smf_autov_pwverify">', $txt['verify_pass'], ':</label>
-							<input type="password" name="passwrd2" id="smf_autov_pwverify" size="30" tabindex="', $context['tabindex']++, '" class="form-control form-control-inline input_password" />
-							<span id="smf_autov_pwverify_div" style="display: none;">
-								<img id="smf_autov_pwverify_img" src="', $settings['images_url'], '/icons/field_valid.gif" alt="*" />
-							</span>							
-						</div>';
+											<span id="smf_autov_username_div" style="display: none;">
+												<a id="smf_autov_username_link" href="#">
+													<img id="smf_autov_username_img" src="', $settings['images_url'], '/icons/field_check.gif" alt="*" />
+												</a>
+											</span>
+										</div>
+										<div class="form-group form-group-label">
+											<strong><label class="floating-label" for="smf_autov_reserve1">', $txt['email'], ':</label></strong>
+										
+											<input type="text" name="email" id="smf_autov_reserve1" size="30" tabindex="', $context['tabindex']++, '" value="', isset($context['email']) ? $context['email'] : '', '" class="form-control form-control-inline input_text" />
+										</div>
+										<div class="form-group">
+											<div class="checkbox checkbox-adv">
+											
+													<label for="allow_email">
+													  
+														<input type="checkbox" name="allow_email" id="allow_email" tabindex="', $context['tabindex']++, '" class="access-hide input_check" />
+														
+														', $txt['allow_user_email'], '
+			
+														<span class="checkbox-circle"></span><span class="checkbox-circle-check"></span><span class="checkbox-circle-icon icon">done</span>
+													</label>
+											</div>
+										</div>
+							';
 
 	// If OpenID is enabled, give the user a choice between password and OpenID.
 	if (!empty($modSettings['enableOpenID']))
 	{
 		echo '
+									<dl class="register_form" id="authentication_group">
+										<dt>
+											<strong>', $txt['authenticate_label'], ':</strong>
+											<a href="', $scripturl, '?action=helpadmin;help=register_openid" onclick="return reqWin(this.href);" class="help">(?)</a>
+										</dt>
+										<dd>
+											<label for="auth_pass" id="option_auth_pass">
+												<input type="radio" name="authenticate" value="passwd" id="auth_pass" tabindex="', $context['tabindex']++, '" ', empty($context['openid']) ? 'checked="checked" ' : '', ' onclick="updateAuthMethod();" class="input_radio" />
+												', $txt['authenticate_password'], '
+											</label>
+											<label for="auth_openid" id="option_auth_openid">
+												<input type="radio" name="authenticate" value="openid" id="auth_openid" tabindex="', $context['tabindex']++, '" ', !empty($context['openid']) ? 'checked="checked" ' : '', ' onclick="updateAuthMethod();" class="input_radio" />
+												', $txt['authenticate_openid'], '
+											</label>
+										</dd>
+									</dl>';
+	}
 
-						<dl class="register_form" id="openid_group">
-							<dt><strong>', $txt['authenticate_openid_url'], ':</strong></dt>
-							<dd>
-								<input type="text" name="openid_identifier" id="openid_url" size="30" tabindex="', $context['tabindex']++, '" value="', isset($context['openid']) ? $context['openid'] : '', '" class="input_text openid_login" />
-							</dd>
-						</dl>';
+	echo '
+									<div class="form-group form-group-label register_form" id="password1_group">
+										
+										<label class="floating-label" for="smf_autov_pwmain">', $txt['choose_pass'], ':</label>
+										<input type="password" name="passwrd1" id="smf_autov_pwmain" size="30" tabindex="', $context['tabindex']++, '" class="form-control form-control-inline input_password" />
+										<span id="smf_autov_pwmain_div" style="display: none;">
+												<img id="smf_autov_pwmain_img" src="', $settings['images_url'], '/icons/field_invalid.gif" alt="*" />
+											</span>
+									</div>
+									<div class="form-group form-group-label register_form" id="password2_group">
+										<label class="floating-label" for="smf_autov_pwverify">', $txt['verify_pass'], ':</label>
+										<input type="password" name="passwrd2" id="smf_autov_pwverify" size="30" tabindex="', $context['tabindex']++, '" class="form-control form-control-inline input_password" />
+										<span id="smf_autov_pwverify_div" style="display: none;">
+											<img id="smf_autov_pwverify_img" src="', $settings['images_url'], '/icons/field_valid.gif" alt="*" />
+										</span>							
+									</div>';
+
+	// If OpenID is enabled, give the user a choice between password and OpenID.
+	if (!empty($modSettings['enableOpenID']))
+	{
+		echo '
+
+									<dl class="register_form" id="openid_group">
+										<dt><strong>', $txt['authenticate_openid_url'], ':</strong></dt>
+										<dd>
+											<input type="text" name="openid_identifier" id="openid_url" size="30" tabindex="', $context['tabindex']++, '" value="', isset($context['openid']) ? $context['openid'] : '', '" class="input_text openid_login" />
+										</dd>
+									</dl>';
 
 	}
 
 	echo '
-					</fieldset>
-					<span class="botslice"><span></span></span>
-				</div>';
+								</fieldset>
+								<span class="botslice"><span></span></span>
+							</div>';
 
 	// If we have either of these, show the extra group.
 	if (!empty($context['profile_fields']) || !empty($context['custom_fields']))
 	{
 		echo '
-				<div class="title_bar">
-					<h4 class="titlebg">', $txt['additional_information'], '</h4>
-				</div>
-				<div class="windowbg2">
-					<span class="topslice"><span></span></span>
-					<fieldset class="content">
-						<dl class="register_form" id="custom_group">';
+							<div class="title_bar">
+								<h4 class="titlebg">', $txt['additional_information'], '</h4>
+							</div>
+							<div class="windowbg2">
+								<span class="topslice"><span></span></span>
+								<fieldset class="content">
+									<dl class="register_form" id="custom_group">';
 	}
 
 	if (!empty($context['profile_fields']))
@@ -325,44 +328,50 @@ function template_registration_form()
 	{
 		foreach ($context['custom_fields'] as $field)
 			echo '
-							<dt>
-								<strong', !empty($field['is_error']) ? ' style="color: red;"' : '', '>', $field['name'], ':</strong>
-								<span class="smalltext">', $field['desc'], '</span>
-							</dt>
-							<dd>', $field['input_html'], '</dd>';
+										<dt>
+											<strong', !empty($field['is_error']) ? ' style="color: red;"' : '', '>', $field['name'], ':</strong>
+											<span class="smalltext">', $field['desc'], '</span>
+										</dt>
+										<dd>', $field['input_html'], '</dd>';
 	}
 
 	// If we have either of these, close the list like a proper gent.
 	if (!empty($context['profile_fields']) || !empty($context['custom_fields']))
 	{
-		echo '
-						</dl>
-					</fieldset>
-					<span class="botslice"><span></span></span>
-				</div>';
+			echo '
+									</dl>
+								</fieldset>
+								<span class="botslice"><span></span></span>
+							</div>';
 	}
 
 	if ($context['visual_verification'])
 	{
 		echo '
-				<div class="title_bar">
-					<h4 class="titlebg">', $txt['verification'], '</h4>
-				</div>
-				<div class="windowbg2">
-					<span class="topslice"><span></span></span>
-					<fieldset class="content centertext">
-						', template_control_verification($context['visual_verification_id'], 'all'), '
-					</fieldset>
-					<span class="botslice"><span></span></span>
-				</div>';
+							<div class="title_bar">
+								<h4 class="titlebg">', $txt['verification'], '</h4>
+							</div>
+							<div class="windowbg2">
+								<span class="topslice"><span></span></span>
+								<fieldset class="content centertext">
+									', template_control_verification($context['visual_verification_id'], 'all'), '
+								</fieldset>
+								<span class="botslice"><span></span></span>
+							</div>';
 	}
 
 	echo '
-				<div class="form-group sinmargen" id="confirm_buttons">
-					<input type="submit" name="regSubmit" value="', $txt['register'], '" tabindex="', $context['tabindex']++, '" class="form-control btn btn-flat btn-brand button_submit" />
+						</div>
+						<div class="card-action">
+				
+							<div class="form-group sinmargen" id="confirm_buttons">
+								<input type="submit" name="regSubmit" value="', $txt['register'], '" tabindex="', $context['tabindex']++, '" class="form-control btn btn-flat btn-brand button_submit" />
+							</div>
+							
+							<input type="hidden" name="step" value="2" />
+						</div>
+					</div>
 				</div>
-				<div class="margin-bottom"></div>
-				<input type="hidden" name="step" value="2" />
 			</div>
 		</form>
 		<script type="text/javascript"><!-- // --><![CDATA[
