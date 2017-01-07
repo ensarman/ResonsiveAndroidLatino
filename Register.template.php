@@ -358,9 +358,10 @@ function template_registration_form()
 	}
 
 	echo '
-				<div id="confirm_buttons">
-					<input type="submit" name="regSubmit" value="', $txt['register'], '" tabindex="', $context['tabindex']++, '" class="button_submit" />
+				<div class="form-group sinmargen" id="confirm_buttons">
+					<input type="submit" name="regSubmit" value="', $txt['register'], '" tabindex="', $context['tabindex']++, '" class="form-control btn btn-flat btn-brand button_submit" />
 				</div>
+				<div class="margin-bottom"></div>
 				<input type="hidden" name="step" value="2" />
 			</div>
 		</form>
