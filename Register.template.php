@@ -111,8 +111,8 @@ function template_registration_form()
 	{
 		echo '
 		<div class="register_error">
-			<span>', $txt['registration_errors_occurred'], '</span>
-			<ul class="reset">';
+			<span class="text-black-hint">', $txt['registration_errors_occurred'], '</span>
+			<ul class="ulsinpuntos text-red reset">';
 
 		// Cycle through each error and display an error message.
 		foreach ($context['registration_errors'] as $error)
@@ -130,7 +130,7 @@ function template_registration_form()
 			<div class="cat_bar">
 				<h3 class="catbg">', $txt['registration_form'], '</h3>
 			</div>
-			<div class="col-md-4 col-md-offset-4 col-xx-12">
+			<div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 col-xx-12">
 				<div class="card">
 				 	<div class="card-main">
 				 		<div class="card-inner">
