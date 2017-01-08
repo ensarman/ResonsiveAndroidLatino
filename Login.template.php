@@ -20,16 +20,14 @@ function template_login()
 	echo '
 		<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/sha1.js"></script>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4 col-xx-12">
+			<div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 col-xx-12">
 				<div class="card">
 
 					<div class="card-main">
 						<div class="card-inner">
-							<h3>
-								',$txt['login'],'
-							</h3>
-						</div>
-						<form action="', $scripturl, '?action=login2" name="frmLogin" id="frmLogin" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+							<h3>',$txt['login'],'	</h3>
+						
+							<form action="', $scripturl, '?action=login2" name="frmLogin" id="frmLogin" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
 
 					';
 
@@ -37,16 +35,16 @@ function template_login()
 	if (!empty($context['login_errors']))
 		foreach ($context['login_errors'] as $error)
 			echo '
-				<p class="mdc-text-red-900">', $error, '</p>';
+								<p class="text-red">', $error, '</p>';
 
 	// Or perhaps there's some special description for this time?
 	if (isset($context['description']))
 		echo '
-				<p class="description">', $context['description'], '</p>';
+								<p class="description">', $context['description'], '</p>';
 
 	// Now just get the basic information - username, password, etc.
 	echo '
-							<div class="card-inner">
+								<div class="card-inner">
 
 									<div class="form-group form-group-label">
 										<div class="row">

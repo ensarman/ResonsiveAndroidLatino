@@ -127,16 +127,15 @@ function template_registration_form()
 	echo '
 		<form action="', $scripturl, '?action=register2" method="post" accept-charset="', $context['character_set'], '" name="registration" id="registration" onsubmit="return verifyAgree();">
 			
-			<div class="cat_bar">
-				<h3 class="catbg">', $txt['registration_form'], '</h3>
-			</div>
+			
 			<div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 col-xx-12">
 				<div class="card">
 				 	<div class="card-main">
 				 		<div class="card-inner">
-							<div class="title_bar">
-								<h4>', $txt['required_info'], '</h4>
-							</div>
+			        <h3 class="catbg">', $txt['registration_form'], '</h3>
+						
+							<h4>', $txt['required_info'], '</h4>
+							
 							<div class="windowbg2">
 								<span class="topslice"><span></span></span>
 								
