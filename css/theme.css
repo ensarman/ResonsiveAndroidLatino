@@ -275,6 +275,11 @@ h1{
   z-index: 99;
 }
 
+.margen-izq-der-10{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
  /* bbc */
 
 /* Styling for BBC tags */

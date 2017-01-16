@@ -22,7 +22,7 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 			<div class="form-group form-group-label">
 				<div>
 				<label class="floating-label" for="', $editor_id, '"> Escribe Aquí </label>
-					<textarea class="form-control textarea-autosize" name="', $editor_id, '" id="', $editor_id, '" rows="', $editor_context['rows'], '"  onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onchange="storeCaret(this);" tabindex="', $context['tabindex']++, '" style="height: ', $editor_context['height'], '; ', isset($context['post_error']['no_message']) || isset($context['post_error']['long_message']) ? 'border: 1px solid red;' : '', '">', $editor_context['value'], '</textarea>
+					<textarea class="form-control" name="', $editor_id, '" id="', $editor_id, '" rows="', $editor_context['rows'], '"  onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onchange="storeCaret(this);" tabindex="', $context['tabindex']++, '" style="height: ', $editor_context['height'], '; ', isset($context['post_error']['no_message']) || isset($context['post_error']['long_message']) ? 'border: 1px solid red;' : '', '">', $editor_context['value'], '</textarea>
 				</div>
 				<div id="', $editor_id, '_resizer" class="richedit_resize"></div>
 			</div>
@@ -266,15 +266,15 @@ function template_control_richedit_buttons($editor_id)
 	$editor_context = &$context['controls']['richedit'][$editor_id];
 
 	echo '
-		<input type="submit" value="', isset($editor_context['labels']['post_button']) ? $editor_context['labels']['post_button'] : $txt['post'], '" tabindex="', $context['tabindex']++, '" onclick="return submitThisOnce(this);" accesskey="s" class="button_submit" />';
+		<input type="submit" value="', isset($editor_context['labels']['post_button']) ? $editor_context['labels']['post_button'] : $txt['post'], '" tabindex="', $context['tabindex']++, '" onclick="return submitThisOnce(this);" accesskey="s" class="button_submit form-control form-control-inline btn btn-flat btn-brand margen-izq-der-10" />';
 
 	if ($editor_context['preview_type'])
 		echo '
-		<input type="submit" name="preview" value="', isset($editor_context['labels']['preview_button']) ? $editor_context['labels']['preview_button'] : $txt['preview'], '" tabindex="', $context['tabindex']++, '" onclick="', $editor_context['preview_type'] == 2 ? 'return event.ctrlKey || previewPost();' : 'return submitThisOnce(this);', '" accesskey="p" class="button_submit" />';
+		<input type="submit" name="preview" value="', isset($editor_context['labels']['preview_button']) ? $editor_context['labels']['preview_button'] : $txt['preview'], '" tabindex="', $context['tabindex']++, '" onclick="', $editor_context['preview_type'] == 2 ? 'return event.ctrlKey || previewPost();' : 'return submitThisOnce(this);', '" accesskey="p" class="button_submit form-control form-control-inline btn btn-flat btn-brand margen-izq-der-10" />';
 
 	if ($context['show_spellchecking'])
 		echo '
-		<input type="button" value="', $txt['spell_check'], '" tabindex="', $context['tabindex']++, '" onclick="oEditorHandle_', $editor_id, '.spellCheckStart();" class="button_submit" />';
+		<input type="button" value="', $txt['spell_check'], '" tabindex="', $context['tabindex']++, '" onclick="oEditorHandle_', $editor_id, '.spellCheckStart();" class="button_submit form-control form-control-inline btn btn-flat btn-brand margen-izq-der-10" />';
 }
 
 // What's this, verification?!

@@ -170,42 +170,43 @@ function template_main()
 
 	// The post header... important stuff
 	echo '
-					<dl id="post_header">';
+					<div id="post_header">';
 
 	// Guests have to put in their name and email...
 	if (isset($context['name']) && isset($context['email']))
 	{
 		echo '
-						<dt>
-							<span', isset($context['post_error']['long_name']) || isset($context['post_error']['no_name']) || isset($context['post_error']['bad_name']) ? ' class="error"' : '', ' id="caption_guestname">', $txt['name'], ':</span>
-						</dt>
-						<dd>
-							<input type="text" name="guestname" size="25" value="', $context['name'], '" tabindex="', $context['tabindex']++, '" class="input_text" />
-						</dd>';
+						<div>
+							<span', isset($context['post_error']['long_name']) || isset($context['post_error']['no_name']) || isset($context['post_error']['bad_name']) ? ' class="error text-red"' : '', ' id="caption_guestname">', $txt['name'], ':</span>
+						</div>
+						<div form-group form-group-label>
+						  <label class="floating-label" for="guestname">', $txt['name'],' </label>
+							<input type="text" id="guestname" name="guestname" size="25" value="', $context['name'], '" tabindex="', $context['tabindex']++, '" class="input_text form-control" />
+						</div>';
 
 		if (empty($modSettings['guest_post_no_email']))
 			echo '
-						<dt>
-							<span', isset($context['post_error']['no_email']) || isset($context['post_error']['bad_email']) ? ' class="error"' : '', ' id="caption_email">', $txt['email'], ':</span>
-						</dt>
-						<dd>
-							<input type="text" name="email" size="25" value="', $context['email'], '" tabindex="', $context['tabindex']++, '" class="input_text" />
-						</dd>';
+						<div class="form-group form-group-label">
+							<label', isset($context['post_error']['no_email']) || isset($context['post_error']['bad_email']) ? ' class="error text-red"' : '', ' id="caption_email" for="email">', $txt['email'], ':</label>
+							<input type="text" id="email" name="email" size="25" value="', $context['email'], '" tabindex="', $context['tabindex']++, '" class="input_text" />
+						</div>';
 	}
 
 	// Now show the subject box for this post.
 	echo '
-						<dt>
-							<span', isset($context['post_error']['no_subject']) ? ' class="error"' : '', ' id="caption_subject">', $txt['subject'], ':</span>
-						</dt>
-						<dd>
-							<input type="text" name="subject"', $context['subject'] == '' ? '' : ' value="' . $context['subject'] . '"', ' tabindex="', $context['tabindex']++, '" size="80" maxlength="80" class="input_text" />
-						</dd>
-						<dt class="clear_left">
-							', $txt['message_icon'], ':
-						</dt>
-						<dd>
-							<select name="icon" id="icon" onchange="showimage()">';
+						<div class="form-group form-group-label">
+							<label for="subject"', isset($context['post_error']['no_subject']) ? ' class="error text-red floating-label"' : 'class="floating-label"', ' id="caption_subject">', $txt['subject'], ':</span>
+						
+							<input id="subject" type="text" name="subject"', $context['subject'] == '' ? '' : ' value="' . $context['subject'] . '"', ' tabindex="', $context['tabindex']++, '" size="80" maxlength="80" class="input_text form-control" />
+						</div>
+						
+						<br />
+						<div class="form-group form-group-label">
+              <label class="floating-label" for="icon">
+                ', $txt['message_icon'], ':
+              </label>
+						
+							<select class="form-control form-control-inline" name="icon" id="icon" onchange="showimage()">';
 
 	// Loop through each message icon allowed, adding it to the drop down list.
 	foreach ($context['icons'] as $icon)
@@ -215,8 +216,9 @@ function template_main()
 	echo '
 							</select>
 							<img src="', $context['icon_url'], '" name="icons" hspace="15" alt="" />
-						</dd>
-					</dl><hr class="clear" />';
+						</div>
+					</div>
+					<div class="clearfix"></div>';
 
 	// Are you posting a calendar event?
 	if ($context['make_event'])
@@ -522,16 +524,16 @@ function template_main()
 
 	// Finally, the submit buttons.
 	echo '
-					<p class="smalltext" id="shortcuts">
+					<small id="shortcuts">
 						', $context['browser']['is_firefox'] ? $txt['shortcuts_firefox'] : $txt['shortcuts'], '
-					</p>
+					</small>
 					<p id="post_confirm_buttons" class="righttext">
 						', template_control_richedit_buttons($context['post_box_name']);
 
 	// Option to delete an event if user is editing one.
 	if ($context['make_event'] && !$context['event']['new'])
 		echo '
-						<input type="submit" name="deleteevent" value="', $txt['event_delete'], '" onclick="return confirm(\'', $txt['event_delete_confirm'], '\');" class="button_submit" />';
+						<input type="submit" name="deleteevent" value="', $txt['event_delete'], '" onclick="return confirm(\'', $txt['event_delete_confirm'], '\');" class="button_submit form-control form-control-inline btn btn-flat btn-brand" />';
 
 	echo '
 					</p>
@@ -1033,7 +1035,7 @@ function template_announce()
 						</li>
 					</ul>
 					<div id="confirm_buttons">
-						<input type="submit" value="', $txt['post'], '" class="button_submit" />
+						<input type="submit" value="', $txt['post'], '" class="button_submit fform-control form-control-inline btn btn-flat btn-brand" />
 						<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 						<input type="hidden" name="topic" value="', $context['current_topic'], '" />
 						<input type="hidden" name="move" value="', $context['move'], '" />
@@ -1060,7 +1062,7 @@ function template_announcement_send()
 					<p>', $txt['announce_sending'], ' <a href="', $scripturl, '?topic=', $context['current_topic'], '.0" target="_blank" class="new_win">', $context['topic_subject'], '</a></p>
 					<p><strong>', $context['percentage_done'], '% ', $txt['announce_done'], '</strong></p>
 					<div id="confirm_buttons">
-						<input type="submit" name="b" value="', $txt['announce_continue'], '" class="button_submit" />
+						<input type="submit" name="b" value="', $txt['announce_continue'], '" class="button_submit form-control form-control-inline btn btn-flat btn-brand" />
 						<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 						<input type="hidden" name="topic" value="', $context['current_topic'], '" />
 						<input type="hidden" name="move" value="', $context['move'], '" />
