@@ -19,9 +19,10 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 
 	echo '
 		<div>
-			<div >
+			<div class="form-group form-group-label">
 				<div>
-					<textarea class="form-control" name="', $editor_id, '" id="', $editor_id, '" rows="', $editor_context['rows'], '" cols="600" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onchange="storeCaret(this);" tabindex="', $context['tabindex']++, '" style="height: ', $editor_context['height'], '; ', isset($context['post_error']['no_message']) || isset($context['post_error']['long_message']) ? 'border: 1px solid red;' : '', '">', $editor_context['value'], '</textarea>
+				<label class="floating-label" for="', $editor_id, '"> Escribe Aquí </label>
+					<textarea class="form-control textarea-autosize" name="', $editor_id, '" id="', $editor_id, '" rows="', $editor_context['rows'], '"  onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onchange="storeCaret(this);" tabindex="', $context['tabindex']++, '" style="height: ', $editor_context['height'], '; ', isset($context['post_error']['no_message']) || isset($context['post_error']['long_message']) ? 'border: 1px solid red;' : '', '">', $editor_context['value'], '</textarea>
 				</div>
 				<div id="', $editor_id, '_resizer" class="richedit_resize"></div>
 			</div>
@@ -150,6 +151,7 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 								sName: \'sel_face\',
 								oOptions: {
 									\'\': ', JavaScriptEscape($txt['font_face']), ',
+									\'roboto\': \'Roboto\',
 									\'courier\': \'Courier\',
 									\'arial\': \'Arial\',
 									\'arial black\': \'Arial Black\',
@@ -222,9 +224,12 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 						<img src="' . $settings['images_url'] . '/bbc/divider.gif" alt="|" style="margin: 0 3px 0 3px;" />
 					'), ',
 					sSelectTemplate: ', JavaScriptEscape('
-						<select name="%selectName%" id="%selectId%" style="margin-bottom: 1ex; font-size: x-small;">
+            
+            
+						<select name="%selectName%" id="%selectId%" style="form-control form-control-inline margin-bottom: 1ex; font-size: x-small;">
 							%selectOptions%
 						</select>
+						
 					'), ',
 					sButtonRowTemplate: ', JavaScriptEscape('
 						<div>%buttonRow%</div>
