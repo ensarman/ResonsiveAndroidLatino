@@ -275,3 +275,66 @@ h1{
   z-index: 99;
 }
 
+ /* bbc */
+
+/* Styling for BBC tags */
+.bbc_link:link, .bbc_link:visited
+{
+  border-bottom: 1px solid #A8B6CF;
+}
+.bbc_link:hover
+{
+  text-decoration: none;
+  border-bottom: 1px solid #346;
+}
+.bbc_size
+{
+  line-height: 1.4em;
+}
+.bbc_color a
+{
+  color: inherit;
+}
+.bbc_img
+{
+  border: 0;
+}
+.bbc_table
+{
+  font: inherit;
+  color: inherit;
+}
+.bbc_table td
+{
+  font: inherit;
+  color: inherit;
+  vertical-align: top;
+}
+.bbc_u
+{
+  text-decoration: underline;
+}
+.bbc_list
+{
+  text-align: left;
+}
+.bbc_tt
+{
+  font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
+}
+
+strong{
+  font-weight: bold;
+}
+
+blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
+{
+  font-size: small;
+  background-color: #f5f5f5;
+  line-height: 1.4em;
+  border-top: 2px solid #99A;
+  border-bottom: 2px solid #99A;
+  padding: 1.1em 1.4em;
+  margin: 0.1em 0 0.3em 0;
+  overflow: auto;
+}
