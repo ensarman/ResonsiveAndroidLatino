@@ -17,8 +17,8 @@ function template_generic_menu_sidebar_above()
 
 	// This is the main table - we need it so we can keep the content to the right of it.
 	echo '
-	<div id="main_container">
-		<div id="left_admsection"><span id="admin_menu"></span>';
+	<div class="container-full" id="main_container">
+		<div class="col-md-3" id="left_admsection"><span id="admin_menu"></span>';
 
 	// What one are we rendering?
 	$context['cur_menu_id'] = isset($context['cur_menu_id']) ? $context['cur_menu_id'] + 1 : 1;
@@ -89,7 +89,7 @@ function template_generic_menu_sidebar_above()
 	// This is where the actual "main content" area for the admin section starts.
 	echo '
 		</div>
-		<div id="main_admsection">';
+		<div class="col-md-9" main_admsection">';
 
 	// If there are any "tabs" setup, this is the place to shown them.
 	if (!empty($context['tabs']) && empty($context['force_disable_tabs']))
@@ -117,11 +117,13 @@ function template_generic_menu_dropdown_above()
 
 	if (!empty($menu_context['can_toggle_drop_down']))
 		echo '
-	<a href="', $menu_context['toggle_url'], '"><img id="menu_toggle" src="', $context['menu_image_path'], '/change_menu', $context['right_to_left'] ? '2' : '', '.png" alt="*" /></a>';
+	<a href="', $menu_context['toggle_url'], '"><span id="menu_toggle" class="icon icon-15x mdc-text-blue">', $context['right_to_left'] ? 'keyboard_arrow_right' : 'keyboard_arrow_left','</span></a>';
+
 
 	echo '
 <div id="admin_menu">
-	<ul class="dropmenu" id="dropdown_menu_', $context['cur_menu_id'], '">';
+  <nav class="tab-nav margin-top-no">
+	<ul class="nav nav-list" id="dropdown_menu_', $context['cur_menu_id'], '">';
 
 	// Main areas first.
 	foreach ($menu_context['sections'] as $section)
@@ -129,13 +131,13 @@ function template_generic_menu_dropdown_above()
 		if ($section['id'] == $menu_context['current_section'])
 		{
 			echo '
-			<li><a class="active firstlevel" href="#"><span class="firstlevel">', $section['title'] , '</span></a>
-				<ul>';
+			<li class="active dropdown"><a class="firstlevel dropdown-toggle text-black waves-attach waves-effect" data-toggle="dropdown"><span class="firstlevel">', $section['title'] , '</span></a>
+				<ul class="dropdown-menu">';
 		}
 		else
 			echo '
-			<li><a class="firstlevel" href="#"><span class="firstlevel">', $section['title'] , '</span></a>
-				<ul>';
+			<li class="dropdown"><a class="firstlevel dropdown-toggle text-black waves-attach waves-effect" data-toggle="dropdown"><span class="firstlevel">', $section['title'] , '</span></a>
+				<ul class="dropdown-menu">';
 
 		// For every area of this section show a link to that area (bold if it's currently selected.)
 		$additional_items = 0;
@@ -195,6 +197,7 @@ function template_generic_menu_dropdown_above()
 
 	echo '
 	</ul>
+	</nav>
 </div>';
 
 	// This is the main table - we need it so we can keep the content to the right of it.
