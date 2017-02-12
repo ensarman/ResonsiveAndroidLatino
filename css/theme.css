@@ -344,15 +344,3 @@ blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
   overflow: auto;
 }
 
-a {
-  background-color: transparent;
-  background-image: none;
-  color: #00796b;
-  text-decoration: none;
-}
-
-a:focus, a:hover {
-  color: #009688;
-  outline: 0;
-  text-decoration: underline;
-}

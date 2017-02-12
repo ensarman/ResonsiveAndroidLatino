@@ -218,11 +218,12 @@ th {
 a {
   background-color: transparent;
   background-image: none;
-  color: #ff4081;
+  color: #00796b;
   text-decoration: none;
 }
+
 a:focus, a:hover {
-  color: #f50057;
+  color: #009688;
   outline: 0;
   text-decoration: underline;
 }
