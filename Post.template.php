@@ -526,7 +526,7 @@ function template_main()
 					<small id="shortcuts">
 						', $context['browser']['is_firefox'] ? $txt['shortcuts_firefox'] : $txt['shortcuts'], '
 					</small>
-					<p id="post_confirm_buttons" class="righttext">
+					<p id="post_confirm_buttons" class="righttext pull-right">
 						', template_control_richedit_buttons($context['post_box_name']);
 
 	// Option to delete an event if user is editing one.
