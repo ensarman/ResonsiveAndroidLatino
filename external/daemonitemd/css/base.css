@@ -3453,7 +3453,7 @@ fieldset[disabled] input[type="radio"] ~ .radiobtn-circle, input[type="radio"][d
   border-color: rgba(0, 0, 0, 0.38);
 }
 fieldset[disabled] input[type="radio"]:checked ~ .radiobtn-circle, input[type="radio"]:checked[disabled] ~ .radiobtn-circle, .radiobtn-adv.disabled input[type="radio"]:checked ~ .radiobtn-circle {
-  border-color: #ff80ab;
+  border-color: #b2dfdb;
 }
 
 .checkbox-circle-check,
@@ -3520,7 +3520,7 @@ fieldset[disabled] .radiobtn-circle-check:after, fieldset[disabled] .radiobtn-ci
   display: none;
 }
 fieldset[disabled] input[type="radio"]:checked ~ .radiobtn-circle-check, input[type="radio"]:checked[disabled] ~ .radiobtn-circle-check, .radiobtn-adv.disabled input[type="radio"]:checked ~ .radiobtn-circle-check {
-  background-color: #ff80ab;
+  background-color: #b2dfdb;
 }
 
 .checkbox-circle-icon {
@@ -3547,7 +3547,7 @@ input[type="checkbox"]:checked ~ .checkbox-circle-icon {
           transform: scale(1, 1);
 }
 fieldset[disabled] input[type="checkbox"]:checked ~ .checkbox-circle-icon, input[type="checkbox"]:checked[disabled] ~ .checkbox-circle-icon, .checkbox-adv.disabled input[type="checkbox"]:checked ~ .checkbox-circle-icon {
-  background-color: #ff80ab;
+  background-color: #b2dfdb;
 }
 
 @-webkit-keyframes circle-check {
