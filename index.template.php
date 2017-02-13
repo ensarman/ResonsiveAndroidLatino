@@ -109,7 +109,7 @@ function template_html_above()
 
 	// Here comes the JavaScript bits!
 	echo '
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/jquery/dist/jquery.min.js?fin20"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/script.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/theme.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/base.min.js?fin20"></script>
