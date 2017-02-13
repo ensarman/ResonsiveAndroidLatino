@@ -2470,7 +2470,7 @@ template,
 }
 
 .btn-flat.btn-brand-accent {
-  color: #ff4081 !important;
+  color: #00796b !important;
 }
 
 .btn-flat.btn-green {
@@ -2544,7 +2544,7 @@ template,
 }
 
 .fbtn-brand-accent {
-  background-color: #ff4081;
+  background-color: #00796b;
   color: white !important;
 }
 
@@ -2744,7 +2744,7 @@ html.no-touchevents .fbtn:hover > .fbtn-text {
 }
 
 .card-brand-accent {
-  background-color: #ff4081;
+  background-color: #00796b;
   color: white;
 }
 .card-brand-accent a,
