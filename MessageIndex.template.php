@@ -275,7 +275,7 @@ function template_main()
 				echo '
 							<a href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '">
 							
-							<span class="icon">fiber_new</span>
+							<span class="icon icon-15x">fiber_new</span>
 							
 							</a>';
 
