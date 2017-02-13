@@ -194,13 +194,12 @@ function template_main()
 
 	// Now show the subject box for this post.
 	echo '
-						<div class="form-group form-group-label">
+						<div class="form-group form-group-label margin-top-no">
 							<label for="subject"', isset($context['post_error']['no_subject']) ? ' class="error text-red floating-label"' : 'class="floating-label"', ' id="caption_subject">', $txt['subject'], ':</span>
 						
 							<input id="subject" type="text" name="subject"', $context['subject'] == '' ? '' : ' value="' . $context['subject'] . '"', ' tabindex="', $context['tabindex']++, '" size="80" maxlength="80" class="input_text form-control" />
 						</div>
-						
-						<br />
+					  <br /><br />
 						<div class="form-group form-group-label">
               <label class="floating-label" for="icon">
                 ', $txt['message_icon'], ':
@@ -1096,3 +1095,4 @@ function template_announcement_send()
 }
 
 ?>
+
