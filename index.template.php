@@ -228,12 +228,12 @@ function template_body_above()
 									<div>
 										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
 										<input type="hidden" name="ie" value="UTF-8" />
-										<input style="background-color:transparent; " type="text" name="q" class="form-control" />
+										<input style="background-color:white; color: #212121; " type="text" name="q" class="form-control" />
 										<input class="oculto" type="submit" name="sa" value="Buscar" />
 									</div>
 								</form>
 
-								<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
+								
 
 							</div>
 						</td>
@@ -275,7 +275,24 @@ function template_body_above()
 							</ul>
 						</td>
 					</tr>
-					
+					<tr class="hidden-lg hidden-md hidden-sm">
+					    <td colspan="3"  class="">
+							<div class="container">
+								<form action="https://www.google.com" id="cse-search-box">
+									<div>
+										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
+										<input type="hidden" name="ie" value="UTF-8" />
+										<input style="background-color:white; color: #212121; " placeholder="Busqueda Personalizada" type="text" name="q" class="form-control" />
+										<input class="oculto" type="submit" name="sa" value="Buscar" />
+									</div>
+								</form>
+
+								
+
+							</div>
+						</td>
+                    </tr>
+					<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
 				</table>
 			</header>
 
