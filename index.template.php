@@ -222,7 +222,7 @@ function template_body_above()
 
 
 
-						<td class="tbusqueda ocultar-pequeno">
+						<td class="tbusqueda hidden-xs hidden-xx">
 							<div class="busqueda  ">
 								<form action="https://www.google.com" id="cse-search-box">
 									<div>
@@ -275,6 +275,7 @@ function template_body_above()
 							</ul>
 						</td>
 					</tr>
+					
 				</table>
 			</header>
 
@@ -377,6 +378,7 @@ function template_body_above()
 
 		echo '
 														<input type="hidden" name="hash_passwrd" value="" />
+														<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 													</div>
 													<div class="col-md-6">
 														<div class="form-group sinmargen">
@@ -516,7 +518,7 @@ function show_news($cols="desktop"){
 									<div class="text-overflow"><strong>'. $txt['news']. '</strong></div>
 								</div>
 							</div>
-							<div class="tile-active-show collapse" id="'.($cols=="movil" ? : 'doc_tile_example_1').'">
+							<div class="tile-active-show collapse" id="'.($cols=="movil" ? 'doc_tile_example_2': 'doc_tile_example_1').'">
 								<div class="tile-sub">
 									<p>'. $context['random_news_line']. '</p>
 								</div>
