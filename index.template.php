@@ -232,9 +232,6 @@ function template_body_above()
 										<input class="oculto" type="submit" name="sa" value="Buscar" />
 									</div>
 								</form>
-
-								
-
 							</div>
 						</td>
 						<td class="menu-usuario">
@@ -286,9 +283,6 @@ function template_body_above()
 										<input class="oculto" type="submit" name="sa" value="Buscar" />
 									</div>
 								</form>
-
-								
-
 							</div>
 						</td>
                     </tr>
