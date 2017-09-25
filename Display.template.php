@@ -314,7 +314,7 @@ function template_main()
 		// Show the member's custom title, if they have one.
 		if (!empty($message['member']['title']))
 			echo '
-									<li class="title hidden-xx hidden-xs">', $message['member']['title'], '</li>';
+									<li class="title ulsinpuntos sinpadding">', $message['member']['title'], '</li>';
 
 		// Show the member's primary group (like 'Administrator') if they have one.
 		if (!empty($message['member']['group']))
@@ -398,7 +398,7 @@ function template_main()
 			// This shows the popular messaging icons.
 			if ($message['member']['has_messenger'] && $message['member']['can_view_profile'])
 				echo '
-									<li class="profile">
+									<li class="im_icons">
 										<ul class="ulinline">
 											', !empty($message['member']['icq']['link']) ? '<li>' . $message['member']['icq']['link'] . '</li>' : '', '
 											', !empty($message['member']['msn']['link']) ? '<li>' . $message['member']['msn']['link'] . '</li>' : '', '

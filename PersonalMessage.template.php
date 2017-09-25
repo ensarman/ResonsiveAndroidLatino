@@ -181,7 +181,7 @@ function template_folder()
 			echo '
 	<div class="clearfix"></div>
 	<div class="', $window_class, ' container_fluid">
-		<div class="poster col-xx-12 col-sm-2">
+		<div class="poster col-xx-12 col-sm-3 ">
 			<a id="msg', $message['id'], '"></a>
 			<h4>';
 
@@ -193,17 +193,17 @@ function template_folder()
 			echo '
 				', $message['member']['link'], '
 			</h4>
-			<ul class="reset smalltext" id="msg_', $message['id'], '_extra_info">';
+			<ul class="ulsinpuntos sinpadding reset smalltext" id="msg_', $message['id'], '_extra_info">';
 
 			// Show the member's custom title, if they have one.
 			if (isset($message['member']['title']) && $message['member']['title'] != '')
 				echo '
-				<li class="title">', $message['member']['title'], '</li>';
+				<li class="title hidden-xx hidden-xs">', $message['member']['title'], '</li>';
 
 			// Show the member's primary group (like 'Administrator') if they have one.
 			if (isset($message['member']['group']) && $message['member']['group'] != '')
 				echo '
-				<li class="membergroup">', $message['member']['group'], '</li>';
+				<li class="membergroup hidden-xx hidden-xs">', $message['member']['group'], '</li>';
 
 			// Don't show these things for guests.
 			if (!$message['member']['is_guest'])
@@ -211,14 +211,14 @@ function template_folder()
 				// Show the post group if and only if they have no other group or the option is on, and they are in a post group.
 				if ((empty($settings['hide_post_group']) || $message['member']['group'] == '') && $message['member']['post_group'] != '')
 					echo '
-				<li class="postgroup">', $message['member']['post_group'], '</li>';
+				<li class="postgroup hidden-xx hidden-xs">', $message['member']['post_group'], '</li>';
 				echo '
 				<li class="stars">', $message['member']['group_stars'], '</li>';
 
 				// Show avatars, images, etc.?
 				if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image']))
 					echo '
-				<li class="avatar">
+				<li class="avatar center-block">
 					<a href="', $scripturl, '?action=profile;u=', $message['member']['id'], '">
 						', $message['member']['avatar']['image'], '
 					</a>
@@ -227,7 +227,7 @@ function template_folder()
 				// Show how many posts they have made.
 				if (!isset($context['disabled_fields']['posts']))
 					echo '
-				<li class="postcount">', $txt['member_postcount'], ': ', $message['member']['posts'], '</li>';
+				<li class="postcount hidden-xx hidden-xs">', $txt['member_postcount'], ': ', $message['member']['posts'], '</li>';
 
 				// Is karma display enabled?  Total or +/-?
 				if ($modSettings['karmaMode'] == '1')
@@ -247,12 +247,12 @@ function template_folder()
 				// Show the member's gender icon?
 				if (!empty($settings['show_gender']) && $message['member']['gender']['image'] != '' && !isset($context['disabled_fields']['gender']))
 					echo '
-				<li class="gender">', $txt['gender'], ': ', $message['member']['gender']['image'], '</li>';
+				<li class="gender hidden-xx hidden-xs">', $txt['gender'], ': ', $message['member']['gender']['image'], '</li>';
 
 				// Show their personal text?
 				if (!empty($settings['show_blurb']) && $message['member']['blurb'] != '')
 					echo '
-				<li class="blurb">', $message['member']['blurb'], '</li>';
+				<li class="blurb hidden-xx hidden-xs">', $message['member']['blurb'], '</li>';
 
 				// Any custom fields to show as icons?
 				if (!empty($message['member']['custom_fields']))
@@ -267,7 +267,7 @@ function template_folder()
 							$shown = true;
 							echo '
 				<li class="im_icons">
-					<ul>';
+					<ul class="ulinline">';
 						}
 						echo '
 						<li>', $custom['value'], '</li>';
@@ -282,7 +282,7 @@ function template_folder()
 				if ($message['member']['has_messenger'] && $message['member']['can_view_profile'])
 					echo '
 				<li class="im_icons">
-					<ul>', !isset($context['disabled_fields']['icq']) && !empty($message['member']['icq']['link']) ? '
+					<ul class="ulinline">', !isset($context['disabled_fields']['icq']) && !empty($message['member']['icq']['link']) ? '
 						<li>' . $message['member']['icq']['link'] . '</li>' : '', !isset($context['disabled_fields']['msn']) && !empty($message['member']['msn']['link']) ? '
 						<li>' . $message['member']['msn']['link'] . '</li>' : '', !isset($context['disabled_fields']['aim']) && !empty($message['member']['aim']['link']) ? '
 						<li>' . $message['member']['aim']['link'] . '</li>' : '', !isset($context['disabled_fields']['yim']) && !empty($message['member']['yim']['link']) ? '
@@ -295,7 +295,7 @@ function template_folder()
 				{
 					echo '
 				<li class="profile">
-					<ul>';
+					<ul class="ulinline ulsinpuntos sinpadding">';
 
 					// Show the profile button
 					echo '
@@ -340,7 +340,7 @@ function template_folder()
 			echo '
 			</ul>
 		</div>
-		<div class="postarea col-sm-10 col-xx-12">
+		<div class="postarea col-sm-9 col-xx-12">
 			<div class="flow_hidden">
 				<div class="keyinfo">
 					<h5 id="subject_', $message['id'], '">
