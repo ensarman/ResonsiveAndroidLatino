@@ -55,8 +55,6 @@
   width: 260px;
 }
 
-
-
 .header table .menu-usuario{
   width: 50px;
 }
@@ -131,12 +129,28 @@ h1{
   margin: 0;
 }
 
+.sinpadding{
+  padding: 0 ;
+}
+
+.sinmargen > li{
+  margin: 0;
+}
+
 .cat_bar{
   background-color: #eee;
 }
 
 .ulsinpuntos{
   list-style-type: none;
+}
+.ulinline li{
+  display: inline;
+}
+
+
+.ulleft li{
+  float: left;
 }
 
 .birthday
@@ -154,3 +168,176 @@ h1{
   color: #000080;
 }
 
+.button_strip_new_topic{
+  border-color: #ff4081;
+  border-bottom: solid;
+}
+
+.button_strip_reply{
+  border-color: #ff4081;
+  border-bottom: solid;
+}
+
+.coloricono{
+  color: rgb(117, 117, 117);
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: grey;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip-left {
+  top: -5px;
+  bottom: auto;
+  right: 128%;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.post_separator{
+  border-top: solid;
+  border-color: #EEEEEE;
+}
+
+.poster{
+  text-align: center;
+}
+
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.flow_hidden
+{
+	overflow: hidden;
+}
+.cabecera_post{
+
+  display: inline;
+}
+
+.acciones {
+  display: inline;
+}
+
+.messageicon
+{
+	float: left;
+	margin: 0 0.5em 0 0;
+}
+.messageicon img
+{
+	padding: 6px 3px;
+}
+
+.botonquickreply{
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.icon-15x{
+  font-size: 1.5em;
+}
+
+.justified{
+  text-align: justify;
+}
+
+.sinborde{
+  border: none;
+}
+
+.zindex99{
+  z-index: 99;
+}
+
+.margen-izq-der-10{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ /* bbc */
+
+/* Styling for BBC tags */
+.bbc_link:link, .bbc_link:visited
+{
+  border-bottom: 1px solid #A8B6CF;
+}
+.bbc_link:hover
+{
+  text-decoration: none;
+  border-bottom: 1px solid #346;
+}
+.bbc_size
+{
+  line-height: 1.4em;
+}
+.bbc_color a
+{
+  color: inherit;
+}
+.bbc_img
+{
+  border: 0;
+}
+.bbc_table
+{
+  font: inherit;
+  color: inherit;
+}
+.bbc_table td
+{
+  font: inherit;
+  color: inherit;
+  vertical-align: top;
+}
+.bbc_u
+{
+  text-decoration: underline;
+}
+.bbc_list
+{
+  text-align: left;
+}
+.bbc_tt
+{
+  font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
+}
+
+strong{
+  font-weight: bold;
+}
+
+blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
+{
+  font-size: small;
+  background-color: #f5f5f5;
+  line-height: 1.4em;
+  border-top: 2px solid #99A;
+  border-bottom: 2px solid #99A;
+  padding: 1.1em 1.4em;
+  margin: 0.1em 0 0.3em 0;
+  overflow: auto;
+}

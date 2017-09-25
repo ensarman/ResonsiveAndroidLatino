@@ -87,8 +87,8 @@ function template_html_above()
 	// The ?fin20 part of this link is just here to make sure browsers don't cache it wrongly.
 	echo '
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/base.min.css?fin20" />
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/project.min.css?fin20" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/daemonitemd/css/base.css?fin20" />
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/external/mdcp/material-design-color-palette.min.css?fin20" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/theme.css?fin20" />';
@@ -105,16 +105,16 @@ function template_html_above()
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/rtl.css" />';
 
 	//Miniupdate: Chrome acepta el atributo theme-color, asi que vamos a colorear la navbar
-	echo '<meta name="theme-color" content="#388ccc">';
+	echo '<meta name="theme-color" content="#00695c">';
 
 	// Here comes the JavaScript bits!
 	echo '
-	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/script.js?fin20"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js?fin20"></script>
+	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/script.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/scripts/theme.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/jquery/dist/jquery.min.js?fin20"></script>
 	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/base.min.js?fin20"></script>
-	<script type="text/javascript" src="', $settings['theme_url'], '/external/daemonitemd/js/project.min.js?fin20"></script>
-	<script type="text/javascript"><!-- // --><![CDATA[
+	
+		<script type="text/javascript"><!-- // --><![CDATA[
 		var smf_theme_url = "', $settings['theme_url'], '";
 		var smf_default_theme_url = "', $settings['default_theme_url'], '";
 		var smf_images_url = "', $settings['images_url'], '";
@@ -222,19 +222,16 @@ function template_body_above()
 
 
 
-						<td class="tbusqueda ocultar-pequeno">
+						<td class="tbusqueda hidden-xs hidden-xx">
 							<div class="busqueda  ">
 								<form action="https://www.google.com" id="cse-search-box">
 									<div>
 										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
 										<input type="hidden" name="ie" value="UTF-8" />
-										<input style="background-color:transparent; " type="text" name="q" class="form-control" />
+										<input style="background-color:white; color: #212121; " type="text" name="q" class="form-control" />
 										<input class="oculto" type="submit" name="sa" value="Buscar" />
 									</div>
 								</form>
-
-								<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
-
 							</div>
 						</td>
 						<td class="menu-usuario">
@@ -275,6 +272,21 @@ function template_body_above()
 							</ul>
 						</td>
 					</tr>
+					<tr class="hidden-lg hidden-md hidden-sm">
+					    <td colspan="3"  class="">
+							<div class="container">
+								<form action="https://www.google.com" id="cse-search-box">
+									<div>
+										<input type="hidden" name="cx" value="partner-pub-5234228783629303:3299510057" />
+										<input type="hidden" name="ie" value="UTF-8" />
+										<input style="background-color:white; color: #212121; " placeholder="Busqueda Personalizada" type="text" name="q" class="form-control" />
+										<input class="oculto" type="submit" name="sa" value="Buscar" />
+									</div>
+								</form>
+							</div>
+						</td>
+                    </tr>
+					<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=es"></script>
 				</table>
 			</header>
 
@@ -377,6 +389,7 @@ function template_body_above()
 
 		echo '
 														<input type="hidden" name="hash_passwrd" value="" />
+														<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 													</div>
 													<div class="col-md-6">
 														<div class="form-group sinmargen">
@@ -457,7 +470,7 @@ function template_body_above()
 									</div>
 								</div>
 							</div>';
-	//aqui debe de ir el div dard action
+	//aqui debe de ir el div card action
 	echo'
 						</div>
 					</div>
@@ -516,7 +529,7 @@ function show_news($cols="desktop"){
 									<div class="text-overflow"><strong>'. $txt['news']. '</strong></div>
 								</div>
 							</div>
-							<div class="tile-active-show collapse" id="'.($cols=="movil" ? : 'doc_tile_example_1').'">
+							<div class="tile-active-show collapse" id="'.($cols=="movil" ? 'doc_tile_example_2': 'doc_tile_example_1').'">
 								<div class="tile-sub">
 									<p>'. $context['random_news_line']. '</p>
 								</div>
@@ -717,7 +730,7 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
 			$buttons[] = '
-				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class=" button_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' btn btn-flat btn-brand " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
+				<li class="padding-right-lg waves-attach"><a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="btn btn-flat btn-brand  button_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span>' . $txt[$value['text']] . '</span></a></li>';
 	}
 
 	// No buttons? No button strip either.
@@ -728,12 +741,40 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	$buttons[count($buttons) - 1] = str_replace('<span>', '<span class="last">', $buttons[count($buttons) - 1]);
 
 	echo '
-		<div class="buttonlist', !empty($direction) ? ' float' . $direction : '', '"', (empty($buttons) ? ' style="display: none;"' : ''), (!empty($strip_options['id']) ? ' id="' . $strip_options['id'] . '"': ''), '>
+		<div class="sinmargen buttonlist', !empty($direction) ? ' float' . $direction : '', '"', (empty($buttons) ? ' style="display: none;"' : ''), (!empty($strip_options['id']) ? ' id="' . $strip_options['id'] . '"': ''), '>
 			<ul class="nav nav-list ulsinpuntos sinmargen">',
 	implode('', $buttons), '
 			</ul>
 		</div>
 		';
+}
+function template_fbtn_strip($button_strip){
+
+		$buttons =
+
+	$buttons = array();
+	foreach ($button_strip as $key => $value)
+	{
+		if (!isset($value['test']) || !empty($context[$value['test']]))
+			$buttons[] = '
+				<a' . (isset($value['id']) ? ' id="fbutton_strip_' . $value['id'] . '"' : '') . ' class="fbtn waves-attach waves-circle  fbutton_strip_' . $key . (isset($value['active']) ? ' active' : '') . ' " href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="material-icons">' . $txt[$value['text']] . '</span></a>
+				';
+	}
+
+		if (empty($buttons))
+		return;
+
+
+		echo '
+	<div class="fbtn-container">
+		<div class="fbtn-inner">
+			<a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown"><span class="fbtn-text fbtn-text-left">Menú Principal</span><span class="fbtn-ori icon">apps</span><span class="fbtn-sub icon">close</span></a>
+			<div class="fbtn-dropup">
+				<a class="fbtn waves-attach waves-circle" href="#" id="ir_arriba"><span class="fbtn-text fbtn-text-left">Ir arriba</span><span class="material-icons">expand_less</span></a>',
+		implode('', $buttons),'
+			</div>
+		</div>
+	</div>';
 }
 
 
