@@ -629,7 +629,7 @@ function template_main()
 
 		echo '
 							
-							
+							<div class="hr"></div>
 							<div class="moderatorbar">
 								<div class="" id="modified_', $message['id'], '">';
 
